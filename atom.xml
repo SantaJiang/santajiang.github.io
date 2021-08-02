@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2021-07-30T05:39:54.095Z</updated>
+  <updated>2021-08-02T09:39:08.975Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>将Hexo迁移至MacOS</title>
+    <link href="https://santajiang.github.io/2021/08/02/%E5%B0%86Hexo%E8%BF%81%E7%A7%BB%E8%87%B3MacOS/"/>
+    <id>https://santajiang.github.io/2021/08/02/%E5%B0%86Hexo%E8%BF%81%E7%A7%BB%E8%87%B3MacOS/</id>
+    <published>2021-08-02T09:33:05.000Z</published>
+    <updated>2021-08-02T09:39:08.975Z</updated>
+    
+    
+    
+    
+    <category term="搭建博客" scheme="https://santajiang.github.io/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="Github Pages" scheme="https://santajiang.github.io/tags/Github-Pages/"/>
+    
+  </entry>
   
   <entry>
     <title>Hexo配置及主题添加</title>
