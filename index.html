@@ -414,7 +414,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-08-04 23:54:41" itemprop="dateModified" datetime="2021-08-04T23:54:41+08:00">2021-08-04</time>
+        <time title="Modified: 2021-08-16 17:58:44" itemprop="dateModified" datetime="2021-08-16T17:58:44+08:00">2021-08-16</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -498,9 +498,13 @@
 <li>修改配置文件<code>blog/_config.yml</code> ，最新版与之前的不同从这里开始了</li>
 <li>找到<strong>deploy</strong>标签，填入以下内容：</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: https://github.com/SantaJiang/santajiang.github.io.git</span><br><span class="line">branch: main</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: git@github.com:SantaJiang/santajiang.github.io.git</span><br><span class="line">branch: main</span><br></pre></td></tr></table></figure>
 
-<p>这里要<strong>注意</strong>的是，Github后续更新了默认主分支的名称，已经不叫<strong>master</strong>了，改为了<strong>main</strong>，如果还是写<strong>master</strong>，并不会报错，但是会在<strong>main</strong>分支之外新建一个<strong>master</strong>分支</p>
+<p>这里要<strong>注意</strong>两点！</p>
+<ol>
+<li>Github后续更新了默认主分支的名称，已经不叫<strong>master</strong>了，改为了<strong>main</strong>，如果还是写<strong>master</strong>，并不会报错，但是会在<strong>main</strong>分支之外新建一个<strong>master</strong>分支</li>
+<li>repository一栏必须填ssh的地址，因为GitHub的密码验证于2021年8月13日不再支持，也就是不能再用密码方式去提交代码。要使用<strong>personal access token</strong>替代，当然这里我建议用SSH免密登陆，具体GitHub如何配置SSH免密登陆的步骤不在这里详述了，然后继续：</li>
+</ol>
 <ul>
 <li>回到终端，执行 <code>npm install hexo-deployer-git --save</code> 只需执行一次，后续无需再执行</li>
 <li>执行 <code>hexo d</code> 部署</li>
