@@ -38,15 +38,16 @@
     <link href="https://santajiang.github.io/2021/08/24/Qt-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%B8%80%E7%A7%8D%E5%8F%AF%E6%89%A9%E5%B1%95%E5%BD%A2%E5%BC%8F/"/>
     <id>https://santajiang.github.io/2021/08/24/Qt-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%B8%80%E7%A7%8D%E5%8F%AF%E6%89%A9%E5%B1%95%E5%BD%A2%E5%BC%8F/</id>
     <published>2021-08-24T02:05:19.000Z</published>
-    <updated>2021-08-27T07:58:07.371Z</updated>
+    <updated>2021-08-27T09:14:37.328Z</updated>
     
-    <content type="html"><![CDATA[<p><strong>声明：本文为 Santa 原创文章，欢迎转载，请在明显位置注明出处。</strong></p>]]></content>
+    <content type="html"><![CDATA[<p><strong>声明：本文为 Santa 原创文章，欢迎转载，请在明显位置注明出处。</strong></p><p>本文记录单例模式的一种常用用法</p><p>场景：软件的系统配置，文件存储可输出ini和json文件；软件退出时存储，软件登录时读取信息放到缓存中</p><h3 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3><h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3>]]></content>
     
     
       
       
     <summary type="html">&lt;p&gt;&lt;strong&gt;声明：本文为 Santa 原创文章，欢迎转载，请在明显位置注明出处。&lt;/strong&gt;&lt;/p&gt;
-</summary>
+&lt;p&gt;本文记录单例模式的一种常用用法&lt;/p&gt;
+&lt;p&gt;场景：软件的系统配置，文件存储可输出ini和json文件；软件退出时存储，软件登录时读取信息放到缓存中&lt;/p&gt;</summary>
       
     
     
