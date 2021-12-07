@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Santa的博客</title>
   
-  <subtitle>My personal blog</subtitle>
+  
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
