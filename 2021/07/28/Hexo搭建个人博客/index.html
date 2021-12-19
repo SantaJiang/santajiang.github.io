@@ -25,10 +25,10 @@
     <!-- meta -->
 
 
-<title>Github Pages搭建个人博客 | Santa的博客</title>
+<title>Hexo搭建个人博客 | Santa的博客</title>
 
 
-    <meta name="keywords" content="搭建博客">
+    <meta name="keywords" content="Hexo">
 
 
 
@@ -37,15 +37,15 @@
  
     <meta name="description" content="搭建时踩了很多坑，最主要的是很多文章的时效性不能保障了，按照文章的方法不能成功走完下来，特在此记录下最新的搭建流程，后续如有必要会持续更新">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Github Pages搭建个人博客">
-<meta property="og:url" content="https://santajiang.github.io/2021/07/28/Github%20Pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:title" content="Hexo搭建个人博客">
+<meta property="og:url" content="https://santajiang.github.io/2021/07/28/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="Santa的博客">
 <meta property="og:description" content="搭建时踩了很多坑，最主要的是很多文章的时效性不能保障了，按照文章的方法不能成功走完下来，特在此记录下最新的搭建流程，后续如有必要会持续更新">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-28T09:45:53.000Z">
-<meta property="article:modified_time" content="2021-12-07T08:09:18.380Z">
+<meta property="article:published_time" content="2021-07-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-16T09:48:35.460Z">
 <meta property="article:author" content="蒋胜达">
-<meta property="article:tag" content="搭建博客">
+<meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -55,7 +55,7 @@
 
     
     
-        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" >
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/atom-one-dark.css" media="none" >
         
             <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/dark.css" media="none">
         
@@ -137,12 +137,12 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        Github Pages搭建个人博客
+        Hexo搭建个人博客
     </h1>
     <div class="post-title__meta">
         <a href="/archives/2021/07/" class="post-meta__date button">2021-07-28</a>
         
-    <span class="separate-dot"></span><a href="/categories/Github-Pages/" class="button">Github Pages</a>
+    <span class="separate-dot"></span><a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="button">博客搭建</a>
 
  
         
@@ -219,10 +219,10 @@
 <li>生成的.md文件路径在 <code>blog\source\_posts</code>下</li>
 </ul>
 <p>打开Test.md，会发现Hexo已经为我们生成了一个表头，表头的格式如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: Test                       //文章标题</span><br><span class="line">date: 2021-0X-XX XX:XX:XX         //生成日期</span><br><span class="line">tags:                             //所属标签</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: Test                       //文章标题</span><br><span class="line">date: 2021-0X-XX XX:XX:XX         //生成日期</span><br><span class="line">tags:                             //所属标签</span><br></pre></td></tr></table></figure>
 
 <p>我们也可以加上<strong>categories</strong>标签，表示类别，就例如我这边文章的表头就是这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: Github Pages搭建个人博客</span><br><span class="line">date: 2021-07-28 17:45:53</span><br><span class="line">categories: 搭建博客</span><br><span class="line">tags: Github Pages</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: Github Pages搭建个人博客</span><br><span class="line">date: 2021-07-28 17:45:53</span><br><span class="line">categories: 搭建博客</span><br><span class="line">tags: Github Pages</span><br></pre></td></tr></table></figure>
 
 <p>然后，在其下随便写一些内容，保存<br>回到终端，执行<code>hexo g</code>部署，然后执行 <code>hexo s</code>发布，刷新 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a> 查看结果</p>
 <h3 id="在-Github-上部署-Hexo"><a href="#在-Github-上部署-Hexo" class="headerlink" title="在 Github 上部署 Hexo"></a>在 Github 上部署 Hexo</h3><p><strong>操作如下</strong>：</p>
@@ -232,15 +232,15 @@
 <li><p>修改配置文件<code>blog/_config.yml</code> ，最新版与之前的不同从这里开始了</p>
 </li>
 <li><p>查找**# Site**字段，修改如下：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Santa的博客</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;My personal blog&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;记录、分享、交流&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">蒋胜达</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">en</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Santa的博客</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;My personal blog&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;记录、分享、交流&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">蒋胜达</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">en</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>查找**# URL**字段，修改如下：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://santajiang.github.io/</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br><span class="line"><span class="attr">pretty_urls:</span></span><br><span class="line">  <span class="attr">trailing_index:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span></span><br><span class="line">  <span class="attr">trailing_html:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing &#x27;.html&#x27; from permalinks</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://santajiang.github.io/</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br><span class="line"><span class="attr">pretty_urls:</span></span><br><span class="line">  <span class="attr">trailing_index:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span></span><br><span class="line">  <span class="attr">trailing_html:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing &#x27;.html&#x27; from permalinks</span></span><br></pre></td></tr></table></figure>
 <p>注意url填写你的pages网址不是仓库地址</p>
 </li>
 <li><p>查找<strong>deploy</strong>字段，修改如下：</p>
 </li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">repository:</span> <span class="string">git@github.com:SantaJiang/santajiang.github.io.git</span></span><br><span class="line"><span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">repository:</span> <span class="string">git@github.com:SantaJiang/santajiang.github.io.git</span></span><br><span class="line"><span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
 
 <p>这里要<strong>注意</strong>两点！</p>
 <ol>
@@ -255,8 +255,8 @@
 
     </div>
      
-    <div class="post-footer__meta"><p>更新于 2021-12-07</p></div> 
-    <div class="post-entry__tags"><a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="post-tags__link button"># 搭建博客</a></div> 
+    <div class="post-footer__meta"><p>更新于 2021-12-16</p></div> 
+    <div class="post-entry__tags"><a href="/tags/Hexo/" class="post-tags__link button"># Hexo</a></div> 
 </article>
 
 

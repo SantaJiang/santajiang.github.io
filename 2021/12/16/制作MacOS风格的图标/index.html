@@ -25,27 +25,25 @@
     <!-- meta -->
 
 
-<title>Next主题配置Utterances评论系统 | Santa的博客</title>
+<title>制作MacOS风格的图标 | Santa的博客</title>
 
 
-    <meta name="keywords" content="Hexo">
+    <meta name="keywords" content="PS">
 
 
 
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="在网上查找这部分教程的时候，很多教程已经过时了，因为最新版的Next默认已经不内置gitment评论系统了，我在多次配置后选用了目前Next 8+版本内置的Utterances，效果不错，配置起来相较于其他的评论系统简单很多，现写下配置流程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Next主题配置Utterances评论系统">
-<meta property="og:url" content="https://santajiang.github.io/2021/08/18/Next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AEUtterances%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/index.html">
+    <meta property="og:type" content="article">
+<meta property="og:title" content="制作MacOS风格的图标">
+<meta property="og:url" content="https://santajiang.github.io/2021/12/16/%E5%88%B6%E4%BD%9CMacOS%E9%A3%8E%E6%A0%BC%E7%9A%84%E5%9B%BE%E6%A0%87/index.html">
 <meta property="og:site_name" content="Santa的博客">
-<meta property="og:description" content="在网上查找这部分教程的时候，很多教程已经过时了，因为最新版的Next默认已经不内置gitment评论系统了，我在多次配置后选用了目前Next 8+版本内置的Utterances，效果不错，配置起来相较于其他的评论系统简单很多，现写下配置流程">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-16T09:49:33.294Z">
+<meta property="article:published_time" content="2021-12-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-16T09:47:57.964Z">
 <meta property="article:author" content="蒋胜达">
-<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="PS">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -137,12 +135,12 @@
 
 <div class="post-title">
     <h1 class="post-title__text">
-        Next主题配置Utterances评论系统
+        制作MacOS风格的图标
     </h1>
     <div class="post-title__meta">
-        <a href="/archives/2021/08/" class="post-meta__date button">2021-08-18</a>
+        <a href="/archives/2021/12/" class="post-meta__date button">2021-12-16</a>
         
-    <span class="separate-dot"></span><a href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" class="button">博客搭建</a>
+    <span class="separate-dot"></span><a href="/categories/%E8%A7%86%E8%A7%89%E8%AE%BE%E8%AE%A1/" class="button">视觉设计</a>
 
  
         
@@ -168,31 +166,18 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <p>在网上查找这部分教程的时候，很多教程已经过时了，因为最新版的Next默认已经不内置gitment评论系统了，我在多次配置后选用了目前Next 8+版本内置的Utterances，效果不错，配置起来相较于其他的评论系统简单很多，现写下配置流程</p>
-<span id="more"></span>
-
-<h3 id="创建Github仓库"><a href="#创建Github仓库" class="headerlink" title="创建Github仓库"></a>创建Github仓库</h3><p>需要在自己的 <strong>Github</strong> 账号下创建一个仓库来存放评论，创建的仓库名最好为<code>utterances</code>，方便后续自己识别，注意仓库为<code>public</code></p>
-<h3 id="安装Utterances"><a href="#安装Utterances" class="headerlink" title="安装Utterances"></a>安装Utterances</h3><p>安装地址：<a target="_blank" rel="noopener" href="https://github.com/apps/utterances">https://github.com/apps/utterances</a></p>
-<p>访问安装地址，进入安装页面，单击 <code>Install</code> 按钮</p>
-<p>接下来是一个权限的选择，可选可访问全部仓库，或者指定刚才创建的仓库</p>
-<h3 id="配置Utterances"><a href="#配置Utterances" class="headerlink" title="配置Utterances"></a>配置Utterances</h3><p>打开/blog/themes/next/_config.yml文件，查找<strong>utterances</strong>字段并修改如下：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Utterances</span></span><br><span class="line"><span class="comment"># For more information: https://utteranc.es</span></span><br><span class="line"><span class="attr">utterances:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">SantaJiang/utterances</span>	<span class="comment">#格式是 user_name/repo_name</span></span><br><span class="line">  <span class="comment"># Available values: pathname | url | title | og:title</span></span><br><span class="line">  <span class="attr">issue_term:</span> <span class="string">pathname</span></span><br><span class="line">  <span class="comment"># Available values: github-light | github-dark | preferred-color-scheme | github-dark-orange | icy-dark | dark-blue | photon-dark | boxy-light</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">github-light</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>完成后重新部署:  <code>hexo clean</code> <code>hexo g -d</code>  后查看效果</p>
-
+        
     </div>
      
     <div class="post-footer__meta"><p>更新于 2021-12-16</p></div> 
-    <div class="post-entry__tags"><a href="/tags/Hexo/" class="post-tags__link button"># Hexo</a></div> 
+    <div class="post-entry__tags"><a href="/tags/PS/" class="post-tags__link button"># PS</a></div> 
 </article>
 
 
     <div class="nav">
         <div class="nav__prev">
             
-                <a href="/2021/12/16/%E5%88%B6%E4%BD%9CMacOS%E9%A3%8E%E6%A0%BC%E7%9A%84%E5%9B%BE%E6%A0%87/" class="nav__link">
+                <a href="/2021/12/17/RGB%E5%80%BC%E4%B8%8E%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E9%A2%9C%E8%89%B2%E5%80%BC%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7/" class="nav__link">
                     <div>
                         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
                     </div>
@@ -201,7 +186,7 @@
                             Previous Post
                         </div>
                         <div class="nav__title">
-                            制作MacOS风格的图标
+                            RGB值与十六进制颜色值转换工具
                         </div>
                     </div>
                 </a>
@@ -209,13 +194,13 @@
         </div>
         <div class="nav__next">
             
-                <a href="/2021/08/02/%E5%B0%86Hexo%E8%BF%81%E7%A7%BB%E8%87%B3MacOS/" class="nav__link">
+                <a href="/2021/08/18/Next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AEUtterances%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/" class="nav__link">
                     <div>
                         <div class="nav__label">
                             Next Post
                         </div>
                         <div class="nav__title">
-                            将Hexo迁移至MacOS
+                            Next主题配置Utterances评论系统
                         </div>
                     </div>
                     <div>
