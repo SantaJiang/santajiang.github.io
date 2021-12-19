@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2021-12-16T09:49:33.294Z</updated>
+  <updated>2021-12-19T12:00:17.275Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RGB值与十六进制颜色值转换工具</title>
+    <link href="https://santajiang.github.io/2021/12/19/RGB%E5%80%BC%E4%B8%8E%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E9%A2%9C%E8%89%B2%E5%80%BC%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7/"/>
+    <id>https://santajiang.github.io/2021/12/19/RGB%E5%80%BC%E4%B8%8E%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E9%A2%9C%E8%89%B2%E5%80%BC%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7/</id>
+    <published>2021-12-18T16:00:00.000Z</published>
+    <updated>2021-12-19T12:00:17.275Z</updated>
+    
+    <content type="html"><![CDATA[<p>平时在开发时经常会遇到RGB值和十六进制颜色互转的场景，平时都是用在线的网页端，每次麻烦不说，最近页面也开始到处插入广告了，既然想着功能也不大，就自己实现一个吧。</p><span id="more"></span><h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>ps:图直接摘的我GitHub项目里的，GitHub经常抽风，加载不出来图是正常的事<br><img src="https://github.com/SantaJiang/ColorConv/blob/master/image/macos.png" alt="image"> </p><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>页面是画了两个QLineEdit和一个QLabel，就构成了所有的要素，按钮我也不准备加，之前网页端的那个每次填好之后都得点个转换，很麻烦o(╥_╥)o.既然想到这一步了，我想干脆回车直接生成结果，而且生成的结果自动的复制到剪贴板里，那就省事多了，我总共需要做的就是：输入-回车-粘贴到IDE里，就完了.</p><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>做起来也是比较简单的，回车生效的事件直接用的是QLineEdit自带的returnPressed()事件，而复制到剪贴板用到的是QClipboard类，用法也是很简单：  </p><figure class="highlight qt"><table><tr><td class="code"><pre><span class="line">#include &lt;QClipboard&gt;</span><br><span class="line"></span><br><span class="line">QString str = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">QClipboard *clip = <span class="attribute">QApplication</span>::clipboard();</span><br><span class="line">clip-&gt;setText(str);</span><br></pre></td></tr></table></figure><p>这样这个”Hello”就自动复制到剪贴板里了.  </p><p>接下来最主要的就是颜色值的相互转换了，可以里用QColor类，先获取对应的color，然后再转换为对应的显示形式，这里贴上核心代码：  </p><figure class="highlight qt"><table><tr><td class="code"><pre><span class="line">#include &lt;QColor&gt;</span><br><span class="line"></span><br><span class="line">QColor <span class="built_in">color</span>(<span class="number">235</span>,<span class="number">235</span>,<span class="number">235</span>);</span><br><span class="line"><span class="built_in">int</span> red = <span class="built_in">color</span>.red();</span><br><span class="line"><span class="built_in">int</span> green = <span class="built_in">color</span>.green();</span><br><span class="line"><span class="built_in">int</span> blue = <span class="built_in">color</span>.blue();</span><br><span class="line">QString strRed = QString(<span class="string">&quot;%1&quot;</span>).arg(red &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line">QString strGreen = QString(<span class="string">&quot;%1&quot;</span>).arg(green &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line">QString strBlue = QString(<span class="string">&quot;%1&quot;</span>).arg(blue &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//十六进制显示</span></span><br><span class="line">QString hex = QString(<span class="string">&quot;#%1%2%3&quot;</span>).arg(strRed.toUpper()).arg(strGreen.toUpper()).arg(strBlue.toUpper());</span><br><span class="line"><span class="comment">//RGB显示</span></span><br><span class="line">QString rgb = QString(<span class="string">&quot;%1, %2, %3&quot;</span>).arg(red).arg(green).arg(blue);</span><br></pre></td></tr></table></figure><p>文章最后贴上这个项目的GitHub地址：<a href="https://github.com/SantaJiang/ColorConv">https://github.com/SantaJiang/ColorConv</a><br>欢迎来点Star</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;平时在开发时经常会遇到RGB值和十六进制颜色互转的场景，平时都是用在线的网页端，每次麻烦不说，最近页面也开始到处插入广告了，既然想着功能也不大，就自己实现一个吧。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+  </entry>
   
   <entry>
     <title>Next主题配置Utterances评论系统</title>
@@ -42,9 +63,9 @@
     <link href="https://santajiang.github.io/2021/08/02/%E5%B0%86Hexo%E8%BF%81%E7%A7%BB%E8%87%B3MacOS/"/>
     <id>https://santajiang.github.io/2021/08/02/%E5%B0%86Hexo%E8%BF%81%E7%A7%BB%E8%87%B3MacOS/</id>
     <published>2021-08-01T16:00:00.000Z</published>
-    <updated>2021-12-19T11:26:28.995Z</updated>
+    <updated>2021-12-19T11:27:13.429Z</updated>
     
-    <content type="html"><![CDATA[<p>当时用的Windows搭建的这个博客，现在要迁移到我的MacBook Pro上来，在查了很多资料后动手实践，发现还是比较方便的，现写下流程</p><span id="more"></span><h3 id="Node-js-Git"><a href="#Node-js-Git" class="headerlink" title="Node.js / Git"></a>Node.js / Git</h3><p>首先要安装Node.js与Git的环境，这里省略就不多说了，没有什么可提的点</p><h3 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h3><p>将原Windows电脑上的博客复制如下的文件，并暂存起来：</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">_config.yml</span><br><span class="line">package.json</span><br><span class="line">scaffolds/</span><br><span class="line">source/</span><br><span class="line">themes/</span><br></pre></td></tr></table></figure><h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><blockquote><p>打开终端，当前路径均可，默认只会装在固定的位置<br>执行<code>sudo npm install -g hexo-cli</code> </p></blockquote><h3 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h3><p>在你想要放置博客的位置，然后操作：</p><blockquote><p>打开终端<br>执行<code>hexo init blog</code></p></blockquote><h3 id="博客迁移"><a href="#博客迁移" class="headerlink" title="博客迁移"></a>博客迁移</h3><p>将之前暂存的文件，全部替换到刚才创建的blog文件夹中，然后操作：</p><blockquote><p>打开终端<br>执行<code>npm install</code><br>执行<code>hexo g</code><br>执行<code>hexo d</code><br>查看效果</p></blockquote><p>至此博客就成功迁移到MacOS中了，后续的操作与Windows下无差别</p>]]></content>
+    <content type="html"><![CDATA[<p>当时用的Windows搭建的这个博客，现在要迁移到我的MacBook Pro上来，在查了很多资料后动手实践，发现还是比较方便的，现写下流程</p><span id="more"></span><h3 id="Node-js-Git"><a href="#Node-js-Git" class="headerlink" title="Node.js / Git"></a>Node.js / Git</h3><p>首先要安装Node.js与Git的环境，这里省略就不多说了</p><h3 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h3><p>将原Windows电脑上的博客复制如下的文件，并暂存起来：</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">_config.yml</span><br><span class="line">package.json</span><br><span class="line">scaffolds/</span><br><span class="line">source/</span><br><span class="line">themes/</span><br></pre></td></tr></table></figure><h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><blockquote><p>打开终端，当前路径均可，默认只会装在固定的位置<br>执行<code>sudo npm install -g hexo-cli</code> </p></blockquote><h3 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h3><p>在你想要放置博客的位置，然后操作：</p><blockquote><p>打开终端<br>执行<code>hexo init blog</code></p></blockquote><h3 id="博客迁移"><a href="#博客迁移" class="headerlink" title="博客迁移"></a>博客迁移</h3><p>将之前暂存的文件，全部替换到刚才创建的blog文件夹中，然后操作：</p><blockquote><p>打开终端<br>执行<code>npm install</code><br>执行<code>hexo g</code><br>执行<code>hexo d</code><br>查看效果</p></blockquote><p>至此博客就成功迁移到MacOS中了，后续的操作与Windows下无差别</p>]]></content>
     
     
     <summary type="html">&lt;p&gt;当时用的Windows搭建的这个博客，现在要迁移到我的MacBook Pro上来，在查了很多资料后动手实践，发现还是比较方便的，现写下流程&lt;/p&gt;</summary>
