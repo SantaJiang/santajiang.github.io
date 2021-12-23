@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>MacOS下Qt调用终端(Terminal)</title>
+      <link href="/2021/12/23/MacOS%E4%B8%8BQt%E8%B0%83%E7%94%A8Terminal%E7%BB%88%E7%AB%AF/"/>
+      <url>/2021/12/23/MacOS%E4%B8%8BQt%E8%B0%83%E7%94%A8Terminal%E7%BB%88%E7%AB%AF/</url>
+      
+        <content type="html"><![CDATA[<p>今天遇到了一个贼郁闷的问题，就是怎么在MacOS下用Qt调起终端，并执行一些命令，在网上怎么都查不到方法，说什么的都有，就是没有管用的  </p><p>自己在多次尝试后终于找到了解决方案，其实很简单，直接上代码:  </p><figure class="highlight qt"><table><tr><td class="code"><pre><span class="line">#include &lt;QProcess&gt;</span><br><span class="line"></span><br><span class="line">QProcess pCmd = <span class="keyword">new</span> QProcess(<span class="keyword">this</span>);</span><br><span class="line">connect(pCmd , SIGNAL(readyReadStandardOutput()) , <span class="keyword">this</span> , SLOT(on_readoutput()));</span><br><span class="line">connect(pCmd , SIGNAL(readyReadStandardError()) , <span class="keyword">this</span> , SLOT(on_readerror()));</span><br><span class="line"></span><br><span class="line">pCmd-&gt;start(<span class="string">&quot;bash&quot;</span>);</span><br><span class="line">pCmd-&gt;waitForStarted();</span><br><span class="line"></span><br><span class="line">QString strTermCmd = <span class="string">&quot;git add -A&quot;</span> + <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">pCmd-&gt;write(strTermCmd.toUtf8().data());</span><br><span class="line">pCmd-&gt;waitForFinished();</span><br></pre></td></tr></table></figure><p>问题的关键就在这个<code>pCmd-&gt;start(&quot;bash&quot;);</code> ,其实早就该想到填bash的，被网上的各种文章误导，还试了好久的open命令，浪费人生，在此做个记录吧 =_=</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+            <tag> Macos </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>RGB值与十六进制颜色值转换工具</title>
       <link href="/2021/12/19/RGB%E5%80%BC%E4%B8%8E%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E9%A2%9C%E8%89%B2%E5%80%BC%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7/"/>
       <url>/2021/12/19/RGB%E5%80%BC%E4%B8%8E%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E9%A2%9C%E8%89%B2%E5%80%BC%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7/</url>
@@ -21,6 +48,8 @@
         <tags>
             
             <tag> Qt </tag>
+            
+            <tag> Macos </tag>
             
         </tags>
       
@@ -71,6 +100,8 @@
         <tags>
             
             <tag> Hexo </tag>
+            
+            <tag> Macos </tag>
             
         </tags>
       

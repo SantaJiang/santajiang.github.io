@@ -28,7 +28,7 @@
 <title>RGB值与十六进制颜色值转换工具 | Santa的博客</title>
 
 
-    <meta name="keywords" content="Qt">
+    <meta name="keywords" content="Qt, Macos">
 
 
 
@@ -43,9 +43,10 @@
 <meta property="og:description" content="平时在开发时经常会遇到RGB值和十六进制颜色互转的场景，平时都是用在线的网页端，每次麻烦不说，最近页面也开始到处插入广告了，既然想着功能也不大，就自己实现一个吧">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-19T12:04:37.663Z">
+<meta property="article:modified_time" content="2021-12-23T09:35:08.420Z">
 <meta property="article:author" content="蒋胜达">
 <meta property="article:tag" content="Qt">
+<meta property="article:tag" content="Macos">
 <meta name="twitter:card" content="summary_large_image">
 
 
@@ -180,13 +181,27 @@
 <figure class="highlight qt"><table><tr><td class="code"><pre><span class="line">#include &lt;QColor&gt;</span><br><span class="line"></span><br><span class="line">QColor <span class="built_in">color</span>(<span class="number">235</span>,<span class="number">235</span>,<span class="number">235</span>);</span><br><span class="line"><span class="built_in">int</span> red = <span class="built_in">color</span>.red();</span><br><span class="line"><span class="built_in">int</span> green = <span class="built_in">color</span>.green();</span><br><span class="line"><span class="built_in">int</span> blue = <span class="built_in">color</span>.blue();</span><br><span class="line">QString strRed = QString(<span class="string">&quot;%1&quot;</span>).arg(red &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line">QString strGreen = QString(<span class="string">&quot;%1&quot;</span>).arg(green &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line">QString strBlue = QString(<span class="string">&quot;%1&quot;</span>).arg(blue &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//十六进制显示</span></span><br><span class="line">QString hex = QString(<span class="string">&quot;#%1%2%3&quot;</span>).arg(strRed.toUpper()).arg(strGreen.toUpper()).arg(strBlue.toUpper());</span><br><span class="line"><span class="comment">//RGB显示</span></span><br><span class="line">QString rgb = QString(<span class="string">&quot;%1, %2, %3&quot;</span>).arg(red).arg(green).arg(blue);</span><br></pre></td></tr></table></figure>
     </div>
      
-    <div class="post-footer__meta"><p>更新于 2021-12-19</p></div> 
-    <div class="post-entry__tags"><a href="/tags/Qt/" class="post-tags__link button"># Qt</a></div> 
+    <div class="post-footer__meta"><p>更新于 2021-12-23</p></div> 
+    <div class="post-entry__tags"><a href="/tags/Qt/" class="post-tags__link button"># Qt</a><a href="/tags/Macos/" class="post-tags__link button"># Macos</a></div> 
 </article>
 
 
     <div class="nav">
         <div class="nav__prev">
+            
+                <a href="/2021/12/23/MacOS%E4%B8%8BQt%E8%B0%83%E7%94%A8Terminal%E7%BB%88%E7%AB%AF/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            MacOS下Qt调用终端(Terminal)
+                        </div>
+                    </div>
+                </a>
             
         </div>
         <div class="nav__next">
