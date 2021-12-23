@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://santajiang.github.io/about/index.html</loc>
+    
+    <lastmod>2021-12-23</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://santajiang.github.io/2021/12/19/RGB%E5%80%BC%E4%B8%8E%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E9%A2%9C%E8%89%B2%E5%80%BC%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7/</loc>
     
     <lastmod>2021-12-23</lastmod>
@@ -54,13 +61,6 @@
     <loc>https://santajiang.github.io/tags/index.html</loc>
     
     <lastmod>2021-12-07</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://santajiang.github.io/about/index.html</loc>
-    
-    <lastmod>2021-08-30</lastmod>
     
   </url>
   
