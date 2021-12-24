@@ -322,7 +322,7 @@
                     repo: 'gitalk',
                     owner: 'SantaJiang',
                     admin: 'SantaJiang',
-                    id: window.location.pathname,
+                    id: decodeURI(window.location.pathname),
                     distractionFreeMode: false
                 });
                 gitalk.render('gitalk-container');
