@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://santajiang.github.io/article/a8094cf7.html</loc>
+    
+    <lastmod>2022-01-04</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://santajiang.github.io/article/aa3a8158.html</loc>
     
     <lastmod>2022-01-04</lastmod>
@@ -17,13 +24,6 @@
   
   <url>
     <loc>https://santajiang.github.io/article/fa7e3d73.html</loc>
-    
-    <lastmod>2022-01-04</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://santajiang.github.io/article/15952133.html</loc>
     
     <lastmod>2022-01-04</lastmod>
     
@@ -95,6 +95,13 @@
 
   
   <url>
+    <loc>https://santajiang.github.io/tags/Hexo/</loc>
+    <lastmod>2022-01-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://santajiang.github.io/tags/Qt/</loc>
     <lastmod>2022-01-04</lastmod>
     <changefreq>daily</changefreq>
@@ -108,24 +115,17 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://santajiang.github.io/tags/Hexo/</loc>
-    <lastmod>2022-01-04</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   
   <url>
-    <loc>https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://santajiang.github.io/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2022-01-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://santajiang.github.io/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
+    <loc>https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2022-01-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
