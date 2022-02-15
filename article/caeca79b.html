@@ -16,16 +16,26 @@
     <!--icon-->
 
     
+        <link rel="shortcut icon" href="/image/favicon.ico">
     
     
+        <link rel="icon" type="image/png" sizes="16x16" href="/image/favicon-16x16.png">
     
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="/image/favicon-32x32.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="/image/apple-touch-icon.png">
+    
+    
+        <link rel="mask-icon" href="/image/safari-pinned-tab.svg">
     
 
 
     <!-- meta -->
 
 
-<title>RGB值与十六进制颜色值转换工具 | Santa的博客</title>
+<title>RGB值与十六进制颜色值转换工具 | Santa的小站</title>
 
 
     <meta name="keywords" content="Qt, Macos">
@@ -39,7 +49,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="RGB值与十六进制颜色值转换工具">
 <meta property="og:url" content="https://santajiang.github.io/article/caeca79b.html">
-<meta property="og:site_name" content="Santa的博客">
+<meta property="og:site_name" content="Santa的小站">
 <meta property="og:description" content="平时在开发时经常会遇到RGB值和十六进制颜色互转的场景，平时都是用在线的网页端，平日的麻烦也能忍，最近页面竟开始植入广告了，既然想着功能也不大，就自己实现一个吧">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://santajiang.github.io/images/RGB%E5%80%BC%E4%B8%8E%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E9%A2%9C%E8%89%B2%E5%80%BC%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7/colorconv.png">
@@ -58,13 +68,13 @@
 
     
     
-        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/arduino-light.css" media="none" >
+    
+        <link rel="stylesheet" id="hl-default-theme" href="https://cdn.jsdelivr.net/npm/highlight.js@10.1.2/styles/atom-one-light.min.css" media="none" >
         
-            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/dracula.css" media="none">
+            <link rel="stylesheet" id="hl-dark-theme" href="https://cdn.jsdelivr.net/npm/highlight.js@10.1.2/styles/atom-one-dark.min.css" media="none">
         
     
 
-    
     
 
     
@@ -82,7 +92,7 @@
 
     <!-- custom head -->
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Santa的博客" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Santa的小站" type="application/atom+xml">
 </head>
 
     <body>
@@ -90,22 +100,22 @@
             <header class="header">
     <div class="header__left">
         <a href="/" class="button">
-            <span class="logo__text">Santa&#39;s Blog</span>
+            <span class="logo__text">Santa</span>
         </a>
     </div>
     <div class="header__right">
         
             <div class="navbar__menus">
                 
-                    <a href="/" class="navbar-menu button">主页</a>
+                    <a href="/" class="navbar-menu button">Home</a>
                 
-                    <a href="/tags/" class="navbar-menu button">分类</a>
+                    <a href="/tags/" class="navbar-menu button">Tags</a>
                 
-                    <a href="/archives/" class="navbar-menu button">归档</a>
+                    <a href="/archives/" class="navbar-menu button">Archives</a>
                 
-                    <a href="/BBS/" class="navbar-menu button">公告栏</a>
+                    <a href="/BBS/" class="navbar-menu button">BBS</a>
                 
-                    <a href="/about/" class="navbar-menu button">关于</a>
+                    <a href="/about/" class="navbar-menu button">About</a>
                 
             </div>
         
@@ -123,15 +133,15 @@
             <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
             <div class="dropdown-menus" id="dropdown-menus">
                 
-                    <a href="/" class="dropdown-menu button">主页</a>
+                    <a href="/" class="dropdown-menu button">Home</a>
                 
-                    <a href="/tags/" class="dropdown-menu button">分类</a>
+                    <a href="/tags/" class="dropdown-menu button">Tags</a>
                 
-                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                    <a href="/archives/" class="dropdown-menu button">Archives</a>
                 
-                    <a href="/BBS/" class="dropdown-menu button">公告栏</a>
+                    <a href="/BBS/" class="dropdown-menu button">BBS</a>
                 
-                    <a href="/about/" class="dropdown-menu button">关于</a>
+                    <a href="/about/" class="dropdown-menu button">About</a>
                 
             </div>
         
@@ -179,13 +189,30 @@
 <span id="more"></span>
 
 <h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><p>首先贴上这个项目的GitHub地址：<a target="_blank" rel="noopener" href="https://github.com/SantaJiang/ColorConv">https://github.com/SantaJiang/ColorConv</a><br>欢迎来点Star</p>
-<p><img src="/../images/RGB%E5%80%BC%E4%B8%8E%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E9%A2%9C%E8%89%B2%E5%80%BC%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7/colorconv.png" alt="colorconv"></p>
+<p><img src="/../images/RGB%E5%80%BC%E4%B8%8E%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E9%A2%9C%E8%89%B2%E5%80%BC%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7/colorconv.png" class="lazy" data-srcset="/../images/RGB%E5%80%BC%E4%B8%8E%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E9%A2%9C%E8%89%B2%E5%80%BC%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7/colorconv.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEXMzMyWlpYU2uzLAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAACklEQVQImWNgAAAAAgAB9HFkpgAAAABJRU5ErkJggg==" alt="colorconv"></p>
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>页面是画了两个QLineEdit和一个QLabel，就构成了所有的要素，按钮我也不准备加，之前网页端的那个每次填好之后都得点个转换，很麻烦，既然想到这一步了，我想干脆回车直接生成结果，而且生成的结果自动的复制到剪贴板里，那就省事多了，我总共需要做的就是：输入-回车-粘贴到IDE里，就完了.</p>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>做起来也是比较简单的，回车生效的事件直接用的是QLineEdit自带的returnPressed()事件，而复制到剪贴板用到的是QClipboard类，用法也是很简单：  </p>
-<figure class="highlight qt"><table><tr><td class="code"><pre><span class="line">#include &lt;QClipboard&gt;</span><br><span class="line"></span><br><span class="line">QString str = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">QClipboard *clip = <span class="attribute">QApplication</span>::clipboard();</span><br><span class="line">clip-&gt;setText(str);</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs qt">#include &lt;QClipboard&gt;
+
+QString str = <span class="hljs-string">&quot;Hello&quot;</span>;
+QClipboard *clip = <span class="hljs-attribute">QApplication</span>::clipboard();
+clip-&gt;setText(str);</code></pre>
 <p>这样这个”Hello”就自动复制到剪贴板里了.  </p>
 <p>接下来最主要的就是颜色值的相互转换了，可以里用QColor类，先获取对应的color，然后再转换为对应的显示形式，这里贴上核心代码：  </p>
-<figure class="highlight qt"><table><tr><td class="code"><pre><span class="line">#include &lt;QColor&gt;</span><br><span class="line"></span><br><span class="line">QColor <span class="built_in">color</span>(<span class="number">235</span>,<span class="number">235</span>,<span class="number">235</span>);</span><br><span class="line"><span class="built_in">int</span> red = <span class="built_in">color</span>.red();</span><br><span class="line"><span class="built_in">int</span> green = <span class="built_in">color</span>.green();</span><br><span class="line"><span class="built_in">int</span> blue = <span class="built_in">color</span>.blue();</span><br><span class="line">QString strRed = QString(<span class="string">&quot;%1&quot;</span>).arg(red &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line">QString strGreen = QString(<span class="string">&quot;%1&quot;</span>).arg(green &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line">QString strBlue = QString(<span class="string">&quot;%1&quot;</span>).arg(blue &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//十六进制显示</span></span><br><span class="line">QString hex = QString(<span class="string">&quot;#%1%2%3&quot;</span>).arg(strRed.toUpper()).arg(strGreen.toUpper()).arg(strBlue.toUpper());</span><br><span class="line"><span class="comment">//RGB显示</span></span><br><span class="line">QString rgb = QString(<span class="string">&quot;%1, %2, %3&quot;</span>).arg(red).arg(green).arg(blue);</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs qt">#include &lt;QColor&gt;
+
+QColor <span class="hljs-built_in">color</span>(<span class="hljs-number">235</span>,<span class="hljs-number">235</span>,<span class="hljs-number">235</span>);
+<span class="hljs-built_in">int</span> red = <span class="hljs-built_in">color</span>.red();
+<span class="hljs-built_in">int</span> green = <span class="hljs-built_in">color</span>.green();
+<span class="hljs-built_in">int</span> blue = <span class="hljs-built_in">color</span>.blue();
+QString strRed = QString(<span class="hljs-string">&quot;%1&quot;</span>).arg(red &amp; <span class="hljs-number">0xFF</span>, <span class="hljs-number">2</span>, <span class="hljs-number">16</span>, QLatin1Char(<span class="hljs-string">&#x27;0&#x27;</span>));
+QString strGreen = QString(<span class="hljs-string">&quot;%1&quot;</span>).arg(green &amp; <span class="hljs-number">0xFF</span>, <span class="hljs-number">2</span>, <span class="hljs-number">16</span>, QLatin1Char(<span class="hljs-string">&#x27;0&#x27;</span>));
+QString strBlue = QString(<span class="hljs-string">&quot;%1&quot;</span>).arg(blue &amp; <span class="hljs-number">0xFF</span>, <span class="hljs-number">2</span>, <span class="hljs-number">16</span>, QLatin1Char(<span class="hljs-string">&#x27;0&#x27;</span>));
+
+<span class="hljs-comment">//十六进制显示</span>
+QString hex = QString(<span class="hljs-string">&quot;#%1%2%3&quot;</span>).arg(strRed.toUpper()).arg(strGreen.toUpper()).arg(strBlue.toUpper());
+<span class="hljs-comment">//RGB显示</span>
+QString rgb = QString(<span class="hljs-string">&quot;%1, %2, %3&quot;</span>).arg(red).arg(green).arg(blue);</code></pre>
     </div>
      
     <div class="post-footer__meta"><p>更新于 2022-01-04</p></div> 
@@ -205,7 +232,7 @@
                             Previous Post
                         </div>
                         <div class="nav__title">
-                            MacOS下Qt调用终端(Terminal)
+                            Qt调用MacOS终端
                         </div>
                     </div>
                 </a>
@@ -275,8 +302,17 @@
             <span id="busuanzi_value_site_uv"></span>
             <span>Viewers</span>
             
+                <span>&amp;nbsp;&amp;nbsp;&amp;nbsp;|</span>
+            
         </span>
     
+    
+        <span id="busuanzi_container_site_pv" hidden>
+            <span></span>
+            <span id="busuanzi_value_site_pv"></span>
+            <span>Views</span>
+            
+        </span>
     
  
  
@@ -285,7 +321,7 @@
     
         
         <p class="footer-copyright">
-            Copyright © 2021&nbsp;-&nbsp;2022 <a href="/">Santa的博客</a>
+            Copyright © 2021&nbsp;-&nbsp;2022 <a href="/">Santa的小站</a>
         </p>
     
     
@@ -293,7 +329,15 @@
 </footer>
 
         </div>
-         
+        
+    <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+    <script>
+        window.lazyLoadOptions = {
+            elements_selector: ".lazy",
+            threshold: 0
+        };
+    </script>
+ 
 
  
 
@@ -326,8 +370,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
 
     <script>
-        let lazyloadT = Boolean('false'),
-            auto_fancybox = Boolean('false')
+        let lazyloadT = Boolean('true'),
+            auto_fancybox = Boolean('true')
         if (auto_fancybox) {
             $(".post__content").find('img').each(function () {
                 var element = document.createElement("a");
@@ -382,7 +426,7 @@
                     repo: 'gitalk',
                     owner: 'SantaJiang',
                     admin: 'SantaJiang',
-                    id: decodeURI(window.location.pathname),
+                    id: window.location.pathname,
                     distractionFreeMode: false
                 });
                 gitalk.render('gitalk-container');

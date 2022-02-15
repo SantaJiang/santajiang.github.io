@@ -16,16 +16,26 @@
     <!--icon-->
 
     
+        <link rel="shortcut icon" href="/image/favicon.ico">
     
     
+        <link rel="icon" type="image/png" sizes="16x16" href="/image/favicon-16x16.png">
     
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="/image/favicon-32x32.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="/image/apple-touch-icon.png">
+    
+    
+        <link rel="mask-icon" href="/image/safari-pinned-tab.svg">
     
 
 
     <!-- meta -->
 
 
-<title>LeetCode1.两数之和 | Santa的博客</title>
+<title>LeetCode1.两数之和 | Santa的小站</title>
 
 
     <meta name="keywords" content="LeetCode, C++">
@@ -39,7 +49,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode1.两数之和">
 <meta property="og:url" content="https://santajiang.github.io/article/58186276.html">
-<meta property="og:site_name" content="Santa的博客">
+<meta property="og:site_name" content="Santa的小站">
 <meta property="og:description" content="今天要在博客开一个新的分类，记录我刷LeetCode过程中的一些心得体会   希望这个系列能好好做下去，也希望通过这种记录的形式给自己持续刷下去的动力   刷题经验为0，也预料到未来可能会很困难，但千里之行，始于脚下，就从这篇开始吧！">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-04T08:04:00.000Z">
@@ -56,13 +66,13 @@
 
     
     
-        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/arduino-light.css" media="none" >
+    
+        <link rel="stylesheet" id="hl-default-theme" href="https://cdn.jsdelivr.net/npm/highlight.js@10.1.2/styles/atom-one-light.min.css" media="none" >
         
-            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/dracula.css" media="none">
+            <link rel="stylesheet" id="hl-dark-theme" href="https://cdn.jsdelivr.net/npm/highlight.js@10.1.2/styles/atom-one-dark.min.css" media="none">
         
     
 
-    
     
 
     
@@ -80,7 +90,7 @@
 
     <!-- custom head -->
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Santa的博客" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Santa的小站" type="application/atom+xml">
 </head>
 
     <body>
@@ -88,22 +98,22 @@
             <header class="header">
     <div class="header__left">
         <a href="/" class="button">
-            <span class="logo__text">Santa&#39;s Blog</span>
+            <span class="logo__text">Santa</span>
         </a>
     </div>
     <div class="header__right">
         
             <div class="navbar__menus">
                 
-                    <a href="/" class="navbar-menu button">主页</a>
+                    <a href="/" class="navbar-menu button">Home</a>
                 
-                    <a href="/tags/" class="navbar-menu button">分类</a>
+                    <a href="/tags/" class="navbar-menu button">Tags</a>
                 
-                    <a href="/archives/" class="navbar-menu button">归档</a>
+                    <a href="/archives/" class="navbar-menu button">Archives</a>
                 
-                    <a href="/BBS/" class="navbar-menu button">公告栏</a>
+                    <a href="/BBS/" class="navbar-menu button">BBS</a>
                 
-                    <a href="/about/" class="navbar-menu button">关于</a>
+                    <a href="/about/" class="navbar-menu button">About</a>
                 
             </div>
         
@@ -121,15 +131,15 @@
             <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
             <div class="dropdown-menus" id="dropdown-menus">
                 
-                    <a href="/" class="dropdown-menu button">主页</a>
+                    <a href="/" class="dropdown-menu button">Home</a>
                 
-                    <a href="/tags/" class="dropdown-menu button">分类</a>
+                    <a href="/tags/" class="dropdown-menu button">Tags</a>
                 
-                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                    <a href="/archives/" class="dropdown-menu button">Archives</a>
                 
-                    <a href="/BBS/" class="dropdown-menu button">公告栏</a>
+                    <a href="/BBS/" class="dropdown-menu button">BBS</a>
                 
-                    <a href="/about/" class="dropdown-menu button">关于</a>
+                    <a href="/about/" class="dropdown-menu button">About</a>
                 
             </div>
         
@@ -200,13 +210,17 @@
 <p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
 <p>你可以按任意顺序返回答案。</p>
 <p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：nums = [2,7,11,15], target = 9</span><br><span class="line">输出：[0,1]</span><br><span class="line">解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs plaintext">输入：nums = [2,7,11,15], target = 9
+输出：[0,1]
+解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。</code></pre>
 
 <p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：nums = [3,2,4], target = 6</span><br><span class="line">输出：[1,2]</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs plaintext">输入：nums = [3,2,4], target = 6
+输出：[1,2]</code></pre>
 
 <p><strong>示例 3：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：nums = [3,3], target = 6</span><br><span class="line">输出：[0,1]</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs plaintext">输入：nums = [3,3], target = 6
+输出：[0,1]</code></pre>
 
 <p><strong>提示：</strong></p>
 <ul>
@@ -216,11 +230,35 @@
 <li><strong>只会存在一个有效答案</strong></li>
 </ul>
 <h1 id="我的解题"><a href="#我的解题" class="headerlink" title="我的解题"></a>我的解题</h1><p>思考后我给出的解法是这样的：  </p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums.<span class="built_in">size</span>(); j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(j == i)  <span class="comment">//数组内两个元素不能重复使用</span></span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(nums[i] + nums[j] == target)</span><br><span class="line">                &#123;</span><br><span class="line">                    vec.<span class="built_in">push_back</span>(i);</span><br><span class="line">                    vec.<span class="built_in">push_back</span>(j);</span><br><span class="line">                    <span class="keyword">return</span> vec;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">twoSum</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target)</span> </span>
+<span class="hljs-function">    </span>&#123;
+        vector&lt;<span class="hljs-keyword">int</span>&gt; vec;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++)
+        &#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; nums.<span class="hljs-built_in">size</span>(); j++)
+            &#123;
+                <span class="hljs-keyword">if</span>(j == i)  <span class="hljs-comment">//数组内两个元素不能重复使用</span>
+                    <span class="hljs-keyword">continue</span>;
+
+                <span class="hljs-keyword">if</span>(nums[i] + nums[j] == target)
+                &#123;
+                    vec.<span class="hljs-built_in">push_back</span>(i);
+                    vec.<span class="hljs-built_in">push_back</span>(j);
+                    <span class="hljs-keyword">return</span> vec;
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> vec;
+    &#125;
+&#125;;</code></pre>
 
 <p>两个for循环，第一个循环管第一个数，第二个循环管第二个数，然后通过<code>j == i</code>的判断规避“重复使用”的题目限制  </p>
 <p>结果通过了，但是执行效果不太好：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">执行用时：808 ms, 在所有 C++ 提交中击败了5.04%的用户</span><br><span class="line">内存消耗：10 MB, 在所有 C++ 提交中击败了60.94%的用户</span><br><span class="line">通过测试用例：57 / 57</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs plaintext">执行用时：808 ms, 在所有 C++ 提交中击败了5.04%的用户
+内存消耗：10 MB, 在所有 C++ 提交中击败了60.94%的用户
+通过测试用例：57 / 57</code></pre>
 
 
 
@@ -228,10 +266,31 @@
 <p><strong>我：</strong>跟我的思路差不多，我判断的是和，官方的是差值，也是两个for循环遍历；但是在题解里看到了<code>return &#123;i, j&#125;</code>这种用法，原来还可以直接return花括号当vector，学习了···</p>
 <p><strong>方法二：</strong>通过哈希表来解决，这里又分成了两遍哈希表和一遍哈希表</p>
 <p><strong>我：</strong>两遍哈希表就是新建一个HashMap，然后把数组和它的角标按照<code>nums[i],i</code>的形式存起来，然后再来for循环查这个map，相当于把遍历方法的第二个for变成了从映射表里查找对应元素；一遍哈希表则是在两遍哈希表的基础上改进，在用for循环初始化哈希表的时候，顺带就判断了存不存在符合的元素，初始化一遍完了也判断完了，结果就出来了，这个方法不错  </p>
-<h1 id="我的改进"><a href="#我的改进" class="headerlink" title="我的改进"></a>我的改进</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">        map&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; a;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(a.<span class="built_in">count</span>(target - nums[i]) &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                vec.<span class="built_in">push_back</span>(a[target - nums[i]]); <span class="comment">//第1个元素下标</span></span><br><span class="line">                vec.<span class="built_in">push_back</span>(i); <span class="comment">//第2个元素下标</span></span><br><span class="line">                <span class="keyword">return</span> vec;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            a[nums[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="我的改进"><a href="#我的改进" class="headerlink" title="我的改进"></a>我的改进</h1><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">twoSum</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target)</span> </span>
+<span class="hljs-function">    </span>&#123;
+        vector&lt;<span class="hljs-keyword">int</span>&gt; vec;
+        map&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt; a;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++)
+        &#123;
+            <span class="hljs-keyword">if</span>(a.<span class="hljs-built_in">count</span>(target - nums[i]) &gt; <span class="hljs-number">0</span>)
+            &#123;
+                vec.<span class="hljs-built_in">push_back</span>(a[target - nums[i]]); <span class="hljs-comment">//第1个元素下标</span>
+                vec.<span class="hljs-built_in">push_back</span>(i); <span class="hljs-comment">//第2个元素下标</span>
+                <span class="hljs-keyword">return</span> vec;
+            &#125;
+
+            a[nums[i]] = i;
+        &#125;
+        <span class="hljs-keyword">return</span> vec;
+    &#125;
+&#125;;</code></pre>
 
 <p>在进行迭代并将元素插入到表中的同时，我们还会回过头来检查表中是否已经存在当前元素所对应的目标元素。如果它存在，那我们已经找到了对应解，并立即将其返回。最后的效果不错：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">执行用时：8 ms, 在所有 C++ 提交中击败了92.55%的用户</span><br><span class="line">内存消耗：10.9 MB, 在所有 C++ 提交中击败了14.31%的用户</span><br><span class="line">通过测试用例：57 / 57</span><br></pre></td></tr></table></figure>
+<pre><code class="hljs plaintext">执行用时：8 ms, 在所有 C++ 提交中击败了92.55%的用户
+内存消耗：10.9 MB, 在所有 C++ 提交中击败了14.31%的用户
+通过测试用例：57 / 57</code></pre>
 
 <h3 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h3><p>那么为什么这个<code>a[nums[i]] = i</code>放在了判断的后边呢，是为了防止出现某个数组元素和target数值是一个倍数的关系。比如给的是<code>[3,2,4]</code>,而target是6的话，那么在第一遍判断的时候，a就会存在一个<code>3,0</code>的元素，而此时<code>target - nums[0]</code>正好是<code>6-3=3</code>，就满足了if的条件，导致了逻辑的错误；而又因为新增元素放到了判断的下边，每次i++的时候都会先判断，所以第2个元素下标就不能从哈希表里拿了，可以直接用i来表示就行。  </p>
 
@@ -248,13 +307,13 @@
         </div>
         <div class="nav__next">
             
-                <a href="/article/aa3a8158.html" class="nav__link">
+                <a href="/article/a8094cf7.html" class="nav__link">
                     <div>
                         <div class="nav__label">
                             Next Post
                         </div>
                         <div class="nav__title">
-                            软件配置存读功能开发
+                            Cards主题添加Gitalk遇坑
                         </div>
                     </div>
                     <div>
@@ -310,8 +369,17 @@
             <span id="busuanzi_value_site_uv"></span>
             <span>Viewers</span>
             
+                <span>&amp;nbsp;&amp;nbsp;&amp;nbsp;|</span>
+            
         </span>
     
+    
+        <span id="busuanzi_container_site_pv" hidden>
+            <span></span>
+            <span id="busuanzi_value_site_pv"></span>
+            <span>Views</span>
+            
+        </span>
     
  
  
@@ -320,7 +388,7 @@
     
         
         <p class="footer-copyright">
-            Copyright © 2021&nbsp;-&nbsp;2022 <a href="/">Santa的博客</a>
+            Copyright © 2021&nbsp;-&nbsp;2022 <a href="/">Santa的小站</a>
         </p>
     
     
@@ -328,7 +396,15 @@
 </footer>
 
         </div>
-         
+        
+    <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+    <script>
+        window.lazyLoadOptions = {
+            elements_selector: ".lazy",
+            threshold: 0
+        };
+    </script>
+ 
 
  
 
@@ -361,8 +437,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
 
     <script>
-        let lazyloadT = Boolean('false'),
-            auto_fancybox = Boolean('false')
+        let lazyloadT = Boolean('true'),
+            auto_fancybox = Boolean('true')
         if (auto_fancybox) {
             $(".post__content").find('img').each(function () {
                 var element = document.createElement("a");
@@ -417,7 +493,7 @@
                     repo: 'gitalk',
                     owner: 'SantaJiang',
                     admin: 'SantaJiang',
-                    id: decodeURI(window.location.pathname),
+                    id: window.location.pathname,
                     distractionFreeMode: false
                 });
                 gitalk.render('gitalk-container');
