@@ -9,7 +9,7 @@
   --body-color: #4c4d4e;
   --title-color: #50596c;
   --border-color: rgba(0,0,0,0.1);
-  --space: 3.5rem;
+  --space: 2rem;
   --content-width: 776px;
 }
 ::-webkit-scrollbar {
@@ -46,7 +46,7 @@ body {
 }
 @media screen and (max-width: 650px) {
   body {
-    --space: 1.5rem;
+    --space: 1rem;
   }
 }
 article,
