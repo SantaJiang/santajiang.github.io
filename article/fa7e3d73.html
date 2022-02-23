@@ -45,15 +45,15 @@
 
     <!-- OpenGraph -->
  
-    <meta name="description" content="自己在多次尝试后终于找到了解决方案，其实很简单，直接上代码:   #include &lt;QProcess&gt;  QProcess pCmd &#x3D; new QProcess(this); connect(pCmd , SIGNAL(readyReadStandardOutput()) , this , SLOT(on_readoutput())); connect(pCmd , SIGNAL(">
+    <meta name="description" content="#include &lt;QProcess&gt;  QProcess pCmd &#x3D; new QProcess(this); connect(pCmd , SIGNAL(readyReadStandardOutput()) , this , SLOT(on_readoutput())); connect(pCmd , SIGNAL(readyReadStandardError()) , this">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Qt调用MacOS终端">
 <meta property="og:url" content="https://santajiang.github.io/article/fa7e3d73.html">
 <meta property="og:site_name" content="Santa">
-<meta property="og:description" content="自己在多次尝试后终于找到了解决方案，其实很简单，直接上代码:   #include &lt;QProcess&gt;  QProcess pCmd &#x3D; new QProcess(this); connect(pCmd , SIGNAL(readyReadStandardOutput()) , this , SLOT(on_readoutput())); connect(pCmd , SIGNAL(">
+<meta property="og:description" content="#include &lt;QProcess&gt;  QProcess pCmd &#x3D; new QProcess(this); connect(pCmd , SIGNAL(readyReadStandardOutput()) , this , SLOT(on_readoutput())); connect(pCmd , SIGNAL(readyReadStandardError()) , this">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-23T01:27:32.438Z">
+<meta property="article:modified_time" content="2022-02-23T02:43:25.220Z">
 <meta property="article:author" content="蒋胜达">
 <meta property="article:tag" content="Qt">
 <meta property="article:tag" content="Macos">
@@ -179,8 +179,7 @@
 <article class="post content-card">
     <div class="post__header"></div>
     <div class="post__content">
-        <p>自己在多次尝试后终于找到了解决方案，其实很简单，直接上代码:  </p>
-<pre><code class="hljs qt">#include &lt;QProcess&gt;
+        <pre><code class="hljs qt">#include &lt;QProcess&gt;
 
 QProcess pCmd = <span class="hljs-keyword">new</span> QProcess(<span class="hljs-keyword">this</span>);
 connect(pCmd , SIGNAL(readyReadStandardOutput()) , <span class="hljs-keyword">this</span> , SLOT(on_readoutput()));
@@ -193,7 +192,7 @@ QString strTermCmd = <span class="hljs-string">&quot;git add -A&quot;</span> + <
 pCmd-&gt;write(strTermCmd.toUtf8().data());
 pCmd-&gt;waitForFinished();</code></pre>
 
-<p>问题的关键就在这个<code>pCmd-&gt;start(&quot;bash&quot;);</code> ,其实早就该想到bash的，被网上的各种文章误导，还试了好久的open命令，浪费人生，在此做个记录吧</p>
+<p>问题的关键就在这个<code>pCmd-&gt;start(&quot;bash&quot;);</code> </p>
 
     </div>
      
