@@ -109,7 +109,7 @@
                 
                     <a href="/tags/" class="navbar-menu button">Tags</a>
                 
-                    <a href="/archives/" class="navbar-menu button">Archives</a>
+                    <a target="_blank" rel="noopener" href="https://www.github.com/SantaJiang" class="navbar-menu button">Projects</a>
                 
                     <a href="/about/" class="navbar-menu button">About</a>
                 
@@ -133,7 +133,7 @@
                 
                     <a href="/tags/" class="dropdown-menu button">Tags</a>
                 
-                    <a href="/archives/" class="dropdown-menu button">Archives</a>
+                    <a target="_blank" rel="noopener" href="https://www.github.com/SantaJiang" class="dropdown-menu button">Projects</a>
                 
                     <a href="/about/" class="dropdown-menu button">About</a>
                 
@@ -322,26 +322,6 @@
 
 
 
-    <div class="post__comments content-card" id="comment">
-        
-    <h4>评论</h4>
-    
-    
-    
-    
-    
-    <div id="gitalk-container"></div>
-
-    
-    
-    
-    
-    
-    
-
-
-    </div>
-
 
 
 </main>
@@ -458,69 +438,6 @@
 
  
 
-
-    
-
-    
-    
-    
-
-    
-    
-    
-    <script>
-        function loadComment() {
-            let e, i;
-            (e = document.createElement("script")).src = 'https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js',
-            document.body.appendChild(e);
-            e.onload = () => {
-                var gitalk = new Gitalk({
-                    clientID: 'a976c3bb8d0b3b89f723',
-                    clientSecret: 'f186b52519d2241759838898cd1787c6d3223362',
-                    repo: 'gitalk',
-                    owner: 'SantaJiang',
-                    admin: 'SantaJiang',
-                    id: window.location.pathname,
-                    distractionFreeMode: false
-                });
-                gitalk.render('gitalk-container');
-            };
-            (i = document.createElement("link")).rel = "stylesheet",
-            i.href = 'https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css',
-            document.head.appendChild(i);
-        }
-    
-        var runningOnBrowser = typeof window !== "undefined";
-        var isBot = runningOnBrowser && !("onscroll" in window) || typeof navigator !== "undefined" && /(gle|ing|ro|msn)bot|crawl|spider|yand|duckgo/i.test(navigator.userAgent);
-        var supportsIntersectionObserver = runningOnBrowser && "IntersectionObserver" in window;
-    
-        setTimeout(function () {
-            if (!isBot && supportsIntersectionObserver) {
-                var comment_observer = new IntersectionObserver(function(entries) {
-                    if (entries[0].isIntersecting) {
-                        loadComment();
-                        comment_observer.disconnect();
-                    }
-                }, { threshold: [0] });
-                comment_observer.observe(document.getElementById('comment'));
-            } else {
-                loadComment();
-            }
-        }, 1);
-    </script>
-
-    
-    
-
-    
-    
-    
-    
-    
-
-    
-    
-    
 
 
 
