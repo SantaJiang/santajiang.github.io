@@ -437,7 +437,7 @@ body td {
 @font-face {
   font-style: normal;
   font-family: "PingFang";
-  src: local("PingFang S"), url("../lib/PingFang/PingFang.ttc") format("truetype");
+  src: local("PingFang S"), url("../lib/PingFang/PingFang.ttf") format("truetype");
 }
 *,
 *:before,

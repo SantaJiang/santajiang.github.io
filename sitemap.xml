@@ -67,6 +67,13 @@
 
   
   <url>
+    <loc>https://santajiang.github.io/tags/Hexo/</loc>
+    <lastmod>2022-07-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://santajiang.github.io/tags/Qt/</loc>
     <lastmod>2022-07-21</lastmod>
     <changefreq>daily</changefreq>
@@ -87,14 +94,14 @@
     <priority>0.6</priority>
   </url>
   
+
+  
   <url>
-    <loc>https://santajiang.github.io/tags/Hexo/</loc>
+    <loc>https://santajiang.github.io/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2022-07-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
-  
-
   
   <url>
     <loc>https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</loc>
@@ -105,13 +112,6 @@
   
   <url>
     <loc>https://santajiang.github.io/categories/%E6%84%9F%E6%82%9F/</loc>
-    <lastmod>2022-07-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://santajiang.github.io/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2022-07-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
