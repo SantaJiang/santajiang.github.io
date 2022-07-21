@@ -436,8 +436,8 @@ body td {
 }
 @font-face {
   font-style: normal;
-  font-family: "Meslo LG";
-  src: local("Meslo LG S"), url("../lib/meslo-LG/MesloLGS-Regular.ttf") format("truetype");
+  font-family: "PingFang";
+  src: local("PingFang S"), url("../lib/PingFang/PingFang.ttc") format("truetype");
 }
 *,
 *:before,
@@ -483,7 +483,7 @@ body {
   font-display: swap;
   font-weight: 400;
   font-size: 14px;
-  font-family: "Menlo", "Meslo LG", monospace;
+  font-family: "PingFang", "PingFang", monospace;
   line-height: 1.725;
   text-rendering: geometricPrecision;
   flex: 1;
@@ -1412,7 +1412,7 @@ article .content .caption {
   font-display: swap;
   font-weight: 400;
   font-size: 11.200000000000001px;
-  font-family: "Menlo", "Meslo LG", monospace;
+  font-family: "PingFang", "PingFang", monospace;
   line-height: 1.725;
   text-rendering: geometricPrecision;
   text-align: center;
@@ -1586,7 +1586,7 @@ pre {
   border: 1px dotted #666;
   border-radius: 4px;
   font-size: 13px;
-  font-family: "Menlo", "Meslo LG", monospace;
+  font-family: "PingFang", "PingFang", monospace;
   line-height: 22px;
   -webkit-border-radius: 4px;
 }
@@ -1607,7 +1607,7 @@ code {
   padding: 10px 15px;
   border-radius: 4px;
   background: #efefef;
-  font-family: "Menlo", "Meslo LG", monospace;
+  font-family: "PingFang", "PingFang", monospace;
   -webkit-border-radius: 4px;
 }
 .highlight figcaption {
