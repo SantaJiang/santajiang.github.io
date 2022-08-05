@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2022-02-23T01:24:42.579Z</updated>
+  <updated>2022-08-05T08:27:13.721Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Qt对图片大小进行压缩</title>
+    <link href="https://santajiang.github.io/article/54b18459.html"/>
+    <id>https://santajiang.github.io/article/54b18459.html</id>
+    <published>2022-08-05T08:18:25.000Z</published>
+    <updated>2022-08-05T08:27:13.721Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>开发中的项目遇到了问题，用户选择的4K大图被打成压缩包上传下载的，4K大图动辄好几MB，导致云端拉取很慢，就需要对图片进行压缩，网上查Qt图片处理相关的内容很少，最后还是经查API找到了方法，Qt本身就带图片压缩的方法，即利用QPixMap的save方法   </p><p>最后的效果很好，肉眼基本不可辨别，测试用一张微单拍摄的6K图，原图19.7MB，压缩后变为2.3MB </p><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>方法的使用很简单， 这里给出一套完整的处理流程：</p><figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> compressImage(QString path)</span><br><span class="line">&#123;</span><br><span class="line">    QFile file(path);</span><br><span class="line">    <span class="keyword">if</span>(!file.open(<span class="attribute">QIODevice</span>::ReadWrite))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    QByteArray bytes = file.readAll();</span><br><span class="line">    QImage img;</span><br><span class="line">    img.loadFromData(bytes);</span><br><span class="line"></span><br><span class="line">    QPixmap bk_image;</span><br><span class="line">    bk_image.convertFromImage(img);</span><br><span class="line"></span><br><span class="line">    bk_image.save(path, nullptr, <span class="number">80</span>);<span class="comment">//压缩率从0-100</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;开发中的项目遇到了问题，用户选择的4K大图被打成压缩包上传下载的，4K大图动辄好几MB，导致云端拉取很慢，就需要对图片进行压缩，网上查Qt图</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+    <category term="Macos" scheme="https://santajiang.github.io/tags/Macos/"/>
+    
+  </entry>
   
   <entry>
     <title>2021年总结</title>
@@ -100,9 +126,9 @@
     <link href="https://santajiang.github.io/article/3e930800.html"/>
     <id>https://santajiang.github.io/article/3e930800.html</id>
     <published>2021-08-01T16:00:00.000Z</published>
-    <updated>2022-02-23T01:25:33.413Z</updated>
+    <updated>2022-07-22T06:30:07.032Z</updated>
     
-    <content type="html"><![CDATA[<p>当时用的Windows搭建的这个博客，现在要迁移到我的MacBook Pro上来，在查了很多资料后动手实践，发现还是比较方便的，现写下流程  </p><h3 id="Node-js-Git"><a href="#Node-js-Git" class="headerlink" title="Node.js / Git"></a>Node.js / Git</h3><p>首先要安装Node.js与Git的环境，这里省略就不多说了</p><h3 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h3><p>将原Windows电脑上的博客复制如下的文件，并暂存起来：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_config.yml</span><br><span class="line">package.json</span><br><span class="line">scaffolds/</span><br><span class="line">source/</span><br><span class="line">themes/</span><br></pre></td></tr></table></figure><h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><blockquote><p>打开终端，当前路径均可，默认只会装在固定的位置<br>执行<code>sudo npm install -g hexo-cli</code> </p></blockquote><h3 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h3><p>在你想要放置博客的位置，然后操作：</p><blockquote><p>打开终端<br>执行<code>hexo init blog</code></p></blockquote><h3 id="博客迁移"><a href="#博客迁移" class="headerlink" title="博客迁移"></a>博客迁移</h3><p>将之前暂存的文件，全部替换到刚才创建的blog文件夹中，然后操作：</p><blockquote><p>打开终端<br>执行<code>npm install</code><br>执行<code>hexo g</code><br>执行<code>hexo d</code><br>查看效果</p></blockquote><p>至此博客就成功迁移到MacOS中了，后续的操作与Windows下无差别</p>]]></content>
+    <content type="html"><![CDATA[<p>当时用的Windows搭建的这个博客，现在要迁移到我的MacBook Pro上来，在查了很多资料后动手实践，发现还是比较方便的，现写下流程  </p><h3 id="Node-js-Git"><a href="#Node-js-Git" class="headerlink" title="Node.js / Git"></a>Node.js / Git</h3><p>首先要安装Node.js与Git的环境，这里省略就不多说了</p><h3 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h3><p>将原Windows电脑上的博客复制如下的文件，并暂存起来：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_config.yml</span><br><span class="line">package.json</span><br><span class="line">scaffolds/</span><br><span class="line">source/</span><br><span class="line">themes/</span><br></pre></td></tr></table></figure><h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><ul><li>打开终端，当前路径均可，默认只会装在固定的位置</li><li>执行<code>sudo npm install -g hexo-cli</code> </li></ul><h3 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h3><p>在你想要放置博客的位置，然后操作：</p><ul><li>打开终端</li><li>执行<code>hexo init blog</code></li></ul><h3 id="博客迁移"><a href="#博客迁移" class="headerlink" title="博客迁移"></a>博客迁移</h3><p>将之前暂存的文件，全部替换到刚才创建的blog文件夹中，然后操作：</p><ul><li>打开终端</li><li>执行<code>npm install</code></li><li>执行<code>hexo g</code></li><li>执行<code>hexo d</code></li><li> 查看效果</li></ul><p>至此博客就成功迁移到MacOS中了，后续的操作与Windows下无差别</p>]]></content>
     
     
       
