@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://santajiang.github.io/article/cdff3725.html</loc>
+    
+    <lastmod>2022-09-15</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://santajiang.github.io/article/ad3e8609.html</loc>
     
     <lastmod>2022-09-05</lastmod>
@@ -74,7 +81,7 @@
 
   <url>
     <loc>https://santajiang.github.io/</loc>
-    <lastmod>2022-09-05</lastmod>
+    <lastmod>2022-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -82,28 +89,28 @@
   
   <url>
     <loc>https://santajiang.github.io/tags/Hexo/</loc>
-    <lastmod>2022-09-05</lastmod>
+    <lastmod>2022-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://santajiang.github.io/tags/Qt/</loc>
-    <lastmod>2022-09-05</lastmod>
+    <lastmod>2022-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://santajiang.github.io/tags/Macos/</loc>
-    <lastmod>2022-09-05</lastmod>
+    <lastmod>2022-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://santajiang.github.io/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2022-09-05</lastmod>
+    <lastmod>2022-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -112,21 +119,21 @@
   
   <url>
     <loc>https://santajiang.github.io/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2022-09-05</lastmod>
+    <lastmod>2022-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2022-09-05</lastmod>
+    <lastmod>2022-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://santajiang.github.io/categories/%E6%84%9F%E6%82%9F/</loc>
-    <lastmod>2022-09-05</lastmod>
+    <lastmod>2022-09-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
