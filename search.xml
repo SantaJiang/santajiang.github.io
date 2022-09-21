@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Qt高分屏适配方案</title>
+      <link href="/article/a2642ebb.html"/>
+      <url>/article/a2642ebb.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>通过比例系数来实现高分屏适配，软件的每个UI组件尺寸都要乘以比例系数，以达到适配高分辨率的目的</p><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">win32:&#123;</span><br><span class="line">QT += winextras</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> Q_OS_WIN</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;windows.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="built_in">getWindowScaleFactor</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">double</span> scaleFactor = <span class="number">1.0</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> Q_OS_WIN</span></span><br><span class="line">    <span class="keyword">int</span> nWidth = <span class="built_in">GetSystemMetrics</span>(SM_CXSCREEN);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    QRectF rect = QApplication::<span class="built_in">desktop</span>()-&gt;<span class="built_in">screenGeometry</span>();</span><br><span class="line">    <span class="keyword">int</span> nWidth = rect.<span class="built_in">width</span>();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(nWidth &gt;= <span class="number">3840</span> )</span><br><span class="line">    &#123;</span><br><span class="line">          scaleFactor = <span class="number">2.0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(nWidth &lt; <span class="number">3840</span> &amp;&amp; nWidth &gt; <span class="number">1366</span> )</span><br><span class="line">    &#123;</span><br><span class="line">          scaleFactor = <span class="number">1.0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(nWidth &lt;= <span class="number">1366</span>  &amp;&amp; nWidth &gt; <span class="number">800</span> )</span><br><span class="line">    &#123;</span><br><span class="line">          scaleFactor = <span class="number">0.8</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(nWidth &lt;= <span class="number">800</span>)</span><br><span class="line">    &#123;</span><br><span class="line">          scaleFactor = <span class="number">0.5</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//各类靠property获取比例系数</span></span><br><span class="line">    QApplication::<span class="built_in">instance</span>()-&gt;<span class="built_in">setProperty</span>(<span class="string">&quot;scalefactor&quot;</span>, dScaleFactor); </span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+            <tag> 高分屏 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Qt实现Http的Get/Post请求</title>
       <link href="/article/cdff3725.html"/>
       <url>/article/cdff3725.html</url>
@@ -22,7 +49,7 @@
             
             <tag> Qt </tag>
             
-            <tag> Macos </tag>
+            <tag> 网络 </tag>
             
         </tags>
       
@@ -49,7 +76,7 @@
             
             <tag> Qt </tag>
             
-            <tag> Macos </tag>
+            <tag> 正则表达式 </tag>
             
         </tags>
       
@@ -58,11 +85,11 @@
     
     
     <entry>
-      <title>Qt对图片大小进行压缩</title>
+      <title>Qt图片压缩</title>
       <link href="/article/54b18459.html"/>
       <url>/article/54b18459.html</url>
       
-        <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>用户选择的4K大图被打成压缩包上传下载的，4K大图动辄好几MB，导致云端拉取很慢，就需要对图片进行压缩，网上查Qt图片处理相关的内容很少，最后还是经查API找到了方法，Qt本身就带图片压缩的方法，即利用QPixMap的save方法   </p><p>最后的效果很好，肉眼基本不可辨别，测试用一张微单拍摄的6K图，原图19.7MB，压缩后变为2.3MB </p><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>方法的使用很简单， 这里给出一套完整的处理流程：</p><figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> compressImage(QString path)</span><br><span class="line">&#123;</span><br><span class="line">    QFile file(ui-&gt;lineEdit-&gt;text());</span><br><span class="line">    <span class="keyword">if</span>(!file.open(<span class="attribute">QIODevice</span>::ReadWrite))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    QByteArray bytes = file.readAll();</span><br><span class="line">    QImage img;</span><br><span class="line">    img.loadFromData(bytes);</span><br><span class="line"></span><br><span class="line">    QPixmap bk_image;</span><br><span class="line">    bk_image.convertFromImage(img);</span><br><span class="line"></span><br><span class="line">    bk_image.save(path, nullptr, <span class="number">80</span>);<span class="comment">//压缩率从0-100</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Qt本身就带图片压缩的方法，即利用QPixMap的save方法   </p><p>最后的效果很好，肉眼基本不可辨别，测试用一张微单拍摄的6K图，原图19.7MB，压缩后变为2.3MB </p><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>完整流程：</p><figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> compressImage(QString path)</span><br><span class="line">&#123;</span><br><span class="line">    QFile file(ui-&gt;lineEdit-&gt;text());</span><br><span class="line">    <span class="keyword">if</span>(!file.open(<span class="attribute">QIODevice</span>::ReadWrite))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    QByteArray bytes = file.readAll();</span><br><span class="line">    QImage img;</span><br><span class="line">    img.loadFromData(bytes);</span><br><span class="line"></span><br><span class="line">    QPixmap bk_image;</span><br><span class="line">    bk_image.convertFromImage(img);</span><br><span class="line"></span><br><span class="line">    bk_image.save(path, nullptr, <span class="number">80</span>);<span class="comment">//压缩率从0-100</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -76,7 +103,7 @@
             
             <tag> Qt </tag>
             
-            <tag> Macos </tag>
+            <tag> 图像处理 </tag>
             
         </tags>
       
@@ -128,7 +155,7 @@
             
             <tag> Qt </tag>
             
-            <tag> Macos </tag>
+            <tag> 终端 </tag>
             
         </tags>
       
@@ -137,11 +164,11 @@
     
     
     <entry>
-      <title>RGB值与十六进制颜色值转换工具</title>
+      <title>RGB值Hex颜色值转换</title>
       <link href="/article/caeca79b.html"/>
       <url>/article/caeca79b.html</url>
       
-        <content type="html"><![CDATA[<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>页面画两个QLineEdit和一个QLabel，就构成了所有的要素，按钮不准备加，网页端的那个每次填好之后都得点个转换，很麻烦，既然到这一步了，干脆回车直接生成结果，而且生成的结果自动的复制到剪贴板里，那就省事多了，我总共需要做的就是：输入-回车-自动拷贝结果，就完了</p><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>做起来也是比较简单的，回车生效的事件直接用的是QLineEdit自带的returnPressed()事件，而复制到剪贴板用到的是QClipboard类，用法也是很简单：  </p><figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;QClipboard&gt;</span><br><span class="line"></span><br><span class="line">QString str = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">QClipboard *clip = <span class="attribute">QApplication</span>::clipboard();</span><br><span class="line">clip-&gt;setText(str);</span><br></pre></td></tr></table></figure><p>这样这个”Hello”就自动复制到剪贴板里了.  </p><p>接下来最主要的就是颜色值的相互转换了，可以里用QColor类，先获取对应的color，然后再转换为对应的显示形式，这里贴上核心代码：  </p><figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;QColor&gt;</span><br><span class="line"></span><br><span class="line">QColor <span class="built_in">color</span>(<span class="number">235</span>,<span class="number">235</span>,<span class="number">235</span>);</span><br><span class="line"><span class="built_in">int</span> red = <span class="built_in">color</span>.red();</span><br><span class="line"><span class="built_in">int</span> green = <span class="built_in">color</span>.green();</span><br><span class="line"><span class="built_in">int</span> blue = <span class="built_in">color</span>.blue();</span><br><span class="line">QString strRed = QString(<span class="string">&quot;%1&quot;</span>).arg(red &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line">QString strGreen = QString(<span class="string">&quot;%1&quot;</span>).arg(green &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line">QString strBlue = QString(<span class="string">&quot;%1&quot;</span>).arg(blue &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//十六进制显示</span></span><br><span class="line">QString hex = QString(<span class="string">&quot;#%1%2%3&quot;</span>).arg(strRed.toUpper()).arg(strGreen.toUpper()).arg(strBlue.toUpper());</span><br><span class="line"><span class="comment">//RGB显示</span></span><br><span class="line">QString rgb = QString(<span class="string">&quot;%1, %2, %3&quot;</span>).arg(red).arg(green).arg(blue);</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>输入RGB/Hex值，回车触发转换并自动复制结果到剪贴板，简单高效</p><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>回车生效的事件直接用的是QLineEdit自带的returnPressed()事件，而复制到剪贴板用到的是QClipboard类：  </p><figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;QClipboard&gt;</span><br><span class="line"></span><br><span class="line">QString str = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">QClipboard *clip = <span class="attribute">QApplication</span>::clipboard();</span><br><span class="line">clip-&gt;setText(str);</span><br></pre></td></tr></table></figure><p>这样这个”Hello”就自动复制到剪贴板里了.  </p><p>接下来最主要的就是颜色值的相互转换了，可以里用QColor类，先获取对应的color，然后再转换为对应的显示形式，这里贴上核心代码：  </p><figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;QColor&gt;</span><br><span class="line"></span><br><span class="line">QColor <span class="built_in">color</span>(<span class="number">235</span>,<span class="number">235</span>,<span class="number">235</span>);</span><br><span class="line"><span class="built_in">int</span> red = <span class="built_in">color</span>.red();</span><br><span class="line"><span class="built_in">int</span> green = <span class="built_in">color</span>.green();</span><br><span class="line"><span class="built_in">int</span> blue = <span class="built_in">color</span>.blue();</span><br><span class="line">QString strRed = QString(<span class="string">&quot;%1&quot;</span>).arg(red &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line">QString strGreen = QString(<span class="string">&quot;%1&quot;</span>).arg(green &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line">QString strBlue = QString(<span class="string">&quot;%1&quot;</span>).arg(blue &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//十六进制显示</span></span><br><span class="line">QString hex = QString(<span class="string">&quot;#%1%2%3&quot;</span>).arg(strRed.toUpper()).arg(strGreen.toUpper()).arg(strBlue.toUpper());</span><br><span class="line"><span class="comment">//RGB显示</span></span><br><span class="line">QString rgb = QString(<span class="string">&quot;%1, %2, %3&quot;</span>).arg(red).arg(green).arg(blue);</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -155,7 +182,7 @@
             
             <tag> Qt </tag>
             
-            <tag> Macos </tag>
+            <tag> 颜色处理 </tag>
             
         </tags>
       
@@ -179,8 +206,6 @@
       
       
         <tags>
-            
-            <tag> Macos </tag>
             
             <tag> Hexo </tag>
             

@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="思路页面画两个QLineEdit和一个QLabel，就构成了所有的要素，按钮不准备加，网页端的那个每次填好之后都得点个转换，很麻烦，既然到这一步了，干脆回车直接生成结果，而且生成的结果自动的复制到剪贴板里，那就省事多了，我总共需要做的就是：输入-回车-自动拷贝结果，就完了 实现做起来也是比较简单的，回车生效的事件直接用的是QLineEdit自带的returnPressed()事件，而复制到剪贴板用">
+    <meta name="description" content="思路输入RGB&#x2F;Hex值，回车触发转换并自动复制结果到剪贴板，简单高效 实现回车生效的事件直接用的是QLineEdit自带的returnPressed()事件，而复制到剪贴板用到的是QClipboard类：   12345#include &lt;QClipboard&gt;QString str &#x3D; &quot;Hello&quot;;QClipboard *clip &#x3D; QApplicatio">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RGB值与十六进制颜色值转换工具">
+<meta property="og:title" content="RGB值Hex颜色值转换">
 <meta property="og:url" content="https://santajiang.github.io/article/caeca79b.html">
 <meta property="og:site_name" content="Santa">
-<meta property="og:description" content="思路页面画两个QLineEdit和一个QLabel，就构成了所有的要素，按钮不准备加，网页端的那个每次填好之后都得点个转换，很麻烦，既然到这一步了，干脆回车直接生成结果，而且生成的结果自动的复制到剪贴板里，那就省事多了，我总共需要做的就是：输入-回车-自动拷贝结果，就完了 实现做起来也是比较简单的，回车生效的事件直接用的是QLineEdit自带的returnPressed()事件，而复制到剪贴板用">
+<meta property="og:description" content="思路输入RGB&#x2F;Hex值，回车触发转换并自动复制结果到剪贴板，简单高效 实现回车生效的事件直接用的是QLineEdit自带的returnPressed()事件，而复制到剪贴板用到的是QClipboard类：   12345#include &lt;QClipboard&gt;QString str &#x3D; &quot;Hello&quot;;QClipboard *clip &#x3D; QApplicatio">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-09-05T02:11:08.038Z">
+<meta property="article:modified_time" content="2022-09-21T08:16:09.628Z">
 <meta property="article:author" content="蒋胜达">
 <meta property="article:tag" content="Qt">
-<meta property="article:tag" content="Macos">
+<meta property="article:tag" content="颜色处理">
 <meta name="twitter:card" content="summary">
     
     
@@ -38,7 +38,7 @@
       
     
     <!-- title -->
-    <title>RGB值与十六进制颜色值转换工具</title>
+    <title>RGB值Hex颜色值转换</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -48,10 +48,11 @@
     <!-- rss -->
     
     
+      <link rel="alternate" href="/true" title="Santa" type="application/atom+xml" />
+    
 	<!-- mathjax -->
 	
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Santa" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -94,16 +95,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://santajiang.github.io/article/caeca79b.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://santajiang.github.io/article/caeca79b.html&text=RGB值与十六进制颜色值转换工具"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值与十六进制颜色值转换工具"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://santajiang.github.io/article/caeca79b.html&is_video=false&description=RGB值与十六进制颜色值转换工具"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=RGB值与十六进制颜色值转换工具&body=Check out this article: https://santajiang.github.io/article/caeca79b.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值与十六进制颜色值转换工具"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值与十六进制颜色值转换工具"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值与十六进制颜色值转换工具"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值与十六进制颜色值转换工具"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://santajiang.github.io/article/caeca79b.html&name=RGB值与十六进制颜色值转换工具&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://santajiang.github.io/article/caeca79b.html&t=RGB值与十六进制颜色值转换工具"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://santajiang.github.io/article/caeca79b.html&text=RGB值Hex颜色值转换"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值Hex颜色值转换"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://santajiang.github.io/article/caeca79b.html&is_video=false&description=RGB值Hex颜色值转换"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RGB值Hex颜色值转换&body=Check out this article: https://santajiang.github.io/article/caeca79b.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值Hex颜色值转换"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值Hex颜色值转换"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值Hex颜色值转换"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值Hex颜色值转换"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://santajiang.github.io/article/caeca79b.html&name=RGB值Hex颜色值转换&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://santajiang.github.io/article/caeca79b.html&t=RGB值Hex颜色值转换"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -120,7 +121,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        RGB值与十六进制颜色值转换工具
+        RGB值Hex颜色值转换
     </h1>
 
 
@@ -148,7 +149,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link-link" href="/tags/Macos/" rel="tag">Macos</a>, <a class="tag-link-link" href="/tags/Qt/" rel="tag">Qt</a>
+        <a class="tag-link-link" href="/tags/Qt/" rel="tag">Qt</a>, <a class="tag-link-link" href="/tags/%E9%A2%9C%E8%89%B2%E5%A4%84%E7%90%86/" rel="tag">颜色处理</a>
     </div>
 
 
@@ -157,8 +158,8 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>页面画两个QLineEdit和一个QLabel，就构成了所有的要素，按钮不准备加，网页端的那个每次填好之后都得点个转换，很麻烦，既然到这一步了，干脆回车直接生成结果，而且生成的结果自动的复制到剪贴板里，那就省事多了，我总共需要做的就是：输入-回车-自动拷贝结果，就完了</p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>做起来也是比较简单的，回车生效的事件直接用的是QLineEdit自带的returnPressed()事件，而复制到剪贴板用到的是QClipboard类，用法也是很简单：  </p>
+    <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>输入RGB/Hex值，回车触发转换并自动复制结果到剪贴板，简单高效</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>回车生效的事件直接用的是QLineEdit自带的returnPressed()事件，而复制到剪贴板用到的是QClipboard类：  </p>
 <figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;QClipboard&gt;</span><br><span class="line"></span><br><span class="line">QString str = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">QClipboard *clip = <span class="attribute">QApplication</span>::clipboard();</span><br><span class="line">clip-&gt;setText(str);</span><br></pre></td></tr></table></figure>
 <p>这样这个”Hello”就自动复制到剪贴板里了.  </p>
 <p>接下来最主要的就是颜色值的相互转换了，可以里用QColor类，先获取对应的color，然后再转换为对应的显示形式，这里贴上核心代码：  </p>
@@ -193,16 +194,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://santajiang.github.io/article/caeca79b.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://santajiang.github.io/article/caeca79b.html&text=RGB值与十六进制颜色值转换工具"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值与十六进制颜色值转换工具"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://santajiang.github.io/article/caeca79b.html&is_video=false&description=RGB值与十六进制颜色值转换工具"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=RGB值与十六进制颜色值转换工具&body=Check out this article: https://santajiang.github.io/article/caeca79b.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值与十六进制颜色值转换工具"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值与十六进制颜色值转换工具"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值与十六进制颜色值转换工具"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值与十六进制颜色值转换工具"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://santajiang.github.io/article/caeca79b.html&name=RGB值与十六进制颜色值转换工具&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://santajiang.github.io/article/caeca79b.html&t=RGB值与十六进制颜色值转换工具"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://santajiang.github.io/article/caeca79b.html&text=RGB值Hex颜色值转换"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值Hex颜色值转换"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://santajiang.github.io/article/caeca79b.html&is_video=false&description=RGB值Hex颜色值转换"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RGB值Hex颜色值转换&body=Check out this article: https://santajiang.github.io/article/caeca79b.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值Hex颜色值转换"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值Hex颜色值转换"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值Hex颜色值转换"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://santajiang.github.io/article/caeca79b.html&title=RGB值Hex颜色值转换"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://santajiang.github.io/article/caeca79b.html&name=RGB值Hex颜色值转换&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://santajiang.github.io/article/caeca79b.html&t=RGB值Hex颜色值转换"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
