@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>信号槽的特殊声明</title>
+      <link href="/article/a204f63f.html"/>
+      <url>/article/a204f63f.html</url>
+      
+        <content type="html"><![CDATA[<p>适用于槽函数逻辑较简单无须单独列出的情况：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QTimer* timer = <span class="keyword">new</span> <span class="built_in">QTimer</span>(<span class="keyword">this</span>);</span><br><span class="line"><span class="built_in">connect</span>(timer, &amp;QTimer::timeout, [ = ]()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//TODO</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+            <tag> 信号槽 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Qt高分屏适配方案</title>
       <link href="/article/a2642ebb.html"/>
       <url>/article/a2642ebb.html</url>

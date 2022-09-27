@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2022-09-21T08:35:06.110Z</updated>
+  <updated>2022-09-27T08:36:30.148Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>信号槽的特殊声明</title>
+    <link href="https://santajiang.github.io/article/a204f63f.html"/>
+    <id>https://santajiang.github.io/article/a204f63f.html</id>
+    <published>2022-09-27T08:34:10.000Z</published>
+    <updated>2022-09-27T08:36:30.148Z</updated>
+    
+    <content type="html"><![CDATA[<p>适用于槽函数逻辑较简单无须单独列出的情况：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QTimer* timer = <span class="keyword">new</span> <span class="built_in">QTimer</span>(<span class="keyword">this</span>);</span><br><span class="line"><span class="built_in">connect</span>(timer, &amp;QTimer::timeout, [ = ]()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//TODO</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;适用于槽函数逻辑较简单无须单独列出的情况：&lt;/p&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;li</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+    <category term="信号槽" scheme="https://santajiang.github.io/tags/%E4%BF%A1%E5%8F%B7%E6%A7%BD/"/>
+    
+  </entry>
   
   <entry>
     <title>Qt高分屏适配方案</title>
