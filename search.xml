@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Qt跨平台路径表示法</title>
+      <link href="/article/98434a1.html"/>
+      <url>/article/98434a1.html</url>
+      
+        <content type="html"><![CDATA[<p>跨平台开发的时候，经常涉及到路径的表示问题，有单斜杠、双斜杠、双反斜杠等等，很容易出问题，所以直接用separator()方法代替斜杠即可，API原文：  </p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QChar <span class="title">QDir::separator</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span></span><br><span class="line"><span class="function">Returns the native directory separator: <span class="string">&quot;/&quot;</span> under Unix and <span class="string">&quot;\&quot; under Windows.</span></span></span><br><span class="line"><span class="string"><span class="function">You do not need to use this function to build file paths. If you always use &quot;</span>/<span class="string">&quot;, Qt will translate your paths to conform to the underlying operating system. If you want to display paths to the user using their operating system&#x27;s separator use toNativeSeparators().</span></span></span><br><span class="line"><span class="string"><span class="function">See also listSeparator().</span></span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+            <tag> 跨平台 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>2022年总结</title>
       <link href="/article/7448189f.html"/>
       <url>/article/7448189f.html</url>
