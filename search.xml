@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Qt实现边框圆角图片</title>
+      <link href="/article/577bc24c.html"/>
+      <url>/article/577bc24c.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QPixmap&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QPainter&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSize&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QBitmap&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QPainterPath&gt;</span></span></span><br><span class="line"></span><br><span class="line">Widget::<span class="built_in">Widget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">    , <span class="built_in">ui</span>(<span class="keyword">new</span> Ui::Widget)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;<span class="built_in">setupUi</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    ui-&gt;label-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;background-color:transparent;&quot;</span></span><br><span class="line">                             <span class="string">&quot;border: 1px solid rgba(0,0,0,1);&quot;</span></span><br><span class="line">                             <span class="string">&quot;border-radius: 8px;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> w = ui-&gt;label-&gt;<span class="built_in">width</span>() - <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> h = ui-&gt;label-&gt;<span class="built_in">height</span>() - <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">QPixmap <span class="title">pixmapback</span><span class="params">(<span class="string">&quot;://images/test.jpeg&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">QPixmap <span class="title">pixmap</span><span class="params">(w,h)</span></span>;</span><br><span class="line">    pixmap.<span class="built_in">fill</span>(Qt::transparent);</span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(&amp;pixmap)</span></span>;</span><br><span class="line">    painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);</span><br><span class="line">    QPainterPath path;</span><br><span class="line">    path.<span class="built_in">addRoundedRect</span>(<span class="number">0</span>, <span class="number">0</span>, w, h,<span class="number">8</span>,<span class="number">8</span>);    <span class="comment">//绘制圆角</span></span><br><span class="line">    painter.<span class="built_in">setClipPath</span>(path);</span><br><span class="line">    painter.<span class="built_in">drawPixmap</span>(<span class="number">0</span>, <span class="number">0</span>, w, h, pixmapback);</span><br><span class="line"></span><br><span class="line">    ui-&gt;label-&gt;<span class="built_in">setPixmap</span>(pixmap);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>不同DPI固定窗口位置显示探索</title>
       <link href="/article/36353022.html"/>
       <url>/article/36353022.html</url>

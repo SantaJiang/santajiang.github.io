@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2023-02-20T08:17:48.403Z</updated>
+  <updated>2023-05-09T11:14:22.943Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Qt实现边框圆角图片</title>
+    <link href="https://santajiang.github.io/article/577bc24c.html"/>
+    <id>https://santajiang.github.io/article/577bc24c.html</id>
+    <published>2023-05-09T11:09:21.000Z</published>
+    <updated>2023-05-09T11:14:22.943Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QPixmap&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QPainter&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QSize&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QBitmap&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QPainterPath&gt;</span></span></span><br><span class="line"></span><br><span class="line">Widget::<span class="built_in">Widget</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QWidget</span>(parent)</span><br><span class="line">    , <span class="built_in">ui</span>(<span class="keyword">new</span> Ui::Widget)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;<span class="built_in">setupUi</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    ui-&gt;label-&gt;<span class="built_in">setStyleSheet</span>(<span class="string">&quot;background-color:transparent;&quot;</span></span><br><span class="line">                             <span class="string">&quot;border: 1px solid rgba(0,0,0,1);&quot;</span></span><br><span class="line">                             <span class="string">&quot;border-radius: 8px;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> w = ui-&gt;label-&gt;<span class="built_in">width</span>() - <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> h = ui-&gt;label-&gt;<span class="built_in">height</span>() - <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">QPixmap <span class="title">pixmapback</span><span class="params">(<span class="string">&quot;://images/test.jpeg&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">QPixmap <span class="title">pixmap</span><span class="params">(w,h)</span></span>;</span><br><span class="line">    pixmap.<span class="built_in">fill</span>(Qt::transparent);</span><br><span class="line">    <span class="function">QPainter <span class="title">painter</span><span class="params">(&amp;pixmap)</span></span>;</span><br><span class="line">    painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);</span><br><span class="line">    QPainterPath path;</span><br><span class="line">    path.<span class="built_in">addRoundedRect</span>(<span class="number">0</span>, <span class="number">0</span>, w, h,<span class="number">8</span>,<span class="number">8</span>);    <span class="comment">//绘制圆角</span></span><br><span class="line">    painter.<span class="built_in">setClipPath</span>(path);</span><br><span class="line">    painter.<span class="built_in">drawPixmap</span>(<span class="number">0</span>, <span class="number">0</span>, w, h, pixmapback);</span><br><span class="line"></span><br><span class="line">    ui-&gt;label-&gt;<span class="built_in">setPixmap</span>(pixmap);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;示例&quot;&gt;&lt;a href=&quot;#示例&quot; class=&quot;headerlink&quot; title=&quot;示例&quot;&gt;&lt;/a&gt;示例&lt;/h3&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span cl</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+  </entry>
   
   <entry>
     <title>不同DPI固定窗口位置显示探索</title>
