@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2023-05-09T11:14:22.943Z</updated>
+  <updated>2023-05-16T12:02:04.579Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Qt快速转换路径(斜杠与反斜杠转换)</title>
+    <link href="https://santajiang.github.io/article/c2e86a2f.html"/>
+    <id>https://santajiang.github.io/article/c2e86a2f.html</id>
+    <published>2023-05-16T11:58:08.000Z</published>
+    <updated>2023-05-16T12:02:04.579Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><p>使用<code>QDir::fromNativeSeparators</code></p></li><li><p>示例：</p></li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QString path = <span class="string">&quot;C:\\temp/test.txt&quot;</span>;</span><br><span class="line">path = QDir::<span class="built_in">fromNativeSeparators</span>(path);</span><br></pre></td></tr></table></figure><ul><li>输出</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:/temp/test.txt</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;使用&lt;code&gt;QDir::fromNativeSeparators&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td clas</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+  </entry>
   
   <entry>
     <title>Qt实现边框圆角图片</title>

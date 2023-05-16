@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Qt快速转换路径(斜杠与反斜杠转换)</title>
+      <link href="/article/c2e86a2f.html"/>
+      <url>/article/c2e86a2f.html</url>
+      
+        <content type="html"><![CDATA[<ul><li><p>使用<code>QDir::fromNativeSeparators</code></p></li><li><p>示例：</p></li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QString path = <span class="string">&quot;C:\\temp/test.txt&quot;</span>;</span><br><span class="line">path = QDir::<span class="built_in">fromNativeSeparators</span>(path);</span><br></pre></td></tr></table></figure><ul><li>输出</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:/temp/test.txt</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Qt实现边框圆角图片</title>
       <link href="/article/577bc24c.html"/>
       <url>/article/577bc24c.html</url>
