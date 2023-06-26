@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2023-05-16T12:02:04.579Z</updated>
+  <updated>2023-05-16T12:02:24.376Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://santajiang.github.io/article/c2e86a2f.html"/>
     <id>https://santajiang.github.io/article/c2e86a2f.html</id>
     <published>2023-05-16T11:58:08.000Z</published>
-    <updated>2023-05-16T12:02:04.579Z</updated>
+    <updated>2023-05-16T12:02:24.376Z</updated>
     
     <content type="html"><![CDATA[<ul><li><p>使用<code>QDir::fromNativeSeparators</code></p></li><li><p>示例：</p></li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QString path = <span class="string">&quot;C:\\temp/test.txt&quot;</span>;</span><br><span class="line">path = QDir::<span class="built_in">fromNativeSeparators</span>(path);</span><br></pre></td></tr></table></figure><ul><li>输出</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:/temp/test.txt</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -235,9 +235,9 @@
     <link href="https://santajiang.github.io/article/a204f63f.html"/>
     <id>https://santajiang.github.io/article/a204f63f.html</id>
     <published>2022-09-27T08:34:10.000Z</published>
-    <updated>2022-09-27T08:36:39.168Z</updated>
+    <updated>2023-06-26T02:16:33.368Z</updated>
     
-    <content type="html"><![CDATA[<p>适用于槽函数逻辑较简单无须单独列出的情况：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QTimer* timer = <span class="keyword">new</span> <span class="built_in">QTimer</span>(<span class="keyword">this</span>);</span><br><span class="line"><span class="built_in">connect</span>(timer, &amp;QTimer::timeout, [ = ]()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//TODO</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>适用于槽函数逻辑较简单无须单独列出的情况：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QTimer* timer = <span class="keyword">new</span> <span class="built_in">QTimer</span>(<span class="keyword">this</span>);</span><br><span class="line"><span class="built_in">connect</span>(timer, &amp;QTimer::timeout, [ = ]()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//TODO</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>或</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">QTimer::<span class="built_in">singleShot</span>(<span class="number">300</span>, <span class="keyword">this</span> , [ = ]</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//TODO</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>]]></content>
     
     
       

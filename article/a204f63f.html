@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="适用于槽函数逻辑较简单无须单独列出的情况： 12345QTimer* timer &#x3D; new QTimer(this);connect(timer, &amp;QTimer::timeout, [ &#x3D; ]()&amp;#123;    &#x2F;&#x2F;TODO&amp;#125;);">
+    <meta name="description" content="适用于槽函数逻辑较简单无须单独列出的情况： 12345QTimer* timer &#x3D; new QTimer(this);connect(timer, &amp;QTimer::timeout, [ &#x3D; ]()&amp;#123;    &#x2F;&#x2F;TODO&amp;#125;);  或 1234QTimer::singleShot(300, this , [ &#x3D; ]&amp;#123;    &#x2F;&#x2F;TODO&amp;#125;);">
 <meta property="og:type" content="article">
 <meta property="og:title" content="信号槽的特殊声明">
 <meta property="og:url" content="https://santajiang.github.io/article/a204f63f.html">
 <meta property="og:site_name" content="Santa">
-<meta property="og:description" content="适用于槽函数逻辑较简单无须单独列出的情况： 12345QTimer* timer &#x3D; new QTimer(this);connect(timer, &amp;QTimer::timeout, [ &#x3D; ]()&amp;#123;    &#x2F;&#x2F;TODO&amp;#125;);">
+<meta property="og:description" content="适用于槽函数逻辑较简单无须单独列出的情况： 12345QTimer* timer &#x3D; new QTimer(this);connect(timer, &amp;QTimer::timeout, [ &#x3D; ]()&amp;#123;    &#x2F;&#x2F;TODO&amp;#125;);  或 1234QTimer::singleShot(300, this , [ &#x3D; ]&amp;#123;    &#x2F;&#x2F;TODO&amp;#125;);">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-27T08:34:10.000Z">
-<meta property="article:modified_time" content="2022-09-27T08:36:39.168Z">
+<meta property="article:modified_time" content="2023-06-26T02:16:33.368Z">
 <meta property="article:author" content="蒋胜达">
 <meta property="article:tag" content="Qt">
 <meta property="article:tag" content="信号槽">
@@ -160,6 +160,9 @@
   <div class="content" itemprop="articleBody">
     <p>适用于槽函数逻辑较简单无须单独列出的情况：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QTimer* timer = <span class="keyword">new</span> <span class="built_in">QTimer</span>(<span class="keyword">this</span>);</span><br><span class="line"><span class="built_in">connect</span>(timer, &amp;QTimer::timeout, [ = ]()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//TODO</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">QTimer::<span class="built_in">singleShot</span>(<span class="number">300</span>, <span class="keyword">this</span> , [ = ]</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//TODO</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 
   </div>
