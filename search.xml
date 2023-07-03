@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Qt正则表达式筛手机号</title>
+      <link href="/article/9fa9795d.html"/>
+      <url>/article/9fa9795d.html</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QRegExp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QRegExpValidator&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsValidPhoneNumber</span><span class="params">(<span class="keyword">const</span> QString &amp; phoneNum)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QRegExp <span class="title">regx</span><span class="params">(<span class="string">&quot;^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]&#123;8&#125;$&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">QRegExpValidator <span class="title">regs</span><span class="params">(regx, <span class="number">0</span>)</span></span>;</span><br><span class="line">    QString pNum = phoneNum;</span><br><span class="line">    <span class="keyword">int</span> pos = <span class="number">0</span>;</span><br><span class="line">    QValidator::State res = regs.<span class="built_in">validate</span>(pNum, pos);</span><br><span class="line">    <span class="keyword">if</span> (QValidator::Acceptable == res) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+            <tag> 正则表达式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Qt快速转换路径(斜杠与反斜杠转换)</title>
       <link href="/article/c2e86a2f.html"/>
       <url>/article/c2e86a2f.html</url>
