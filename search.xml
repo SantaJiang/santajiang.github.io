@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>Qt设置窗口居中显示</title>
+      <link href="/article/29e34681.html"/>
+      <url>/article/29e34681.html</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//移动窗体到屏幕中央</span></span><br><span class="line">QRect rect = m_pWidget-&gt;<span class="built_in">frameGeometry</span>();</span><br><span class="line">QScreen* screen = QGuiApplication::<span class="built_in">primaryScreen</span>();</span><br><span class="line">QPoint point = screen-&gt;availableGeometry.<span class="built_in">center</span>();</span><br><span class="line">rect.<span class="built_in">moveCenter</span>(point);</span><br><span class="line">m_pWidget-&gt;<span class="built_in">move</span>(rect.<span class="built_in">topLeft</span>());</span><br><span class="line">m_pWidget-&gt;<span class="built_in">show</span>();</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Qt限制软件某日期后不能使用</title>
+      <link href="/article/a0b9096a.html"/>
+      <url>/article/a0b9096a.html</url>
+      
+        <content type="html"><![CDATA[<p>在main.cpp里：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QDate <span class="title">overDate</span><span class="params">(<span class="number">2023</span>,<span class="number">6</span>,<span class="number">28</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> days = overDate.<span class="built_in">daysTo</span>(QDate::<span class="built_in">currentDate</span>());</span><br><span class="line"><span class="keyword">if</span>(days &gt; <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Qt正则表达式筛手机号</title>
       <link href="/article/9fa9795d.html"/>
       <url>/article/9fa9795d.html</url>

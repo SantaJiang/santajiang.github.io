@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2023-07-03T05:51:48.715Z</updated>
+  <updated>2023-07-12T06:28:50.202Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Qt设置窗口居中显示</title>
+    <link href="https://santajiang.github.io/article/29e34681.html"/>
+    <id>https://santajiang.github.io/article/29e34681.html</id>
+    <published>2023-07-12T06:24:01.000Z</published>
+    <updated>2023-07-12T06:28:50.202Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//移动窗体到屏幕中央</span></span><br><span class="line">QRect rect = m_pWidget-&gt;<span class="built_in">frameGeometry</span>();</span><br><span class="line">QScreen* screen = QGuiApplication::<span class="built_in">primaryScreen</span>();</span><br><span class="line">QPoint point = screen-&gt;availableGeometry.<span class="built_in">center</span>();</span><br><span class="line">rect.<span class="built_in">moveCenter</span>(point);</span><br><span class="line">m_pWidget-&gt;<span class="built_in">move</span>(rect.<span class="built_in">topLeft</span>());</span><br><span class="line">m_pWidget-&gt;<span class="built_in">show</span>();</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Qt限制软件某日期后不能使用</title>
+    <link href="https://santajiang.github.io/article/a0b9096a.html"/>
+    <id>https://santajiang.github.io/article/a0b9096a.html</id>
+    <published>2023-07-12T06:23:42.000Z</published>
+    <updated>2023-07-12T06:25:52.936Z</updated>
+    
+    <content type="html"><![CDATA[<p>在main.cpp里：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QDate <span class="title">overDate</span><span class="params">(<span class="number">2023</span>,<span class="number">6</span>,<span class="number">28</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> days = overDate.<span class="built_in">daysTo</span>(QDate::<span class="built_in">currentDate</span>());</span><br><span class="line"><span class="keyword">if</span>(days &gt; <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;在main.cpp里：&lt;/p&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/spa</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+  </entry>
   
   <entry>
     <title>Qt正则表达式筛手机号</title>
@@ -482,30 +531,6 @@
       
     <summary type="html">&lt;p&gt;当时用的Windows搭建的这个博客，现在要迁移到我的MacBook Pro上来，在查了很多资料后动手实践，发现还是比较方便的，现写下流程  &lt;/p&gt;
 &lt;h3 id=&quot;Node-js-Git&quot;&gt;&lt;a href=&quot;#Node-js-Git&quot; class=&quot;headerlink</summary>
-      
-    
-    
-    
-    <category term="博客搭建" scheme="https://santajiang.github.io/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-    
-    
-    <category term="Hexo" scheme="https://santajiang.github.io/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo搭建个人博客</title>
-    <link href="https://santajiang.github.io/article/ec7d7221.html"/>
-    <id>https://santajiang.github.io/article/ec7d7221.html</id>
-    <published>2021-07-27T16:00:00.000Z</published>
-    <updated>2022-09-05T02:11:29.332Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Github-Pages"><a href="#Github-Pages" class="headerlink" title="Github Pages"></a>Github Pages</h3><p>Github Pages是Github推出的一项网站服务，有关Pages的核心就一点：**创建一个名为username.github.io的仓库。Github会自动识别为一个网站，网站的url就是username.github.io **</p><p>操作起来也很简单，<strong>步骤如下：</strong></p><ul><li>在Gtihub新建一个repository</li><li>在第一栏，<strong>Owner</strong>要选<strong>自己</strong>，<strong>Repository name</strong>填<strong>username.github.io</strong>，username就是你Github的用户名</li><li>可见性选Public，因为Pages free的账号只能public，有钱可以选Private，然后在新建之后的仓库Setting里，左侧栏选Pages，里边有升级成Pages Pro的选项，这样你的网站项目就可以隐藏，但每年要支付一定的费用</li><li>勾选 <strong>Initialize this repository with a README</strong></li><li>点<code>Create repository</code>按钮新建仓库</li></ul><p>此时你便拥有了自己的Pages个人主页，可以尝试输入网址打开看看，这个生成好的 Repository 就是用来存放博客内容的地方</p><h3 id="绑定个人域名"><a href="#绑定个人域名" class="headerlink" title="绑定个人域名"></a>绑定个人域名</h3><p>如果你有一个个人域名，也可以在Repository-Settings-Pages里的<strong>Custom domain</strong>选项填上自己的个人域名，这样你的Pages就和你的个人域名绑定了，输入你的域名就会自动跳转到你个人的Pages</p><h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><p>生成 Repository之后，接下来就是要往这个Repository 里搭博客了</p><p>Hexo是一款本地博客框架，可以运行一个本地的静态博客网站，如果你只需要在自己电脑用，那就不用Pages了</p><p>Hexo使用起来很方便，只要在本地编辑好.md后缀的文章，然后重新部署就可以了，而且Hexo官网提供了大量的主题模板</p><p><strong>1.搭建Node.js环境</strong></p><ul><li>前往 <a href="https://nodejs.org/en/">https://nodejs.org/en/</a></li><li>下载最新LTS版本</li><li>安装</li><li>打开<strong>Command Prompt</strong>，输入 <code>node -v</code></li><li>显示版本号</li><li>成功</li></ul><p><strong>2.安装Hexo</strong></p><ul><li>打开<strong>Command Prompt</strong></li><li>执行<code>npm install -g hexo-cli</code> </li><li>输入 <code>hexo -v</code>查看版本即安装成功</li></ul><p><strong>3.Hexo的初始化</strong></p><ul><li>创建blog文件夹，位置建议各盘根目录</li><li>打开任一终端(PowerShell/Windows Terminal/Git Bash等均可)，进入刚才创建的blog路径下</li><li>执行<code>hexo init</code> 将 blog 文件夹初始化</li><li>执行 <code>npm install</code> 安装依赖包</li><li>执行 <code>hexo g</code> 开始进行部署操作</li><li>执行 <code>hexo s</code> 将生成的网页放在本地服务器</li><li>打开浏览器，输入网址 <a href="http://localhost:4000/">http://localhost:4000/</a> 就可以看到本地的博客效果了</li><li>效果没问题，返回终端按 <code>Ctrl</code> + <code>C</code> 中止服务运行</li></ul><p><strong>4.发布博客文章</strong><br>发布博客文章也是较为简单的，需要在本地新建一个博客文档，打开本地进行编辑后，重新部署发布即可，操作如下：</p><ul><li>打开刚才的终端</li><li>在blog路径下执行 <code>hexo new &quot;Test&quot;</code></li><li>生成的.md文件路径在 <code>blog\source\_posts</code>下</li></ul><p>打开Test.md，会发现Hexo已经为我们生成了一个表头，表头的格式如下  </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: Test                       //文章标题</span><br><span class="line">date: 2021-0X-XX XX:XX:XX         //生成日期</span><br><span class="line">tags:                             //所属标签</span><br></pre></td></tr></table></figure><p>然后，在其下随便写一些内容，保存<br>回到终端，执行<code>hexo g</code>部署，然后执行 <code>hexo s</code>发布，刷新 <a href="http://localhost:4000/">http://localhost:4000/</a> 查看结果</p><h3 id="在-Github-上部署-Hexo"><a href="#在-Github-上部署-Hexo" class="headerlink" title="在 Github 上部署 Hexo"></a>在 Github 上部署 Hexo</h3><p><strong>操作如下</strong>：</p><ul><li>复制Github Pages的仓库地址，如：<a href="https://github.com/SantaJiang/santajiang.github.io.git">https://github.com/SantaJiang/santajiang.github.io.git</a></li><li>修改配置文件<code>blog/_config.yml</code> ，最新版与之前的不同从这里开始了</li><li>查找**# Site**字段，修改如下：  </li></ul><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Santa的博客</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;My personal blog&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;记录、分享、交流&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">蒋胜达</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">en</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure><ul><li>查找**# URL**字段，修改如下：  </li></ul><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://santajiang.github.io/</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br><span class="line"><span class="attr">pretty_urls:</span></span><br><span class="line">  <span class="attr">trailing_index:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span></span><br><span class="line">  <span class="attr">trailing_html:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing &#x27;.html&#x27; from permalinks</span></span><br></pre></td></tr></table></figure><p>注意url填写的是pages网址不是仓库地址</p><ul><li>查找<strong>deploy</strong>字段，修改如下：  </li></ul><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">repository:</span> <span class="string">git@github.com:SantaJiang/santajiang.github.io.git</span></span><br><span class="line"><span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure><p>这里要<strong>注意</strong>两点！</p><ol><li>Github后续更新了默认主分支的名称，已经不叫<strong>master</strong>了，改为了<strong>main</strong>，如果还是写<strong>master</strong>，并不会报错，但是会在<strong>main</strong>分支之外新建一个<strong>master</strong>分支</li><li>repository一栏必须填ssh的地址，因为GitHub的密码验证于2021年8月13日不再支持，也就是不能再用密码方式去提交代码。要使用<strong>personal access token</strong>替代，当然这里我建议用SSH免密登陆，具体GitHub如何配置SSH免密登陆的步骤不在这里详述了，然后继续：</li></ol><ul><li>回到终端，执行 <code>npm install hexo-deployer-git --save</code> 只需执行一次，后续无需再执行</li><li>执行 <code>hexo d</code> 部署</li><li>登录 santajiang.github.io.git 查看效果</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;Github-Pages&quot;&gt;&lt;a href=&quot;#Github-Pages&quot; class=&quot;headerlink&quot; title=&quot;Github Pages&quot;&gt;&lt;/a&gt;Github Pages&lt;/h3&gt;&lt;p&gt;Github Pages是Github推出的一项网站服务，有</summary>
       
     
     
