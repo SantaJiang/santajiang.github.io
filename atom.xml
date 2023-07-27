@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2023-07-12T06:28:50.202Z</updated>
+  <updated>2023-07-27T12:46:52.659Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Qt防连点</title>
+    <link href="https://santajiang.github.io/article/d2b5f7ee.html"/>
+    <id>https://santajiang.github.io/article/d2b5f7ee.html</id>
+    <published>2023-07-27T12:41:25.000Z</published>
+    <updated>2023-07-27T12:46:52.659Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 避免连续点击</span></span><br><span class="line"><span class="keyword">static</span> DWORD tick1 = <span class="number">0</span>;</span><br><span class="line">DWORD tick2 = <span class="built_in">GetTickCount</span>();</span><br><span class="line"><span class="keyword">if</span> (tick2 - tick1 &gt; <span class="number">200</span>)</span><br><span class="line">&#123;</span><br><span class="line">    tick1 = tick2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+    <category term="C++" scheme="https://santajiang.github.io/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Qt设置窗口居中显示</title>
     <link href="https://santajiang.github.io/article/29e34681.html"/>
     <id>https://santajiang.github.io/article/29e34681.html</id>
     <published>2023-07-12T06:24:01.000Z</published>
-    <updated>2023-07-12T06:28:50.202Z</updated>
+    <updated>2023-07-12T06:29:00.286Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//移动窗体到屏幕中央</span></span><br><span class="line">QRect rect = m_pWidget-&gt;<span class="built_in">frameGeometry</span>();</span><br><span class="line">QScreen* screen = QGuiApplication::<span class="built_in">primaryScreen</span>();</span><br><span class="line">QPoint point = screen-&gt;availableGeometry.<span class="built_in">center</span>();</span><br><span class="line">rect.<span class="built_in">moveCenter</span>(point);</span><br><span class="line">m_pWidget-&gt;<span class="built_in">move</span>(rect.<span class="built_in">topLeft</span>());</span><br><span class="line">m_pWidget-&gt;<span class="built_in">show</span>();</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -45,7 +71,7 @@
     <link href="https://santajiang.github.io/article/a0b9096a.html"/>
     <id>https://santajiang.github.io/article/a0b9096a.html</id>
     <published>2023-07-12T06:23:42.000Z</published>
-    <updated>2023-07-12T06:25:52.936Z</updated>
+    <updated>2023-07-12T06:29:00.287Z</updated>
     
     <content type="html"><![CDATA[<p>在main.cpp里：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QDate <span class="title">overDate</span><span class="params">(<span class="number">2023</span>,<span class="number">6</span>,<span class="number">28</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> days = overDate.<span class="built_in">daysTo</span>(QDate::<span class="built_in">currentDate</span>());</span><br><span class="line"><span class="keyword">if</span>(days &gt; <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -514,31 +540,6 @@
     <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
     
     <category term="颜色处理" scheme="https://santajiang.github.io/tags/%E9%A2%9C%E8%89%B2%E5%A4%84%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>将Hexo迁移至MacOS</title>
-    <link href="https://santajiang.github.io/article/3e930800.html"/>
-    <id>https://santajiang.github.io/article/3e930800.html</id>
-    <published>2021-08-01T16:00:00.000Z</published>
-    <updated>2022-09-21T08:04:41.101Z</updated>
-    
-    <content type="html"><![CDATA[<p>当时用的Windows搭建的这个博客，现在要迁移到我的MacBook Pro上来，在查了很多资料后动手实践，发现还是比较方便的，现写下流程  </p><h3 id="Node-js-Git"><a href="#Node-js-Git" class="headerlink" title="Node.js / Git"></a>Node.js / Git</h3><p>首先要安装Node.js与Git的环境，这里省略就不多说了</p><h3 id="复制文件"><a href="#复制文件" class="headerlink" title="复制文件"></a>复制文件</h3><p>将原Windows电脑上的博客复制如下的文件，并暂存起来：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_config.yml</span><br><span class="line">package.json</span><br><span class="line">scaffolds/</span><br><span class="line">source/</span><br><span class="line">themes/</span><br></pre></td></tr></table></figure><h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><ul><li>打开终端，当前路径均可，默认只会装在固定的位置</li><li>执行<code>sudo npm install -g hexo-cli</code> </li></ul><h3 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h3><p>在你想要放置博客的位置，然后操作：</p><ul><li>打开终端</li><li>执行<code>hexo init blog</code></li></ul><h3 id="博客迁移"><a href="#博客迁移" class="headerlink" title="博客迁移"></a>博客迁移</h3><p>将之前暂存的文件，全部替换到刚才创建的blog文件夹中，然后操作：</p><ul><li>打开终端</li><li>执行<code>npm install</code></li><li>执行<code>hexo g</code></li><li>执行<code>hexo d</code></li><li> 查看效果</li></ul><p>至此博客就成功迁移到MacOS中了，后续的操作与Windows下无差别</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;当时用的Windows搭建的这个博客，现在要迁移到我的MacBook Pro上来，在查了很多资料后动手实践，发现还是比较方便的，现写下流程  &lt;/p&gt;
-&lt;h3 id=&quot;Node-js-Git&quot;&gt;&lt;a href=&quot;#Node-js-Git&quot; class=&quot;headerlink</summary>
-      
-    
-    
-    
-    <category term="博客搭建" scheme="https://santajiang.github.io/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-    
-    
-    <category term="Hexo" scheme="https://santajiang.github.io/tags/Hexo/"/>
     
   </entry>
   
