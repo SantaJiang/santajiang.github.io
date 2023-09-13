@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2023-07-27T12:46:52.659Z</updated>
+  <updated>2023-07-27T12:47:02.420Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://santajiang.github.io/article/d2b5f7ee.html"/>
     <id>https://santajiang.github.io/article/d2b5f7ee.html</id>
     <published>2023-07-27T12:41:25.000Z</published>
-    <updated>2023-07-27T12:46:52.659Z</updated>
+    <updated>2023-07-27T12:47:02.420Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 避免连续点击</span></span><br><span class="line"><span class="keyword">static</span> DWORD tick1 = <span class="number">0</span>;</span><br><span class="line">DWORD tick2 = <span class="built_in">GetTickCount</span>();</span><br><span class="line"><span class="keyword">if</span> (tick2 - tick1 &gt; <span class="number">200</span>)</span><br><span class="line">&#123;</span><br><span class="line">    tick1 = tick2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
