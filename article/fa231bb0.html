@@ -13,7 +13,7 @@
 
 
 
-<title>Qt防连点 | Santa&#39;s Blog</title>
+<title>LeetCode刷题-序 | Santa&#39;s Blog</title>
 
 
 
@@ -132,11 +132,76 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Qt防连点</h1>
+            <h1 class="post-title">LeetCode刷题-序</h1>
             
                 <div class="post-meta">
                     
@@ -145,14 +210,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">七月 27, 2023&nbsp;&nbsp;20:41</a>
+                        Date: <a href="#">九月 20, 2023&nbsp;&nbsp;14:00</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a>
+                                <a href="/categories/%E9%9D%A2%E8%AF%95/">面试</a>
                             
                         </span>
                     
@@ -161,8 +226,10 @@
         </header>
 
         <div class="post-content">
-            <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 避免连续点击</span></span><br><span class="line"><span class="keyword">static</span> DWORD tick1 = <span class="number">0</span>;</span><br><span class="line">DWORD tick2 = <span class="built_in">GetTickCount</span>();</span><br><span class="line"><span class="keyword">if</span> (tick2 - tick1 &gt; <span class="number">200</span>)</span><br><span class="line">&#123;</span><br><span class="line">    tick1 = tick2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+            <h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>最近公司发生了种种事情，先是新上任的领导天天给压力，但工资又没涨一分钱；然后又开始卡绩效，动不动就拿裁员吓唬人；最后又听说产研部门要集体搬迁到深圳了，而我是不可能跟着去深圳的，所以觉得有必要开始进行面试准备了  </p>
+<p>首先要干的就是LeetCode刷题，基于之前的经验，只要想去好一些的大厂，刷题这道坎是绕过不去的，如果一面解不出来，基本就被Pass了；但人的惰性是很大的，总是有得过且过的心理，只要今天刀没砍脖子上，就觉得又顺利过了一天，所以，一个适当的仪式感还是必要的  </p>
+<p>就比如写这篇帖子，主要的目的就是给个标志性的开始、一个时间点、一个仪式，告诉自己，好了，正式开始了。所以在这立贴为证，以后要经常性、时时的刷题，刷到熟练  </p>
+<p>都不容易，加油吧！</p>
 
         </div>
 
@@ -173,9 +240,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/Qt/"># Qt</a>
-                    
-                        <a href="/tags/C/"># C++</a>
+                        <a href="/tags/LeetCode/"># LeetCode</a>
                     
                         
                 </span>
@@ -188,10 +253,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/article/fa231bb0.html">LeetCode刷题-序</a>
+                <a class="prev" rel="prev" href="/article/15739779.html">88.合并两个有序数组</a>
             
             
-            <a class="next" rel="next" href="/article/29e34681.html">Qt设置窗口居中显示</a>
+            <a class="next" rel="next" href="/article/d2b5f7ee.html">Qt防连点</a>
             
         </section>
 

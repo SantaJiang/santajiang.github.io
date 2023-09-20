@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2023-07-27T12:47:02.420Z</updated>
+  <updated>2023-09-20T08:10:35.932Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>88.合并两个有序数组</title>
+    <link href="https://santajiang.github.io/article/15739779.html"/>
+    <id>https://santajiang.github.io/article/15739779.html</id>
+    <published>2023-09-20T08:05:00.000Z</published>
+    <updated>2023-09-20T08:10:35.932Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="我的解"><a href="#我的解" class="headerlink" title="我的解"></a>我的解</h3><p>想到的是把两个数组按递增合并到第三个新数组里；设两个游标记录合并的进度，一直循环，直到两个数组全部走完就结束</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; actNums1;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            actNums1.<span class="built_in">push_back</span>(nums1[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        nums1.<span class="built_in">clear</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> nVec1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> nVec2 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(nVec1 == actNums1.<span class="built_in">size</span>() &amp;&amp; nVec2 == nums2.<span class="built_in">size</span>())</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(nVec1 == actNums1.<span class="built_in">size</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(nums2[nVec2]);</span><br><span class="line">                nVec2++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nVec2 == nums2.<span class="built_in">size</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(actNums1[nVec1]);</span><br><span class="line">                nVec1++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(nums2[nVec2] &gt; actNums1[nVec1])</span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(actNums1[nVec1]);</span><br><span class="line">                nVec1++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums2[nVec2] &lt; actNums1[nVec1])</span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(nums2[nVec2]);</span><br><span class="line">                nVec2++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(actNums1[nVec1]);</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(nums2[nVec2]);</span><br><span class="line">                nVec1++;</span><br><span class="line">                nVec2++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="官方解"><a href="#官方解" class="headerlink" title="官方解"></a>官方解</h3><p>思路和我的差不多，只是代码更精简</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = <span class="number">0</span>, p2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> sorted[m + n];</span><br><span class="line">        <span class="keyword">int</span> cur;</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt; m || p2 &lt; n) &#123;</span><br><span class="line">            <span class="keyword">if</span> (p1 == m) &#123;</span><br><span class="line">                cur = nums2[p2++];</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (p2 == n) &#123;</span><br><span class="line">                cur = nums1[p1++];</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums1[p1] &lt; nums2[p2]) &#123;</span><br><span class="line">                cur = nums1[p1++];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cur = nums2[p2++];</span><br><span class="line">            &#125;</span><br><span class="line">            sorted[p1 + p2 - <span class="number">1</span>] = cur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != m + n; ++i) &#123;</span><br><span class="line">            nums1[i] = sorted[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><ul><li><p><strong>我的解</strong><br>用时4ms，击败 51.79%使用 C++ 的用户<br>内存8.98MB，击败 5.01%使用 C++ 的用户</p></li><li><p><strong>官方解</strong><br>用时4ms，击败 51.79%使用 C++ 的用户<br>内存8.90MB，击败 6.39%使用 C++ 的用户</p></li></ul><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>第一道LeetCode题，耗费了大概2个小时，还不太熟悉刷题的节奏  </p><p>好在解出来了，好开头，继续加油！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;我的解&quot;&gt;&lt;a href=&quot;#我的解&quot; class=&quot;headerlink&quot; title=&quot;我的解&quot;&gt;&lt;/a&gt;我的解&lt;/h3&gt;&lt;p&gt;想到的是把两个数组按递增合并到第三个新数组里；设两个游标记录合并的进度，一直循环，直到两个数组全部走完就结束&lt;/p&gt;
+&lt;figure</summary>
+      
+    
+    
+    
+    <category term="面试" scheme="https://santajiang.github.io/categories/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="LeetCode" scheme="https://santajiang.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode刷题-序</title>
+    <link href="https://santajiang.github.io/article/fa231bb0.html"/>
+    <id>https://santajiang.github.io/article/fa231bb0.html</id>
+    <published>2023-09-20T06:00:00.000Z</published>
+    <updated>2023-09-20T08:10:40.905Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>最近公司发生了种种事情，先是新上任的领导天天给压力，但工资又没涨一分钱；然后又开始卡绩效，动不动就拿裁员吓唬人；最后又听说产研部门要集体搬迁到深圳了，而我是不可能跟着去深圳的，所以觉得有必要开始进行面试准备了  </p><p>首先要干的就是LeetCode刷题，基于之前的经验，只要想去好一些的大厂，刷题这道坎是绕过不去的，如果一面解不出来，基本就被Pass了；但人的惰性是很大的，总是有得过且过的心理，只要今天刀没砍脖子上，就觉得又顺利过了一天，所以，一个适当的仪式感还是必要的  </p><p>就比如写这篇帖子，主要的目的就是给个标志性的开始、一个时间点、一个仪式，告诉自己，好了，正式开始了。所以在这立贴为证，以后要经常性、时时的刷题，刷到熟练  </p><p>都不容易，加油吧！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;序&quot;&gt;&lt;a href=&quot;#序&quot; class=&quot;headerlink&quot; title=&quot;序&quot;&gt;&lt;/a&gt;序&lt;/h3&gt;&lt;p&gt;最近公司发生了种种事情，先是新上任的领导天天给压力，但工资又没涨一分钱；然后又开始卡绩效，动不动就拿裁员吓唬人；最后又听说产研部门要集体搬迁到深圳了</summary>
+      
+    
+    
+    
+    <category term="面试" scheme="https://santajiang.github.io/categories/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="LeetCode" scheme="https://santajiang.github.io/tags/LeetCode/"/>
+    
+  </entry>
   
   <entry>
     <title>Qt防连点</title>
@@ -487,59 +536,6 @@
     
     
     <category term="年度总结" scheme="https://santajiang.github.io/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Qt调用MacOS终端</title>
-    <link href="https://santajiang.github.io/article/fa7e3d73.html"/>
-    <id>https://santajiang.github.io/article/fa7e3d73.html</id>
-    <published>2021-12-22T16:00:00.000Z</published>
-    <updated>2022-09-21T08:15:59.295Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;QProcess&gt;</span><br><span class="line"></span><br><span class="line">QProcess pCmd = <span class="keyword">new</span> QProcess(<span class="keyword">this</span>);</span><br><span class="line">connect(pCmd , SIGNAL(readyReadStandardOutput()) , <span class="keyword">this</span> , SLOT(on_readoutput()));</span><br><span class="line">connect(pCmd , SIGNAL(readyReadStandardError()) , <span class="keyword">this</span> , SLOT(on_readerror()));</span><br><span class="line"></span><br><span class="line">pCmd-&gt;start(<span class="string">&quot;bash&quot;</span>);</span><br><span class="line">pCmd-&gt;waitForStarted();</span><br><span class="line"></span><br><span class="line">QString strTermCmd = <span class="string">&quot;git add -A&quot;</span> + <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">pCmd-&gt;write(strTermCmd.toUtf8().data());</span><br><span class="line">pCmd-&gt;waitForFinished();</span><br></pre></td></tr></table></figure><p>问题的关键就在这个<code>pCmd-&gt;start(&quot;bash&quot;);</code> </p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;figure class=&quot;highlight qt&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;l</summary>
-      
-    
-    
-    
-    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
-    
-    <category term="终端" scheme="https://santajiang.github.io/tags/%E7%BB%88%E7%AB%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>RGB值Hex颜色值转换</title>
-    <link href="https://santajiang.github.io/article/caeca79b.html"/>
-    <id>https://santajiang.github.io/article/caeca79b.html</id>
-    <published>2021-12-18T16:00:00.000Z</published>
-    <updated>2022-09-21T08:16:09.628Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>输入RGB/Hex值，回车触发转换并自动复制结果到剪贴板，简单高效</p><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>回车生效的事件直接用的是QLineEdit自带的returnPressed()事件，而复制到剪贴板用到的是QClipboard类：  </p><figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;QClipboard&gt;</span><br><span class="line"></span><br><span class="line">QString str = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">QClipboard *clip = <span class="attribute">QApplication</span>::clipboard();</span><br><span class="line">clip-&gt;setText(str);</span><br></pre></td></tr></table></figure><p>这样这个”Hello”就自动复制到剪贴板里了.  </p><p>接下来最主要的就是颜色值的相互转换了，可以里用QColor类，先获取对应的color，然后再转换为对应的显示形式，这里贴上核心代码：  </p><figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;QColor&gt;</span><br><span class="line"></span><br><span class="line">QColor <span class="built_in">color</span>(<span class="number">235</span>,<span class="number">235</span>,<span class="number">235</span>);</span><br><span class="line"><span class="built_in">int</span> red = <span class="built_in">color</span>.red();</span><br><span class="line"><span class="built_in">int</span> green = <span class="built_in">color</span>.green();</span><br><span class="line"><span class="built_in">int</span> blue = <span class="built_in">color</span>.blue();</span><br><span class="line">QString strRed = QString(<span class="string">&quot;%1&quot;</span>).arg(red &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line">QString strGreen = QString(<span class="string">&quot;%1&quot;</span>).arg(green &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line">QString strBlue = QString(<span class="string">&quot;%1&quot;</span>).arg(blue &amp; <span class="number">0xFF</span>, <span class="number">2</span>, <span class="number">16</span>, QLatin1Char(<span class="string">&#x27;0&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//十六进制显示</span></span><br><span class="line">QString hex = QString(<span class="string">&quot;#%1%2%3&quot;</span>).arg(strRed.toUpper()).arg(strGreen.toUpper()).arg(strBlue.toUpper());</span><br><span class="line"><span class="comment">//RGB显示</span></span><br><span class="line">QString rgb = QString(<span class="string">&quot;%1, %2, %3&quot;</span>).arg(red).arg(green).arg(blue);</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;思路&quot;&gt;&lt;a href=&quot;#思路&quot; class=&quot;headerlink&quot; title=&quot;思路&quot;&gt;&lt;/a&gt;思路&lt;/h3&gt;&lt;p&gt;输入RGB/Hex值，回车触发转换并自动复制结果到剪贴板，简单高效&lt;/p&gt;
-&lt;h3 id=&quot;实现&quot;&gt;&lt;a href=&quot;#实现&quot; class=</summary>
-      
-    
-    
-    
-    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
-    
-    <category term="颜色处理" scheme="https://santajiang.github.io/tags/%E9%A2%9C%E8%89%B2%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
