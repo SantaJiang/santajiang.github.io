@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2023-09-21T09:12:20.256Z</updated>
+  <updated>2023-10-10T09:50:28.836Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Qt模态窗口点击窗外消失</title>
+    <link href="https://santajiang.github.io/article/4a371b70.html"/>
+    <id>https://santajiang.github.io/article/4a371b70.html</id>
+    <published>2023-10-10T09:49:44.000Z</published>
+    <updated>2023-10-10T09:50:28.836Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天遇到个麻烦事，模态窗口、置顶、无父；要实现点窗口外关窗口功能，失焦事件之类的全部失效，查了好多后有了一个很好的解决方案：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setWindowFlags</span>(Qt::FramelessWindowHint | Qt::Popup | Qt::NoDropShadowWindowHint);</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;今天遇到个麻烦事，模态窗口、置顶、无父；要实现点窗口外关窗口功能，失焦事件之类的全部失效，查了好多后有了一个很好的解决方案：&lt;/p&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+  </entry>
+  
+  <entry>
     <title>80.删除有序数组中的重复项II</title>
     <link href="https://santajiang.github.io/article/5cd4619b.html"/>
     <id>https://santajiang.github.io/article/5cd4619b.html</id>
     <published>2023-09-21T09:07:38.000Z</published>
-    <updated>2023-09-21T09:12:20.256Z</updated>
+    <updated>2023-09-21T09:12:36.198Z</updated>
     
     <content type="html"><![CDATA[<h3 id="我的解"><a href="#我的解" class="headerlink" title="我的解"></a>我的解</h3><p>刚看完26题就开始做，憋了十几分钟也憋不出来，尝试了几次都是只有部分对</p><h3 id="官方解"><a href="#官方解" class="headerlink" title="官方解"></a>官方解</h3><p>因为给定数组是有序的，所以相同元素必然连续。我们可以使用双指针解决本题，遍历数组检查每一个元素是否应该被保留，如果应该被保留，就将其移动到指定位置。具体地，我们定义两个指针 slow 和 fast 分别为慢指针和快指针，其中慢指针表示处理出的数组的长度，快指针表示已经检查过的数组的长度，即 nums[fast]表示待检查的第一个元素，nums[slow−1]为上一个应该被保留的元素所移动到的指定位置。</p><p>因为本题要求相同元素最多出现两次而非一次，所以我们需要检查上上个应该被保留的元素 nums[slow−2] 是否和当前待检查元素 nums[fast]相同。当且仅当 nums[slow−2]=nums[fast]时，当前待检查元素 nums[fast]不应该被保留（因为此时必然有 nums[slow−2]=nums[slow−1]=nums[fast]）。最后，slow 即为处理好的数组的长度。</p><p>特别地，数组的前两个数必然可以被保留，因此对于长度不超过2的数组，我们无需进行任何处理，对于长度超过2的数组，我们直接将双指针的初始值设为2即可。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> slow = <span class="number">2</span>, fast = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span> (fast &lt; n) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[slow - <span class="number">2</span>] != nums[fast]) &#123;</span><br><span class="line">                nums[slow] = nums[fast];</span><br><span class="line">                ++slow;</span><br><span class="line">            &#125;</span><br><span class="line">            ++fast;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><p>无</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>快慢指针的用法还是得多练=_=</p>]]></content>
     
@@ -504,32 +529,6 @@
     <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
     
     <category term="高分屏" scheme="https://santajiang.github.io/tags/%E9%AB%98%E5%88%86%E5%B1%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Qt实现Http的Get/Post请求</title>
-    <link href="https://santajiang.github.io/article/cdff3725.html"/>
-    <id>https://santajiang.github.io/article/cdff3725.html</id>
-    <published>2022-09-15T11:08:04.000Z</published>
-    <updated>2022-09-21T08:16:03.085Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">QT += network</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QNetworkAccessManager&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QNetworkRequest&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QNetworkReply&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建</span></span><br><span class="line"><span class="keyword">void</span> <span class="built_in">init</span>()</span><br><span class="line">&#123;</span><br><span class="line">    QNetworkAccessManager* manager = <span class="keyword">new</span> <span class="built_in">QNetworkAccessManager</span>(<span class="keyword">this</span>);</span><br><span class="line">    <span class="built_in">connect</span>(manager,<span class="built_in">SIGNAL</span>(<span class="built_in">finished</span>(QNetworkReply*)),<span class="keyword">this</span>,<span class="built_in">SLOT</span>(<span class="built_in">replyFinished</span>(QNetworkReply*)));<span class="comment">//关联信号和槽</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//请求，以天气预报为例</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">queryWeather</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> quest_array[<span class="number">256</span>]=<span class="string">&quot;http://wthrcdn.etouch.cn/weather_mini?city=&quot;</span>;</span><br><span class="line">    QNetworkRequest quest;</span><br><span class="line">    <span class="built_in">sprintf</span>(quest_array,<span class="string">&quot;%s%s&quot;</span>,quest_array,cityName.<span class="built_in">toUtf8</span>().<span class="built_in">data</span>());</span><br><span class="line">    quest.<span class="built_in">setUrl</span>(<span class="built_in">QUrl</span>(quest_array));</span><br><span class="line">    quest.<span class="built_in">setHeader</span>(QNetworkRequest::UserAgentHeader,<span class="string">&quot;RT-Thread ART&quot;</span>);</span><br><span class="line">    <span class="comment">/*发送get网络请求*/</span></span><br><span class="line">    manager-&gt;<span class="built_in">get</span>(quest);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//响应</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">replyFinished</span><span class="params">(QNetworkReply *reply)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    allinfo = reply-&gt;<span class="built_in">readAll</span>();</span><br><span class="line">    <span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;allinfo：&quot;</span>&lt;&lt;allinfo;</span><br><span class="line">    </span><br><span class="line">    QJsonParseError err;</span><br><span class="line">    QJsonDocument json_recv = QJsonDocument::<span class="built_in">fromJson</span>(allinfo.<span class="built_in">toUtf8</span>(),&amp;err);<span class="comment">//解析json对象</span></span><br><span class="line">    <span class="built_in">qDebug</span>() &lt;&lt;<span class="string">&quot;Json-Error:&quot;</span>&lt;&lt; err.error;</span><br><span class="line">    <span class="keyword">if</span>(!json_recv.<span class="built_in">isNull</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        QJsonObject object = json_recv.<span class="built_in">object</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;示例&quot;&gt;&lt;a href=&quot;#示例&quot; class=&quot;headerlink&quot; title=&quot;示例&quot;&gt;&lt;/a&gt;示例&lt;/h3&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span cl</summary>
-      
-    
-    
-    
-    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
-    
-    <category term="网络" scheme="https://santajiang.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   

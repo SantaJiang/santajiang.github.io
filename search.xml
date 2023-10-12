@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Qt模态窗口点击窗外消失</title>
+      <link href="/article/4a371b70.html"/>
+      <url>/article/4a371b70.html</url>
+      
+        <content type="html"><![CDATA[<p>今天遇到个麻烦事，模态窗口、置顶、无父；要实现点窗口外关窗口功能，失焦事件之类的全部失效，查了好多后有了一个很好的解决方案：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setWindowFlags</span>(Qt::FramelessWindowHint | Qt::Popup | Qt::NoDropShadowWindowHint);</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>80.删除有序数组中的重复项II</title>
       <link href="/article/5cd4619b.html"/>
       <url>/article/5cd4619b.html</url>
