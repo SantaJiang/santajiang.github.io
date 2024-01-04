@@ -29,131 +29,6 @@
     
     
     <entry>
-      <title>80.删除有序数组中的重复项II</title>
-      <link href="/article/5cd4619b.html"/>
-      <url>/article/5cd4619b.html</url>
-      
-        <content type="html"><![CDATA[<h3 id="我的解"><a href="#我的解" class="headerlink" title="我的解"></a>我的解</h3><p>刚看完26题就开始做，憋了十几分钟也憋不出来，尝试了几次都是只有部分对</p><h3 id="官方解"><a href="#官方解" class="headerlink" title="官方解"></a>官方解</h3><p>因为给定数组是有序的，所以相同元素必然连续。我们可以使用双指针解决本题，遍历数组检查每一个元素是否应该被保留，如果应该被保留，就将其移动到指定位置。具体地，我们定义两个指针 slow 和 fast 分别为慢指针和快指针，其中慢指针表示处理出的数组的长度，快指针表示已经检查过的数组的长度，即 nums[fast]表示待检查的第一个元素，nums[slow−1]为上一个应该被保留的元素所移动到的指定位置。</p><p>因为本题要求相同元素最多出现两次而非一次，所以我们需要检查上上个应该被保留的元素 nums[slow−2] 是否和当前待检查元素 nums[fast]相同。当且仅当 nums[slow−2]=nums[fast]时，当前待检查元素 nums[fast]不应该被保留（因为此时必然有 nums[slow−2]=nums[slow−1]=nums[fast]）。最后，slow 即为处理好的数组的长度。</p><p>特别地，数组的前两个数必然可以被保留，因此对于长度不超过2的数组，我们无需进行任何处理，对于长度超过2的数组，我们直接将双指针的初始值设为2即可。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> slow = <span class="number">2</span>, fast = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span> (fast &lt; n) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[slow - <span class="number">2</span>] != nums[fast]) &#123;</span><br><span class="line">                nums[slow] = nums[fast];</span><br><span class="line">                ++slow;</span><br><span class="line">            &#125;</span><br><span class="line">            ++fast;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><p>无</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>快慢指针的用法还是得多练=_=</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 面试 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> LeetCode </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>26.删除有序数组中的重复项</title>
-      <link href="/article/fed1388b.html"/>
-      <url>/article/fed1388b.html</url>
-      
-        <content type="html"><![CDATA[<h3 id="我的解"><a href="#我的解" class="headerlink" title="我的解"></a>我的解</h3><p>脑子有点懵，愣是没做出来，最后卡到了返回几个元素的地方，因为我用双重for循环实现的东西，确实可以把前边筛成不重复的元素，但是如果后边也发生了替换操作，就分不清有效的替换实际进行了几次，返回不了数组大小，而这个题它不管你数组实际大小多少，它只按给的int值打出来元素，一致就算过，打不出来，哎</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> val = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> left=<span class="number">0</span>; left&lt;nums.<span class="built_in">size</span>(); left++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> right=val+<span class="number">1</span>; right&lt;nums.<span class="built_in">size</span>(); right++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[left] != nums[right])</span><br><span class="line">                &#123;</span><br><span class="line">                    nums[left+<span class="number">1</span>] = nums[right];</span><br><span class="line">                    val = right;</span><br><span class="line">                    <span class="keyword">break</span>; </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// =_=哎</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="官方解"><a href="#官方解" class="headerlink" title="官方解"></a>官方解</h3><p>其实这个也不是官方解，只是我发现了一个跟我逻辑高度相似的解：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> right = <span class="number">0</span>;right &lt; nums.<span class="built_in">size</span>() ; right++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[right] != nums[left]) &#123;</span><br><span class="line">                nums[left + <span class="number">1</span>] = nums[right];</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><p>无</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>挺不应该的，感觉是脑子不清楚，做了两个多小时还是没做出来，继续加油吧</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 面试 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> LeetCode </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>27.移除元素</title>
-      <link href="/article/89234294.html"/>
-      <url>/article/89234294.html</url>
-      
-        <content type="html"><![CDATA[<h3 id="我的解"><a href="#我的解" class="headerlink" title="我的解"></a>我的解</h3><p>思路是遍历，直接删除元素；这块比较特殊的是vector用了erase后，会减小容器的容量，会导致迭代器用于erase删除元素后，会失效，后续就不能用该迭代器操作向量了，循环就乱套了；所以这里首先用<strong>it=<strong>接一下删除后下一个元素位置，然后下一次循环顺其自然就到下一个元素的判断了，如果不是，就走else的</strong>it++</strong></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> d = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = nums.<span class="built_in">begin</span>(); it != nums.<span class="built_in">end</span>();)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(*it == val)</span><br><span class="line">            &#123;</span><br><span class="line">                it = nums.<span class="built_in">erase</span>(it);</span><br><span class="line">                d++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                it++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        num = num - d;</span><br><span class="line">        <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="官方解"><a href="#官方解" class="headerlink" title="官方解"></a>官方解</h3><p>好吧这道题人家想考双指针的应用</p><ul><li>思路及算法</li></ul><p>由于题目要求删除数组中等于 val的元素，因此输出数组的长度一定小于等于输入数组的长度，我们可以把输出的数组直接写在输入数组上。可以使用双指针：右指针 right 指向当前将要处理的元素，左指针 left 指向下一个将要赋值的位置。</p><p>如果右指针指向的元素不等于 val，它一定是输出数组的一个元素，我们就将右指针指向的元素复制到左指针位置，然后将左右指针同时右移；</p><p>如果右指针指向的元素等于 val，它不能在输出数组里，此时左指针不动，右指针右移一位。</p><p>整个过程保持不变的性质是：区间 [0,left)中的元素都不等于 val。当左右指针遍历完输入数组以后，left的值就是输出数组的长度。</p><p>这样的算法在最坏情况下（输入数组中没有元素等于 val），左右指针各遍历了数组一次。</p><ul><li>代码</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> right = <span class="number">0</span>; right &lt; n; right++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[right] != val) &#123;</span><br><span class="line">                nums[left] = nums[right];</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><ul><li><p><strong>我的解</strong><br>用时4ms，击败 46.13%使用 C++ 的用户<br>内存8.91MB，击败 5.05%使用 C++ 的用户</p></li><li><p><strong>官方解</strong><br>用时4ms，击败 46.13%使用 C++ 的用户<br>内存8.63MB，击败 6.74%使用 C++ 的用户</p></li></ul><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这里发现官方解题老是喜欢用<strong>指针</strong>这个话术，我一开始以为指的是*p这种，但其实就是游标的意思</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 面试 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> LeetCode </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>88.合并两个有序数组</title>
-      <link href="/article/15739779.html"/>
-      <url>/article/15739779.html</url>
-      
-        <content type="html"><![CDATA[<h3 id="我的解"><a href="#我的解" class="headerlink" title="我的解"></a>我的解</h3><p>想到的是把两个数组按递增合并到第三个新数组里；设两个游标记录合并的进度，一直循环，直到两个数组全部走完就结束</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; actNums1;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            actNums1.<span class="built_in">push_back</span>(nums1[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        nums1.<span class="built_in">clear</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> nVec1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> nVec2 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(nVec1 == actNums1.<span class="built_in">size</span>() &amp;&amp; nVec2 == nums2.<span class="built_in">size</span>())</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(nVec1 == actNums1.<span class="built_in">size</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(nums2[nVec2]);</span><br><span class="line">                nVec2++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nVec2 == nums2.<span class="built_in">size</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(actNums1[nVec1]);</span><br><span class="line">                nVec1++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(nums2[nVec2] &gt; actNums1[nVec1])</span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(actNums1[nVec1]);</span><br><span class="line">                nVec1++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums2[nVec2] &lt; actNums1[nVec1])</span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(nums2[nVec2]);</span><br><span class="line">                nVec2++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(actNums1[nVec1]);</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(nums2[nVec2]);</span><br><span class="line">                nVec1++;</span><br><span class="line">                nVec2++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="官方解"><a href="#官方解" class="headerlink" title="官方解"></a>官方解</h3><p>思路和我的差不多，只是代码更精简</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = <span class="number">0</span>, p2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> sorted[m + n];</span><br><span class="line">        <span class="keyword">int</span> cur;</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt; m || p2 &lt; n) &#123;</span><br><span class="line">            <span class="keyword">if</span> (p1 == m) &#123;</span><br><span class="line">                cur = nums2[p2++];</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (p2 == n) &#123;</span><br><span class="line">                cur = nums1[p1++];</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums1[p1] &lt; nums2[p2]) &#123;</span><br><span class="line">                cur = nums1[p1++];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cur = nums2[p2++];</span><br><span class="line">            &#125;</span><br><span class="line">            sorted[p1 + p2 - <span class="number">1</span>] = cur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != m + n; ++i) &#123;</span><br><span class="line">            nums1[i] = sorted[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><ul><li><p><strong>我的解</strong><br>用时4ms，击败 51.79%使用 C++ 的用户<br>内存8.98MB，击败 5.01%使用 C++ 的用户</p></li><li><p><strong>官方解</strong><br>用时4ms，击败 51.79%使用 C++ 的用户<br>内存8.90MB，击败 6.39%使用 C++ 的用户</p></li></ul><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>第一道LeetCode题，耗费了大概2个小时，还不太熟悉刷题的节奏  </p><p>好在解出来了，好开头，继续加油！</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 面试 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> LeetCode </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>LeetCode刷题-序</title>
-      <link href="/article/fa231bb0.html"/>
-      <url>/article/fa231bb0.html</url>
-      
-        <content type="html"><![CDATA[<h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>最近公司发生了种种事情，先是新上任的领导天天给压力，但工资又没涨一分钱；然后又开始卡绩效，动不动就拿裁员吓唬人；最后又听说产研部门要集体搬迁到深圳了，而我是不可能跟着去深圳的，所以觉得有必要开始进行面试准备了  </p><p>首先要干的就是LeetCode刷题，基于之前的经验，只要想去好一些的大厂，刷题这道坎是绕过不去的，如果一面解不出来，基本就被Pass了；但人的惰性是很大的，总是有得过且过的心理，只要今天刀没砍脖子上，就觉得又顺利过了一天，所以，一个适当的仪式感还是必要的  </p><p>就比如写这篇帖子，主要的目的就是给个标志性的开始、一个时间点、一个仪式，告诉自己，好了，正式开始了。所以在这立贴为证，以后要经常性、时时的刷题，刷到熟练  </p><p>都不容易，加油吧！</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 面试 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> LeetCode </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Qt防连点</title>
       <link href="/article/d2b5f7ee.html"/>
       <url>/article/d2b5f7ee.html</url>
@@ -354,6 +229,31 @@
             <tag> Qt </tag>
             
             <tag> 跨平台 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>2023年总结</title>
+      <link href="/article/9b8a73a1.html"/>
+      <url>/article/9b8a73a1.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>23年真的是不平凡的一年，发生了好多好多事，这篇回顾文写的持续时间也比较长，我怕到年底的时候不能完整的回忆起每件事</p><p>首先1月份搬家到了北辰时代大厦这边，不得不说风景是真的好，不光挨着鸟巢，上下班都路过鸟巢，工位也高大上了好多，甚至在工位上一扭头就能看到鸟巢风景，还解锁了大年二十八九下班路上，鸟巢公园空无一人的奇观；坏处肯定也是有的，通勤时间从35分钟变成了1小时20分钟，时间长了也麻木了；物价也高了很多，消费开支都高了</p><p>过年的时候两家终于见面了，老爸找了保定会馆，据说在这里的原因是“保证能定”;我对象在第二天也来我家串门吃饭，终于定了在柏润东方大酒店办婚礼</p><p>然后，年后回来上班，从3月份开始了一个大项目，持续到了7月底，前中期几乎每天都在加班，9点后走打车报销是常事，期间各种改需求，赶进度，动不动崩溃，过程很痛苦</p><p>同时我自己的人生大事也在同步推进：3月20号求婚，想了很多最后还是在出租屋里求婚了，期间还发生了趣事，本来照常点下班的对象下午意外撒了咖啡，又是个周五，对象就提前回来了，导致我没布置完就匆匆忙忙躲起来了；还是3月，逛婚博会定了北遇的婚纱；4月份婚纱照拍了，出片了，但是不满意，又约了重拍，同时定了婚庆公司；5月份重拍了婚纱照，5月21号订了婚；6月中旬出了婚纱照片的精修，两个人很满意，还跟着对象俩人玩了第一次剧本杀；7月份就是挑婚纱，最后定婚礼方案；8月份一直在备婚，很多很多事情，动不动就崩溃；8月26号，两个人办了婚礼，这可真是一辈子的大事，很开心</p><p>9月份两个人自驾去乌兰察布玩了，还住了帐篷，晚上还下大暴雨，两个人在帐篷里边看手机视频边吃小火锅，感觉太特别了，很难忘</p><p>以上的段落写在我23年9月份的时候，现在回看一下心态还真的是完全不同；接下来的段落是在24年1月初写的，后边的状况急转直下</p><p>10月份的时候就开始有消息说公司要整个搬到深圳，leader当时还比较乐观，说不太可能，我也觉得不太可能整个全搬到深圳，公司里有很多的老员工，光赔偿金都不够赔的  </p><p>后边部门就开始没活干了，一度到了要员工自己找活干的程度了，我明白这是研发领导跟leader可能有恩怨，连带一起打压我们部门了，申请的工作全都不让做  </p><p>12月初的时候，研发领导开大会，直接就说要进行搬家和大裁员，确实是挺让人意外的，但还是觉得可能动作不会那么快，而且裁也裁不到我，毕竟我的能力大家都是认可的  </p><p>后来我们一起去钢琴行看了电钢琴，花一万买了一架KAWAI CA401，我很喜欢，又可以重拾之前的爱好了，只是希望后续有足够的时间练琴，也能坚持下去  </p><p>月中的时候，某天晚上我照常下班坐昌平线地铁，从西二旗到沙河高教园的时候，突发事故了，当时我只感觉我整个人飞了出去，然后我摔到了某人的上边，我的上边也压着两三个人，挣扎着起来之后发现地铁撞车了，一片混乱，又经过了漫长的两个多小时的等待，我们全都从车上下来了，顺着地铁一路走回了西二旗地铁站，后又因为打不到车，手机又没电了，又徒步走到了新龙泽医院，最后还是玥玥从沙河高教园打车过来接我回去才得以回家的，有生之年竟然上了一次热搜，地铁事故这种超小概率事件能碰上也是神奇··  </p><p>12月末的时候，事情就急转直下了，先是各个部门大裁员，保定部门直接没了，然后就我们部门没动静，后来就是leader开会说可能裁一半，再到24年1月3号（昨天）的时候，leader私聊找我说我在裁员名单上了，事情才尘埃落定了  </p><h3 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h3><p>不知道说什么，现在脑袋其实乱糟糟的，被裁员肯定难过还是有的，但不被裁的话，说实话也干不下去了，没什么意义，还是挺想拿了赔偿休息一阵的，毕竟后边干几十年呢，想出去旅个游还要等放假，我放假别人也放假，人多物价也贵；但又很烦接下来的谈判过程，通过和各个同事的聊天过程后已经预感到了不是一个轻松的过程；还有拿到赔偿后，现在又是年底，过完年了之后找工作的情况也是未知数，还是有些焦虑的····总而言之言而总之，还是希望自己能整理好心情吧，努力把该做的事情做好，希望24年末回顾的时候，自己能有一个满意的结果，加油吧！！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 感悟 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 年度总结 </tag>
             
         </tags>
       

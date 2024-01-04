@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2023-10-10T09:50:28.836Z</updated>
+  <updated>2023-10-12T07:30:19.424Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://santajiang.github.io/article/4a371b70.html"/>
     <id>https://santajiang.github.io/article/4a371b70.html</id>
     <published>2023-10-10T09:49:44.000Z</published>
-    <updated>2023-10-10T09:50:28.836Z</updated>
+    <updated>2023-10-12T07:30:19.424Z</updated>
     
     <content type="html"><![CDATA[<p>今天遇到个麻烦事，模态窗口、置顶、无父；要实现点窗口外关窗口功能，失焦事件之类的全部失效，查了好多后有了一个很好的解决方案：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setWindowFlags</span>(Qt::FramelessWindowHint | Qt::Popup | Qt::NoDropShadowWindowHint);</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -38,128 +38,6 @@
     
     
     <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>80.删除有序数组中的重复项II</title>
-    <link href="https://santajiang.github.io/article/5cd4619b.html"/>
-    <id>https://santajiang.github.io/article/5cd4619b.html</id>
-    <published>2023-09-21T09:07:38.000Z</published>
-    <updated>2023-09-21T09:12:36.198Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="我的解"><a href="#我的解" class="headerlink" title="我的解"></a>我的解</h3><p>刚看完26题就开始做，憋了十几分钟也憋不出来，尝试了几次都是只有部分对</p><h3 id="官方解"><a href="#官方解" class="headerlink" title="官方解"></a>官方解</h3><p>因为给定数组是有序的，所以相同元素必然连续。我们可以使用双指针解决本题，遍历数组检查每一个元素是否应该被保留，如果应该被保留，就将其移动到指定位置。具体地，我们定义两个指针 slow 和 fast 分别为慢指针和快指针，其中慢指针表示处理出的数组的长度，快指针表示已经检查过的数组的长度，即 nums[fast]表示待检查的第一个元素，nums[slow−1]为上一个应该被保留的元素所移动到的指定位置。</p><p>因为本题要求相同元素最多出现两次而非一次，所以我们需要检查上上个应该被保留的元素 nums[slow−2] 是否和当前待检查元素 nums[fast]相同。当且仅当 nums[slow−2]=nums[fast]时，当前待检查元素 nums[fast]不应该被保留（因为此时必然有 nums[slow−2]=nums[slow−1]=nums[fast]）。最后，slow 即为处理好的数组的长度。</p><p>特别地，数组的前两个数必然可以被保留，因此对于长度不超过2的数组，我们无需进行任何处理，对于长度超过2的数组，我们直接将双指针的初始值设为2即可。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> slow = <span class="number">2</span>, fast = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span> (fast &lt; n) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[slow - <span class="number">2</span>] != nums[fast]) &#123;</span><br><span class="line">                nums[slow] = nums[fast];</span><br><span class="line">                ++slow;</span><br><span class="line">            &#125;</span><br><span class="line">            ++fast;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><p>无</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>快慢指针的用法还是得多练=_=</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;我的解&quot;&gt;&lt;a href=&quot;#我的解&quot; class=&quot;headerlink&quot; title=&quot;我的解&quot;&gt;&lt;/a&gt;我的解&lt;/h3&gt;&lt;p&gt;刚看完26题就开始做，憋了十几分钟也憋不出来，尝试了几次都是只有部分对&lt;/p&gt;
-&lt;h3 id=&quot;官方解&quot;&gt;&lt;a href=&quot;#官方解</summary>
-      
-    
-    
-    
-    <category term="面试" scheme="https://santajiang.github.io/categories/%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="LeetCode" scheme="https://santajiang.github.io/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>26.删除有序数组中的重复项</title>
-    <link href="https://santajiang.github.io/article/fed1388b.html"/>
-    <id>https://santajiang.github.io/article/fed1388b.html</id>
-    <published>2023-09-21T08:21:57.000Z</published>
-    <updated>2023-09-21T08:30:10.807Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="我的解"><a href="#我的解" class="headerlink" title="我的解"></a>我的解</h3><p>脑子有点懵，愣是没做出来，最后卡到了返回几个元素的地方，因为我用双重for循环实现的东西，确实可以把前边筛成不重复的元素，但是如果后边也发生了替换操作，就分不清有效的替换实际进行了几次，返回不了数组大小，而这个题它不管你数组实际大小多少，它只按给的int值打出来元素，一致就算过，打不出来，哎</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt; &amp;nums)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> val = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> left=<span class="number">0</span>; left&lt;nums.<span class="built_in">size</span>(); left++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> right=val+<span class="number">1</span>; right&lt;nums.<span class="built_in">size</span>(); right++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[left] != nums[right])</span><br><span class="line">                &#123;</span><br><span class="line">                    nums[left+<span class="number">1</span>] = nums[right];</span><br><span class="line">                    val = right;</span><br><span class="line">                    <span class="keyword">break</span>; </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// =_=哎</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="官方解"><a href="#官方解" class="headerlink" title="官方解"></a>官方解</h3><p>其实这个也不是官方解，只是我发现了一个跟我逻辑高度相似的解：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeDuplicates</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> right = <span class="number">0</span>;right &lt; nums.<span class="built_in">size</span>() ; right++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[right] != nums[left]) &#123;</span><br><span class="line">                nums[left + <span class="number">1</span>] = nums[right];</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><p>无</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>挺不应该的，感觉是脑子不清楚，做了两个多小时还是没做出来，继续加油吧</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;我的解&quot;&gt;&lt;a href=&quot;#我的解&quot; class=&quot;headerlink&quot; title=&quot;我的解&quot;&gt;&lt;/a&gt;我的解&lt;/h3&gt;&lt;p&gt;脑子有点懵，愣是没做出来，最后卡到了返回几个元素的地方，因为我用双重for循环实现的东西，确实可以把前边筛成不重复的元素，但是如果后</summary>
-      
-    
-    
-    
-    <category term="面试" scheme="https://santajiang.github.io/categories/%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="LeetCode" scheme="https://santajiang.github.io/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>27.移除元素</title>
-    <link href="https://santajiang.github.io/article/89234294.html"/>
-    <id>https://santajiang.github.io/article/89234294.html</id>
-    <published>2023-09-20T09:36:21.000Z</published>
-    <updated>2023-09-20T09:53:02.906Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="我的解"><a href="#我的解" class="headerlink" title="我的解"></a>我的解</h3><p>思路是遍历，直接删除元素；这块比较特殊的是vector用了erase后，会减小容器的容量，会导致迭代器用于erase删除元素后，会失效，后续就不能用该迭代器操作向量了，循环就乱套了；所以这里首先用<strong>it=<strong>接一下删除后下一个元素位置，然后下一次循环顺其自然就到下一个元素的判断了，如果不是，就走else的</strong>it++</strong></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> d = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = nums.<span class="built_in">begin</span>(); it != nums.<span class="built_in">end</span>();)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(*it == val)</span><br><span class="line">            &#123;</span><br><span class="line">                it = nums.<span class="built_in">erase</span>(it);</span><br><span class="line">                d++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                it++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        num = num - d;</span><br><span class="line">        <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="官方解"><a href="#官方解" class="headerlink" title="官方解"></a>官方解</h3><p>好吧这道题人家想考双指针的应用</p><ul><li>思路及算法</li></ul><p>由于题目要求删除数组中等于 val的元素，因此输出数组的长度一定小于等于输入数组的长度，我们可以把输出的数组直接写在输入数组上。可以使用双指针：右指针 right 指向当前将要处理的元素，左指针 left 指向下一个将要赋值的位置。</p><p>如果右指针指向的元素不等于 val，它一定是输出数组的一个元素，我们就将右指针指向的元素复制到左指针位置，然后将左右指针同时右移；</p><p>如果右指针指向的元素等于 val，它不能在输出数组里，此时左指针不动，右指针右移一位。</p><p>整个过程保持不变的性质是：区间 [0,left)中的元素都不等于 val。当左右指针遍历完输入数组以后，left的值就是输出数组的长度。</p><p>这样的算法在最坏情况下（输入数组中没有元素等于 val），左右指针各遍历了数组一次。</p><ul><li>代码</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">removeElement</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> right = <span class="number">0</span>; right &lt; n; right++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[right] != val) &#123;</span><br><span class="line">                nums[left] = nums[right];</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><ul><li><p><strong>我的解</strong><br>用时4ms，击败 46.13%使用 C++ 的用户<br>内存8.91MB，击败 5.05%使用 C++ 的用户</p></li><li><p><strong>官方解</strong><br>用时4ms，击败 46.13%使用 C++ 的用户<br>内存8.63MB，击败 6.74%使用 C++ 的用户</p></li></ul><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这里发现官方解题老是喜欢用<strong>指针</strong>这个话术，我一开始以为指的是*p这种，但其实就是游标的意思</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;我的解&quot;&gt;&lt;a href=&quot;#我的解&quot; class=&quot;headerlink&quot; title=&quot;我的解&quot;&gt;&lt;/a&gt;我的解&lt;/h3&gt;&lt;p&gt;思路是遍历，直接删除元素；这块比较特殊的是vector用了erase后，会减小容器的容量，会导致迭代器用于erase删除元素后，会失</summary>
-      
-    
-    
-    
-    <category term="面试" scheme="https://santajiang.github.io/categories/%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="LeetCode" scheme="https://santajiang.github.io/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>88.合并两个有序数组</title>
-    <link href="https://santajiang.github.io/article/15739779.html"/>
-    <id>https://santajiang.github.io/article/15739779.html</id>
-    <published>2023-09-20T08:05:00.000Z</published>
-    <updated>2023-09-20T08:10:43.849Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="我的解"><a href="#我的解" class="headerlink" title="我的解"></a>我的解</h3><p>想到的是把两个数组按递增合并到第三个新数组里；设两个游标记录合并的进度，一直循环，直到两个数组全部走完就结束</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; actNums1;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;m; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            actNums1.<span class="built_in">push_back</span>(nums1[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        nums1.<span class="built_in">clear</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> nVec1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> nVec2 = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(nVec1 == actNums1.<span class="built_in">size</span>() &amp;&amp; nVec2 == nums2.<span class="built_in">size</span>())</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(nVec1 == actNums1.<span class="built_in">size</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(nums2[nVec2]);</span><br><span class="line">                nVec2++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nVec2 == nums2.<span class="built_in">size</span>())</span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(actNums1[nVec1]);</span><br><span class="line">                nVec1++;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(nums2[nVec2] &gt; actNums1[nVec1])</span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(actNums1[nVec1]);</span><br><span class="line">                nVec1++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums2[nVec2] &lt; actNums1[nVec1])</span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(nums2[nVec2]);</span><br><span class="line">                nVec2++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(actNums1[nVec1]);</span><br><span class="line">                nums1.<span class="built_in">push_back</span>(nums2[nVec2]);</span><br><span class="line">                nVec1++;</span><br><span class="line">                nVec2++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="官方解"><a href="#官方解" class="headerlink" title="官方解"></a>官方解</h3><p>思路和我的差不多，只是代码更精简</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = <span class="number">0</span>, p2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> sorted[m + n];</span><br><span class="line">        <span class="keyword">int</span> cur;</span><br><span class="line">        <span class="keyword">while</span> (p1 &lt; m || p2 &lt; n) &#123;</span><br><span class="line">            <span class="keyword">if</span> (p1 == m) &#123;</span><br><span class="line">                cur = nums2[p2++];</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (p2 == n) &#123;</span><br><span class="line">                cur = nums1[p1++];</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums1[p1] &lt; nums2[p2]) &#123;</span><br><span class="line">                cur = nums1[p1++];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cur = nums2[p2++];</span><br><span class="line">            &#125;</span><br><span class="line">            sorted[p1 + p2 - <span class="number">1</span>] = cur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != m + n; ++i) &#123;</span><br><span class="line">            nums1[i] = sorted[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><ul><li><p><strong>我的解</strong><br>用时4ms，击败 51.79%使用 C++ 的用户<br>内存8.98MB，击败 5.01%使用 C++ 的用户</p></li><li><p><strong>官方解</strong><br>用时4ms，击败 51.79%使用 C++ 的用户<br>内存8.90MB，击败 6.39%使用 C++ 的用户</p></li></ul><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>第一道LeetCode题，耗费了大概2个小时，还不太熟悉刷题的节奏  </p><p>好在解出来了，好开头，继续加油！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;我的解&quot;&gt;&lt;a href=&quot;#我的解&quot; class=&quot;headerlink&quot; title=&quot;我的解&quot;&gt;&lt;/a&gt;我的解&lt;/h3&gt;&lt;p&gt;想到的是把两个数组按递增合并到第三个新数组里；设两个游标记录合并的进度，一直循环，直到两个数组全部走完就结束&lt;/p&gt;
-&lt;figure</summary>
-      
-    
-    
-    
-    <category term="面试" scheme="https://santajiang.github.io/categories/%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="LeetCode" scheme="https://santajiang.github.io/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode刷题-序</title>
-    <link href="https://santajiang.github.io/article/fa231bb0.html"/>
-    <id>https://santajiang.github.io/article/fa231bb0.html</id>
-    <published>2023-09-20T06:00:00.000Z</published>
-    <updated>2023-09-20T08:10:43.850Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>最近公司发生了种种事情，先是新上任的领导天天给压力，但工资又没涨一分钱；然后又开始卡绩效，动不动就拿裁员吓唬人；最后又听说产研部门要集体搬迁到深圳了，而我是不可能跟着去深圳的，所以觉得有必要开始进行面试准备了  </p><p>首先要干的就是LeetCode刷题，基于之前的经验，只要想去好一些的大厂，刷题这道坎是绕过不去的，如果一面解不出来，基本就被Pass了；但人的惰性是很大的，总是有得过且过的心理，只要今天刀没砍脖子上，就觉得又顺利过了一天，所以，一个适当的仪式感还是必要的  </p><p>就比如写这篇帖子，主要的目的就是给个标志性的开始、一个时间点、一个仪式，告诉自己，好了，正式开始了。所以在这立贴为证，以后要经常性、时时的刷题，刷到熟练  </p><p>都不容易，加油吧！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;序&quot;&gt;&lt;a href=&quot;#序&quot; class=&quot;headerlink&quot; title=&quot;序&quot;&gt;&lt;/a&gt;序&lt;/h3&gt;&lt;p&gt;最近公司发生了种种事情，先是新上任的领导天天给压力，但工资又没涨一分钱；然后又开始卡绩效，动不动就拿裁员吓唬人；最后又听说产研部门要集体搬迁到深圳了</summary>
-      
-    
-    
-    
-    <category term="面试" scheme="https://santajiang.github.io/categories/%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="LeetCode" scheme="https://santajiang.github.io/tags/LeetCode/"/>
     
   </entry>
   
@@ -373,6 +251,31 @@
   </entry>
   
   <entry>
+    <title>2023年总结</title>
+    <link href="https://santajiang.github.io/article/9b8a73a1.html"/>
+    <id>https://santajiang.github.io/article/9b8a73a1.html</id>
+    <published>2023-01-05T15:47:15.037Z</published>
+    <updated>2024-01-04T07:42:32.471Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>23年真的是不平凡的一年，发生了好多好多事，这篇回顾文写的持续时间也比较长，我怕到年底的时候不能完整的回忆起每件事</p><p>首先1月份搬家到了北辰时代大厦这边，不得不说风景是真的好，不光挨着鸟巢，上下班都路过鸟巢，工位也高大上了好多，甚至在工位上一扭头就能看到鸟巢风景，还解锁了大年二十八九下班路上，鸟巢公园空无一人的奇观；坏处肯定也是有的，通勤时间从35分钟变成了1小时20分钟，时间长了也麻木了；物价也高了很多，消费开支都高了</p><p>过年的时候两家终于见面了，老爸找了保定会馆，据说在这里的原因是“保证能定”;我对象在第二天也来我家串门吃饭，终于定了在柏润东方大酒店办婚礼</p><p>然后，年后回来上班，从3月份开始了一个大项目，持续到了7月底，前中期几乎每天都在加班，9点后走打车报销是常事，期间各种改需求，赶进度，动不动崩溃，过程很痛苦</p><p>同时我自己的人生大事也在同步推进：3月20号求婚，想了很多最后还是在出租屋里求婚了，期间还发生了趣事，本来照常点下班的对象下午意外撒了咖啡，又是个周五，对象就提前回来了，导致我没布置完就匆匆忙忙躲起来了；还是3月，逛婚博会定了北遇的婚纱；4月份婚纱照拍了，出片了，但是不满意，又约了重拍，同时定了婚庆公司；5月份重拍了婚纱照，5月21号订了婚；6月中旬出了婚纱照片的精修，两个人很满意，还跟着对象俩人玩了第一次剧本杀；7月份就是挑婚纱，最后定婚礼方案；8月份一直在备婚，很多很多事情，动不动就崩溃；8月26号，两个人办了婚礼，这可真是一辈子的大事，很开心</p><p>9月份两个人自驾去乌兰察布玩了，还住了帐篷，晚上还下大暴雨，两个人在帐篷里边看手机视频边吃小火锅，感觉太特别了，很难忘</p><p>以上的段落写在我23年9月份的时候，现在回看一下心态还真的是完全不同；接下来的段落是在24年1月初写的，后边的状况急转直下</p><p>10月份的时候就开始有消息说公司要整个搬到深圳，leader当时还比较乐观，说不太可能，我也觉得不太可能整个全搬到深圳，公司里有很多的老员工，光赔偿金都不够赔的  </p><p>后边部门就开始没活干了，一度到了要员工自己找活干的程度了，我明白这是研发领导跟leader可能有恩怨，连带一起打压我们部门了，申请的工作全都不让做  </p><p>12月初的时候，研发领导开大会，直接就说要进行搬家和大裁员，确实是挺让人意外的，但还是觉得可能动作不会那么快，而且裁也裁不到我，毕竟我的能力大家都是认可的  </p><p>后来我们一起去钢琴行看了电钢琴，花一万买了一架KAWAI CA401，我很喜欢，又可以重拾之前的爱好了，只是希望后续有足够的时间练琴，也能坚持下去  </p><p>月中的时候，某天晚上我照常下班坐昌平线地铁，从西二旗到沙河高教园的时候，突发事故了，当时我只感觉我整个人飞了出去，然后我摔到了某人的上边，我的上边也压着两三个人，挣扎着起来之后发现地铁撞车了，一片混乱，又经过了漫长的两个多小时的等待，我们全都从车上下来了，顺着地铁一路走回了西二旗地铁站，后又因为打不到车，手机又没电了，又徒步走到了新龙泽医院，最后还是玥玥从沙河高教园打车过来接我回去才得以回家的，有生之年竟然上了一次热搜，地铁事故这种超小概率事件能碰上也是神奇··  </p><p>12月末的时候，事情就急转直下了，先是各个部门大裁员，保定部门直接没了，然后就我们部门没动静，后来就是leader开会说可能裁一半，再到24年1月3号（昨天）的时候，leader私聊找我说我在裁员名单上了，事情才尘埃落定了  </p><h3 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h3><p>不知道说什么，现在脑袋其实乱糟糟的，被裁员肯定难过还是有的，但不被裁的话，说实话也干不下去了，没什么意义，还是挺想拿了赔偿休息一阵的，毕竟后边干几十年呢，想出去旅个游还要等放假，我放假别人也放假，人多物价也贵；但又很烦接下来的谈判过程，通过和各个同事的聊天过程后已经预感到了不是一个轻松的过程；还有拿到赔偿后，现在又是年底，过完年了之后找工作的情况也是未知数，还是有些焦虑的····总而言之言而总之，还是希望自己能整理好心情吧，努力把该做的事情做好，希望24年末回顾的时候，自己能有一个满意的结果，加油吧！！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h3&gt;&lt;p&gt;23年真的是不平凡的一年，发生了好多好多事，这篇回顾文写的持续时间也比较长，我怕到年底的时候不能完整的回忆起每件事&lt;/p&gt;
+&lt;p&gt;首先1月份</summary>
+      
+    
+    
+    
+    <category term="感悟" scheme="https://santajiang.github.io/categories/%E6%84%9F%E6%82%9F/"/>
+    
+    
+    <category term="年度总结" scheme="https://santajiang.github.io/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
     <title>2022年总结</title>
     <link href="https://santajiang.github.io/article/7448189f.html"/>
     <id>https://santajiang.github.io/article/7448189f.html</id>
@@ -529,6 +432,111 @@
     <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
     
     <category term="高分屏" scheme="https://santajiang.github.io/tags/%E9%AB%98%E5%88%86%E5%B1%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Qt实现Http的Get/Post请求</title>
+    <link href="https://santajiang.github.io/article/cdff3725.html"/>
+    <id>https://santajiang.github.io/article/cdff3725.html</id>
+    <published>2022-09-15T11:08:04.000Z</published>
+    <updated>2022-09-21T08:16:03.085Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">QT += network</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QNetworkAccessManager&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QNetworkRequest&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QNetworkReply&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建</span></span><br><span class="line"><span class="keyword">void</span> <span class="built_in">init</span>()</span><br><span class="line">&#123;</span><br><span class="line">    QNetworkAccessManager* manager = <span class="keyword">new</span> <span class="built_in">QNetworkAccessManager</span>(<span class="keyword">this</span>);</span><br><span class="line">    <span class="built_in">connect</span>(manager,<span class="built_in">SIGNAL</span>(<span class="built_in">finished</span>(QNetworkReply*)),<span class="keyword">this</span>,<span class="built_in">SLOT</span>(<span class="built_in">replyFinished</span>(QNetworkReply*)));<span class="comment">//关联信号和槽</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//请求，以天气预报为例</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">queryWeather</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> quest_array[<span class="number">256</span>]=<span class="string">&quot;http://wthrcdn.etouch.cn/weather_mini?city=&quot;</span>;</span><br><span class="line">    QNetworkRequest quest;</span><br><span class="line">    <span class="built_in">sprintf</span>(quest_array,<span class="string">&quot;%s%s&quot;</span>,quest_array,cityName.<span class="built_in">toUtf8</span>().<span class="built_in">data</span>());</span><br><span class="line">    quest.<span class="built_in">setUrl</span>(<span class="built_in">QUrl</span>(quest_array));</span><br><span class="line">    quest.<span class="built_in">setHeader</span>(QNetworkRequest::UserAgentHeader,<span class="string">&quot;RT-Thread ART&quot;</span>);</span><br><span class="line">    <span class="comment">/*发送get网络请求*/</span></span><br><span class="line">    manager-&gt;<span class="built_in">get</span>(quest);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//响应</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">replyFinished</span><span class="params">(QNetworkReply *reply)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    allinfo = reply-&gt;<span class="built_in">readAll</span>();</span><br><span class="line">    <span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;allinfo：&quot;</span>&lt;&lt;allinfo;</span><br><span class="line">    </span><br><span class="line">    QJsonParseError err;</span><br><span class="line">    QJsonDocument json_recv = QJsonDocument::<span class="built_in">fromJson</span>(allinfo.<span class="built_in">toUtf8</span>(),&amp;err);<span class="comment">//解析json对象</span></span><br><span class="line">    <span class="built_in">qDebug</span>() &lt;&lt;<span class="string">&quot;Json-Error:&quot;</span>&lt;&lt; err.error;</span><br><span class="line">    <span class="keyword">if</span>(!json_recv.<span class="built_in">isNull</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        QJsonObject object = json_recv.<span class="built_in">object</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;示例&quot;&gt;&lt;a href=&quot;#示例&quot; class=&quot;headerlink&quot; title=&quot;示例&quot;&gt;&lt;/a&gt;示例&lt;/h3&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span cl</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+    <category term="网络" scheme="https://santajiang.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>正则表达式判断版本号大小</title>
+    <link href="https://santajiang.github.io/article/ad3e8609.html"/>
+    <id>https://santajiang.github.io/article/ad3e8609.html</id>
+    <published>2022-09-05T05:58:26.000Z</published>
+    <updated>2022-09-21T08:15:50.117Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compareVersion</span><span class="params">(QString ver1, QString ver2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QStringList list1 = ver1.<span class="built_in">replace</span>(<span class="built_in">QRegExp</span>(<span class="string">&quot;[a-zA-Z() ]&quot;</span>), <span class="string">&quot;&quot;</span>).<span class="built_in">split</span>(<span class="string">&quot;.&quot;</span>);</span><br><span class="line">    QStringList list2 = ver2.<span class="built_in">replace</span>(<span class="built_in">QRegExp</span>(<span class="string">&quot;[a-zA-Z() ]&quot;</span>), <span class="string">&quot;&quot;</span>).<span class="built_in">split</span>(<span class="string">&quot;.&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (list1.<span class="built_in">size</span>() == <span class="number">3</span> &amp;&amp; list2.<span class="built_in">size</span>() == <span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        qint32 ver1 = (list1.<span class="built_in">at</span>(<span class="number">0</span>).<span class="built_in">toInt</span>() &lt;&lt; <span class="number">16</span>) | (list1.<span class="built_in">at</span>(<span class="number">1</span>).<span class="built_in">toInt</span>() &lt;&lt; <span class="number">8</span>) | list1.<span class="built_in">at</span>(<span class="number">2</span>).<span class="built_in">toInt</span>();</span><br><span class="line">        qint32 ver2 = (list2.<span class="built_in">at</span>(<span class="number">0</span>).<span class="built_in">toInt</span>() &lt;&lt; <span class="number">16</span>) | (list2.<span class="built_in">at</span>(<span class="number">1</span>).<span class="built_in">toInt</span>() &lt;&lt; <span class="number">8</span>) | list2.<span class="built_in">at</span>(<span class="number">2</span>).<span class="built_in">toInt</span>();</span><br><span class="line">        <span class="keyword">return</span> ver2 &gt; ver1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;实现&quot;&gt;&lt;a href=&quot;#实现&quot; class=&quot;headerlink&quot; title=&quot;实现&quot;&gt;&lt;/a&gt;实现&lt;/h3&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span cl</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+    <category term="正则表达式" scheme="https://santajiang.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Qt图片压缩</title>
+    <link href="https://santajiang.github.io/article/54b18459.html"/>
+    <id>https://santajiang.github.io/article/54b18459.html</id>
+    <published>2022-08-05T08:18:25.000Z</published>
+    <updated>2022-09-21T08:16:05.923Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Qt本身就带图片压缩的方法，即利用QPixMap的save方法   </p><p>最后的效果很好，肉眼基本不可辨别，测试用一张微单拍摄的6K图，原图19.7MB，压缩后变为2.3MB </p><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>完整流程：</p><figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> compressImage(QString path)</span><br><span class="line">&#123;</span><br><span class="line">    QFile file(ui-&gt;lineEdit-&gt;text());</span><br><span class="line">    <span class="keyword">if</span>(!file.open(<span class="attribute">QIODevice</span>::ReadWrite))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    QByteArray bytes = file.readAll();</span><br><span class="line">    QImage img;</span><br><span class="line">    img.loadFromData(bytes);</span><br><span class="line"></span><br><span class="line">    QPixmap bk_image;</span><br><span class="line">    bk_image.convertFromImage(img);</span><br><span class="line"></span><br><span class="line">    bk_image.save(path, nullptr, <span class="number">80</span>);<span class="comment">//压缩率从0-100</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;Qt本身就带图片压缩的方法，即利用QPixMap的save方法   &lt;/p&gt;
+&lt;p&gt;最后的效果很好，肉眼基本不可辨别，测试用一张微单拍摄的6</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+    <category term="图像处理" scheme="https://santajiang.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2021年总结</title>
+    <link href="https://santajiang.github.io/article/9f7fa39c.html"/>
+    <id>https://santajiang.github.io/article/9f7fa39c.html</id>
+    <published>2021-12-30T16:00:00.000Z</published>
+    <updated>2022-02-23T01:24:42.579Z</updated>
+    
+    <content type="html"><![CDATA[<hr><h4 id="2021-12-31"><a href="#2021-12-31" class="headerlink" title="2021-12-31"></a>2021-12-31</h4><p>21年的最后一天了，也是同天写了这个文章</p><p>今年是变化巨大的一年，5月份我辞掉了工作三年的工作，来到了一家新公司，这里的工作我更喜欢也更轻松，当然挣得也更多了；搬了新的出租屋，从北京的南五环搬到了北五环，租了一个整居室，整个换了个大环境—后来被证明是个沙雕操作，每个月的房租都能跟买房的房贷持平了；还去了上海和成都旅游—在之前我从未出过河北省的地域范围；空余时间多了，在GitHub发布了很多我一直想要做的项目 ，还创建了这个博客，写了很多文章  </p><p>对于22年，当然还是有一些期望的，因为来公司的时候被HR压价了，我一直心里挺不舒服，尤其她后来得意洋洋的跟我回访的时候说她招到了一个宝（意思她用比这个岗位低的价换来了一个比预期能干的开发人员）， 我就坚定了我想要跳槽的想法。因为我一直在做Qt开发的关系，初步的想法是如果能去金山什么的，做做WPS也是很好的，如果其他的公司有合适的也不错；然后是要换一处房子，希望能找到一个合适的新住处····嗯，暂时就这些，当然也想把这个博客好好的弄下去，不光是对经验的一种总结，也包含一些感悟和记录吧</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;hr&gt;
+&lt;h4 id=&quot;2021-12-31&quot;&gt;&lt;a href=&quot;#2021-12-31&quot; class=&quot;headerlink&quot; title=&quot;2021-12-31&quot;&gt;&lt;/a&gt;2021-12-31&lt;/h4&gt;&lt;p&gt;21年的最后一天了，也是同天写了这个文章&lt;/p&gt;
+&lt;p&gt;今年是变化</summary>
+      
+    
+    
+    
+    <category term="感悟" scheme="https://santajiang.github.io/categories/%E6%84%9F%E6%82%9F/"/>
+    
+    
+    <category term="年度总结" scheme="https://santajiang.github.io/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
