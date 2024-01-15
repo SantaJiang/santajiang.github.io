@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>std实现字符串分割</title>
+      <link href="/article/6586823f.html"/>
+      <url>/article/6586823f.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>今天在刷leetcode题的时候发现c++原生和std并没有类似于QString的.split()功能，还需要自己实现，随用std的正则表达式实现了这个功能</p><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;string&gt; res;</span><br><span class="line"><span class="function">std::regex <span class="title">reg</span><span class="params">(<span class="string">&quot;\\s+&quot;</span>)</span></span>; <span class="comment">// 正则表达式,匹配空格 </span></span><br><span class="line"><span class="function">std::sregex_token_iterator <span class="title">pos</span><span class="params">(s.begin(), s.end(), reg, <span class="number">-1</span>)</span></span>;</span><br><span class="line"><span class="keyword">decltype</span>(pos) end;              <span class="comment">// 自动推导类型 </span></span><br><span class="line"><span class="keyword">for</span>(; pos != end; ++pos)</span><br><span class="line">&#123;</span><br><span class="line">    res.<span class="built_in">push_back</span>(pos-&gt;<span class="built_in">str</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Qt模态窗口点击窗外消失</title>
       <link href="/article/4a371b70.html"/>
       <url>/article/4a371b70.html</url>
