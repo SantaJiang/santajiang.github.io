@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2024-01-17T08:54:53.805Z</updated>
+  <updated>2024-01-25T08:01:00.972Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>C++原生int和string互换</title>
+    <link href="https://santajiang.github.io/article/74ffeb25.html"/>
+    <id>https://santajiang.github.io/article/74ffeb25.html</id>
+    <published>2024-01-24T08:26:23.000Z</published>
+    <updated>2024-01-25T08:01:00.972Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="int转string"><a href="#int转string" class="headerlink" title="int转string"></a>int转string</h3><p>在C++中将int类型的变量转换为字符串可以使用std::to_string()函数。下面是示例代码：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">1234567890</span>;</span><br><span class="line">    </span><br><span class="line">    string strNum = <span class="built_in">to_string</span>(num); <span class="comment">// 将int转换为string</span></span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;转换后的字符串为：&quot;</span> &lt;&lt; strNum &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="string转int"><a href="#string转int" class="headerlink" title="string转int"></a>string转int</h3><p>在C++中将字符串转换为int类型可以使用std::stoi()函数。下面是示例代码：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string strNum = <span class="string">&quot;1234567890&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> num = <span class="built_in">stoi</span>(strNum); <span class="comment">// 将string转换为int</span></span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;转换后的整数为：&quot;</span> &lt;&lt; num &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="char-数字-转int数字"><a href="#char-数字-转int数字" class="headerlink" title="char(数字)转int数字"></a>char(数字)转int数字</h3><p>这里有个坑是：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a = <span class="string">&#x27;2&#x27;</span>; </span><br><span class="line"><span class="keyword">int</span> n = (<span class="keyword">int</span>)a;</span><br><span class="line"><span class="comment">//这个时候n其实=50，不是2，是因为当 char 直接 赋给 int 时，实际上是把 char 变量的ASCII 码赋给 int类型，因此取出char 变量的数值不能通过直接转换成int的方法实现</span></span><br></pre></td></tr></table></figure><p>所以正确做法是，利用char变量使用 ASCII进行算术运算这一特征，可以得到一种间接计算获取数值的方法：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a = <span class="string">&#x27;2&#x27;</span>; </span><br><span class="line"><span class="keyword">int</span> n = a - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line"><span class="comment">//这个时候n就=2了</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;int转string&quot;&gt;&lt;a href=&quot;#int转string&quot; class=&quot;headerlink&quot; title=&quot;int转string&quot;&gt;&lt;/a&gt;int转string&lt;/h3&gt;&lt;p&gt;在C++中将int类型的变量转换为字符串可以使用std::to_string</summary>
+      
+    
+    
+    
+    <category term="基础知识" scheme="https://santajiang.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+    
+    <category term="C++原生" scheme="https://santajiang.github.io/tags/C-%E5%8E%9F%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>双映射问题</title>
     <link href="https://santajiang.github.io/article/8bff5ea8.html"/>
     <id>https://santajiang.github.io/article/8bff5ea8.html</id>
     <published>2024-01-17T08:52:48.000Z</published>
-    <updated>2024-01-17T08:54:53.805Z</updated>
+    <updated>2024-01-24T08:27:28.175Z</updated>
     
     <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>双射说明两个映射表互为映射关系，正反都可推</p><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isIsomorphic</span><span class="params">(string s, string t)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    map&lt;<span class="keyword">char</span>, <span class="keyword">char</span>&gt; t2s, s2t;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) </span><br><span class="line">    &#123;</span><br><span class="line">         <span class="keyword">char</span> a = s[i], b = t[i];</span><br><span class="line">         <span class="keyword">if</span> (s2t.<span class="built_in">contains</span>(a) &amp;&amp; s2t[a] != b || t2s.<span class="built_in">contains</span>(b) &amp;&amp; t2s[b] != a)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      </span><br><span class="line">         s2t[a] = b;</span><br><span class="line">         t2s[b] = a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -34,12 +58,10 @@
     
     
     
-    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    <category term="基础知识" scheme="https://santajiang.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     
     
-    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
-    
-    <category term="映射表" scheme="https://santajiang.github.io/tags/%E6%98%A0%E5%B0%84%E8%A1%A8/"/>
+    <category term="C++原生" scheme="https://santajiang.github.io/tags/C-%E5%8E%9F%E7%94%9F/"/>
     
   </entry>
   
@@ -48,7 +70,7 @@
     <link href="https://santajiang.github.io/article/6586823f.html"/>
     <id>https://santajiang.github.io/article/6586823f.html</id>
     <published>2024-01-15T08:11:54.000Z</published>
-    <updated>2024-01-15T08:14:46.601Z</updated>
+    <updated>2024-01-24T08:27:12.094Z</updated>
     
     <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>今天在刷leetcode题的时候发现c++原生和std并没有类似于QString的.split()功能，还需要自己实现，随用std的正则表达式实现了这个功能</p><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;string&gt; res;</span><br><span class="line"><span class="function">std::regex <span class="title">reg</span><span class="params">(<span class="string">&quot;\\s+&quot;</span>)</span></span>; <span class="comment">// 正则表达式,匹配空格 </span></span><br><span class="line"><span class="function">std::sregex_token_iterator <span class="title">pos</span><span class="params">(s.begin(), s.end(), reg, <span class="number">-1</span>)</span></span>;</span><br><span class="line"><span class="keyword">decltype</span>(pos) end;              <span class="comment">// 自动推导类型 </span></span><br><span class="line"><span class="keyword">for</span>(; pos != end; ++pos)</span><br><span class="line">&#123;</span><br><span class="line">    res.<span class="built_in">push_back</span>(pos-&gt;<span class="built_in">str</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -60,10 +82,10 @@
     
     
     
-    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    <category term="基础知识" scheme="https://santajiang.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     
     
-    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    <category term="C++原生" scheme="https://santajiang.github.io/tags/C-%E5%8E%9F%E7%94%9F/"/>
     
   </entry>
   
@@ -512,32 +534,6 @@
     <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
     
     <category term="图像处理" scheme="https://santajiang.github.io/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Qt调用MacOS终端</title>
-    <link href="https://santajiang.github.io/article/fa7e3d73.html"/>
-    <id>https://santajiang.github.io/article/fa7e3d73.html</id>
-    <published>2021-12-22T16:00:00.000Z</published>
-    <updated>2022-09-21T08:15:59.295Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;QProcess&gt;</span><br><span class="line"></span><br><span class="line">QProcess pCmd = <span class="keyword">new</span> QProcess(<span class="keyword">this</span>);</span><br><span class="line">connect(pCmd , SIGNAL(readyReadStandardOutput()) , <span class="keyword">this</span> , SLOT(on_readoutput()));</span><br><span class="line">connect(pCmd , SIGNAL(readyReadStandardError()) , <span class="keyword">this</span> , SLOT(on_readerror()));</span><br><span class="line"></span><br><span class="line">pCmd-&gt;start(<span class="string">&quot;bash&quot;</span>);</span><br><span class="line">pCmd-&gt;waitForStarted();</span><br><span class="line"></span><br><span class="line">QString strTermCmd = <span class="string">&quot;git add -A&quot;</span> + <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">pCmd-&gt;write(strTermCmd.toUtf8().data());</span><br><span class="line">pCmd-&gt;waitForFinished();</span><br></pre></td></tr></table></figure><p>问题的关键就在这个<code>pCmd-&gt;start(&quot;bash&quot;);</code> </p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;figure class=&quot;highlight qt&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;l</summary>
-      
-    
-    
-    
-    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
-    
-    <category term="终端" scheme="https://santajiang.github.io/tags/%E7%BB%88%E7%AB%AF/"/>
     
   </entry>
   
