@@ -13,7 +13,7 @@
 
 
 
-<title>Qt跨平台路径表示法 | Santa&#39;s Blog</title>
+<title>2021年总结 | Santa&#39;s Blog</title>
 
 
 
@@ -132,11 +132,76 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Qt跨平台路径表示法</h1>
+            <h1 class="post-title">2021年总结</h1>
             
                 <div class="post-meta">
                     
@@ -145,14 +210,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">二月 13, 2023&nbsp;&nbsp;16:59</a>
+                        Date: <a href="#">十二月 31, 2021&nbsp;&nbsp;0:00</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a>
+                                <a href="/categories/%E6%84%9F%E6%82%9F/">感悟</a>
                             
                         </span>
                     
@@ -161,8 +226,10 @@
         </header>
 
         <div class="post-content">
-            <p>跨平台开发的时候，经常涉及到路径的表示问题，有单斜杠、双斜杠、双反斜杠等等，很容易出问题，所以直接用separator()方法代替斜杠即可，API原文：  </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QChar <span class="title">QDir::separator</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span></span><br><span class="line"><span class="function">Returns the native directory separator: <span class="string">&quot;/&quot;</span> under Unix and <span class="string">&quot;\&quot; under Windows.</span></span></span><br><span class="line"><span class="string"><span class="function">You do not need to use this function to build file paths. If you always use &quot;</span>/<span class="string">&quot;, Qt will translate your paths to conform to the underlying operating system. If you want to display paths to the user using their operating system&#x27;s separator use toNativeSeparators().</span></span></span><br><span class="line"><span class="string"><span class="function">See also listSeparator().</span></span></span><br></pre></td></tr></table></figure>
+            <hr>
+<h4 id="2021-12-31"><a href="#2021-12-31" class="headerlink" title="2021-12-31"></a>2021-12-31</h4><p>21年的最后一天了，也是同天写了这个文章</p>
+<p>今年是变化巨大的一年，5月份我辞掉了工作三年的工作，来到了一家新公司，这里的工作我更喜欢也更轻松，当然挣得也更多了；搬了新的出租屋，从北京的南五环搬到了北五环，租了一个整居室，整个换了个大环境—后来被证明是个沙雕操作，每个月的房租都能跟买房的房贷持平了；还去了上海和成都旅游—在之前我从未出过河北省的地域范围；空余时间多了，在GitHub发布了很多我一直想要做的项目 ，还创建了这个博客，写了很多文章  </p>
+<p>对于22年，当然还是有一些期望的，因为来公司的时候被HR压价了，我一直心里挺不舒服，尤其她后来得意洋洋的跟我回访的时候说她招到了一个宝（意思她用比这个岗位低的价换来了一个比预期能干的开发人员）， 我就坚定了我想要跳槽的想法。因为我一直在做Qt开发的关系，初步的想法是如果能去金山什么的，做做WPS也是很好的，如果其他的公司有合适的也不错；然后是要换一处房子，希望能找到一个合适的新住处····嗯，暂时就这些，当然也想把这个博客好好的弄下去，不光是对经验的一种总结，也包含一些感悟和记录吧</p>
 
         </div>
 
@@ -173,9 +240,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/Qt/"># Qt</a>
-                    
-                        <a href="/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/"># 跨平台</a>
+                        <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"># 年度总结</a>
                     
                         
                 </span>
@@ -188,10 +253,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/article/36353022.html">不同DPI固定窗口位置显示探索</a>
+                <a class="prev" rel="prev" href="/article/54b18459.html">Qt图片压缩</a>
             
             
-            <a class="next" rel="next" href="/article/7448189f.html">2022年总结</a>
+            <a class="next" rel="next" href="/article/fa7e3d73.html">Qt调用MacOS终端</a>
             
         </section>
 
