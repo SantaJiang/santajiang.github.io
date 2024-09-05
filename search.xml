@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title>Linux下开发之动态库加载</title>
+      <link href="/article/427bdb52.html"/>
+      <url>/article/427bdb52.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在Linux下进行Qt开发时，习惯性的分了几个模块（1个主工程，3个共享动态库），编译通过了但运行时遇到了问题，虽然二进制可执行文件和动态库在同一目录下，但是就是提示找不到对应的动态库，在一番尝试后，需要用rpath来执行最高优先搜索动态库的路径就行</p><h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">QT += widgets core gui</span><br><span class="line"></span><br><span class="line">TEMPLATE = app</span><br><span class="line">CONFIG += c++<span class="number">17</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">CONFIG</span>(release, debug|release): &#123;</span><br><span class="line">    DESTDIR = $$PWD/../Bin/Release</span><br><span class="line">    LIBS += $$PWD/../Bin/Release/libUIElement.so</span><br><span class="line">    LIBS += $$PWD/../Bin/Release/libPublicData.so</span><br><span class="line">    LIBS += $$PWD/../Bin/Release/libAIModule.so</span><br><span class="line">&#125; <span class="keyword">else</span>: <span class="built_in">CONFIG</span>(debug, debug|release): &#123;</span><br><span class="line">    DESTDIR = $$PWD/../Bin/Debug</span><br><span class="line">    LIBS += $$PWD/../Bin/Debug/libUIElement.so</span><br><span class="line">    LIBS += $$PWD/../Bin/Debug/libPublicData.so</span><br><span class="line">    LIBS += $$PWD/../Bin/Debug/libAIModule.so</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#这句一定要放在上边逻辑的后边，因为上边重新指定了DESTDIR的路径</span><br><span class="line">QMAKE_RPATHDIR += $$DESTDIR</span><br><span class="line"></span><br><span class="line">HEADERS = \</span><br><span class="line">    mainwindow.h \</span><br><span class="line"></span><br><span class="line">SOURCES = \</span><br><span class="line">    main.cpp \</span><br><span class="line">    mainwindow.cpp</span><br><span class="line"></span><br><span class="line">RESOURCES += textedit.qrc</span><br><span class="line"></span><br><span class="line">FORMS += \</span><br><span class="line">    finddialog.ui</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>2024.05社招面经</title>
+      <link href="/article/9a4ee461.html"/>
+      <url>/article/9a4ee461.html</url>
+      
+        <content type="html"><![CDATA[<p>全部都是实际面试中被问到的：</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++原生 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C++原生int和string互换</title>
       <link href="/article/74ffeb25.html"/>
       <url>/article/74ffeb25.html</url>

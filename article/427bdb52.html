@@ -13,7 +13,7 @@
 
 
 
-<title>C++原生int和string互换 | Santa&#39;s Blog</title>
+<title>Linux下开发之动态库加载 | Santa&#39;s Blog</title>
 
 
 
@@ -201,7 +201,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">C++原生int和string互换</h1>
+            <h1 class="post-title">Linux下开发之动态库加载</h1>
             
                 <div class="post-meta">
                     
@@ -210,14 +210,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">一月 24, 2024&nbsp;&nbsp;16:26</a>
+                        Date: <a href="#">九月 5, 2024&nbsp;&nbsp;21:17</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
+                                <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a>
                             
                         </span>
                     
@@ -226,17 +226,8 @@
         </header>
 
         <div class="post-content">
-            <h3 id="int转string"><a href="#int转string" class="headerlink" title="int转string"></a>int转string</h3><p>在C++中将int类型的变量转换为字符串可以使用std::to_string()函数。下面是示例代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">1234567890</span>;</span><br><span class="line">    </span><br><span class="line">    string strNum = <span class="built_in">to_string</span>(num); <span class="comment">// 将int转换为string</span></span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;转换后的字符串为：&quot;</span> &lt;&lt; strNum &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="string转int"><a href="#string转int" class="headerlink" title="string转int"></a>string转int</h3><p>在C++中将字符串转换为int类型可以使用std::stoi()函数。下面是示例代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    string strNum = <span class="string">&quot;1234567890&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> num = <span class="built_in">stoi</span>(strNum); <span class="comment">// 将string转换为int</span></span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;转换后的整数为：&quot;</span> &lt;&lt; num &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="char-数字-转int数字"><a href="#char-数字-转int数字" class="headerlink" title="char(数字)转int数字"></a>char(数字)转int数字</h3><p>这里有个坑是：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a = <span class="string">&#x27;2&#x27;</span>; </span><br><span class="line"><span class="keyword">int</span> n = (<span class="keyword">int</span>)a;</span><br><span class="line"><span class="comment">//这个时候n其实=50，不是2，是因为当 char 直接 赋给 int 时，实际上是把 char 变量的ASCII 码赋给 int类型，因此取出char 变量的数值不能通过直接转换成int的方法实现</span></span><br></pre></td></tr></table></figure>
-
-<p>所以正确做法是，利用char变量使用 ASCII进行算术运算这一特征，可以得到一种间接计算获取数值的方法：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a = <span class="string">&#x27;2&#x27;</span>; </span><br><span class="line"><span class="keyword">int</span> n = a - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line"><span class="comment">//这个时候n就=2了</span></span><br></pre></td></tr></table></figure>
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在Linux下进行Qt开发时，习惯性的分了几个模块（1个主工程，3个共享动态库），编译通过了但运行时遇到了问题，虽然二进制可执行文件和动态库在同一目录下，但是就是提示找不到对应的动态库，在一番尝试后，需要用rpath来执行最高优先搜索动态库的路径就行</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">QT += widgets core gui</span><br><span class="line"></span><br><span class="line">TEMPLATE = app</span><br><span class="line">CONFIG += c++<span class="number">17</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">CONFIG</span>(release, debug|release): &#123;</span><br><span class="line">    DESTDIR = $$PWD/../Bin/Release</span><br><span class="line">    LIBS += $$PWD/../Bin/Release/libUIElement.so</span><br><span class="line">    LIBS += $$PWD/../Bin/Release/libPublicData.so</span><br><span class="line">    LIBS += $$PWD/../Bin/Release/libAIModule.so</span><br><span class="line">&#125; <span class="keyword">else</span>: <span class="built_in">CONFIG</span>(debug, debug|release): &#123;</span><br><span class="line">    DESTDIR = $$PWD/../Bin/Debug</span><br><span class="line">    LIBS += $$PWD/../Bin/Debug/libUIElement.so</span><br><span class="line">    LIBS += $$PWD/../Bin/Debug/libPublicData.so</span><br><span class="line">    LIBS += $$PWD/../Bin/Debug/libAIModule.so</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#这句一定要放在上边逻辑的后边，因为上边重新指定了DESTDIR的路径</span><br><span class="line">QMAKE_RPATHDIR += $$DESTDIR</span><br><span class="line"></span><br><span class="line">HEADERS = \</span><br><span class="line">    mainwindow.h \</span><br><span class="line"></span><br><span class="line">SOURCES = \</span><br><span class="line">    main.cpp \</span><br><span class="line">    mainwindow.cpp</span><br><span class="line"></span><br><span class="line">RESOURCES += textedit.qrc</span><br><span class="line"></span><br><span class="line">FORMS += \</span><br><span class="line">    finddialog.ui</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
         </div>
@@ -248,7 +239,9 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/C-%E5%8E%9F%E7%94%9F/"># C++原生</a>
+                        <a href="/tags/Qt/"># Qt</a>
+                    
+                        <a href="/tags/C/"># C++</a>
                     
                         
                 </span>
@@ -261,10 +254,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/article/9a4ee461.html">2024.05社招面经</a>
             
-            
-            <a class="next" rel="next" href="/article/8bff5ea8.html">双映射问题</a>
+            <a class="next" rel="next" href="/article/9a4ee461.html">2024.05社招面经</a>
             
         </section>
 

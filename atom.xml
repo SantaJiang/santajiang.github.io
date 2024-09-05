@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2024-01-26T02:13:56.579Z</updated>
+  <updated>2024-09-05T13:22:37.481Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux下开发之动态库加载</title>
+    <link href="https://santajiang.github.io/article/427bdb52.html"/>
+    <id>https://santajiang.github.io/article/427bdb52.html</id>
+    <published>2024-09-05T13:17:58.000Z</published>
+    <updated>2024-09-05T13:22:37.481Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在Linux下进行Qt开发时，习惯性的分了几个模块（1个主工程，3个共享动态库），编译通过了但运行时遇到了问题，虽然二进制可执行文件和动态库在同一目录下，但是就是提示找不到对应的动态库，在一番尝试后，需要用rpath来执行最高优先搜索动态库的路径就行</p><h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">QT += widgets core gui</span><br><span class="line"></span><br><span class="line">TEMPLATE = app</span><br><span class="line">CONFIG += c++<span class="number">17</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">CONFIG</span>(release, debug|release): &#123;</span><br><span class="line">    DESTDIR = $$PWD/../Bin/Release</span><br><span class="line">    LIBS += $$PWD/../Bin/Release/libUIElement.so</span><br><span class="line">    LIBS += $$PWD/../Bin/Release/libPublicData.so</span><br><span class="line">    LIBS += $$PWD/../Bin/Release/libAIModule.so</span><br><span class="line">&#125; <span class="keyword">else</span>: <span class="built_in">CONFIG</span>(debug, debug|release): &#123;</span><br><span class="line">    DESTDIR = $$PWD/../Bin/Debug</span><br><span class="line">    LIBS += $$PWD/../Bin/Debug/libUIElement.so</span><br><span class="line">    LIBS += $$PWD/../Bin/Debug/libPublicData.so</span><br><span class="line">    LIBS += $$PWD/../Bin/Debug/libAIModule.so</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#这句一定要放在上边逻辑的后边，因为上边重新指定了DESTDIR的路径</span><br><span class="line">QMAKE_RPATHDIR += $$DESTDIR</span><br><span class="line"></span><br><span class="line">HEADERS = \</span><br><span class="line">    mainwindow.h \</span><br><span class="line"></span><br><span class="line">SOURCES = \</span><br><span class="line">    main.cpp \</span><br><span class="line">    mainwindow.cpp</span><br><span class="line"></span><br><span class="line">RESOURCES += textedit.qrc</span><br><span class="line"></span><br><span class="line">FORMS += \</span><br><span class="line">    finddialog.ui</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;在Linux下进行Qt开发时，习惯性的分了几个模块（1个主工程，3个共享动态库），编译通过了但运行时遇到了问题，虽然二进制可执行文件和动态库</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+    <category term="C++" scheme="https://santajiang.github.io/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2024.05社招面经</title>
+    <link href="https://santajiang.github.io/article/9a4ee461.html"/>
+    <id>https://santajiang.github.io/article/9a4ee461.html</id>
+    <published>2024-06-14T07:09:28.000Z</published>
+    <updated>2024-06-14T07:12:12.803Z</updated>
+    
+    <content type="html"><![CDATA[<p>全部都是实际面试中被问到的：</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;全部都是实际面试中被问到的：&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    <category term="面试" scheme="https://santajiang.github.io/categories/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="C++原生" scheme="https://santajiang.github.io/tags/C-%E5%8E%9F%E7%94%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>C++原生int和string互换</title>
@@ -478,59 +529,6 @@
     <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
     
     <category term="信号槽" scheme="https://santajiang.github.io/tags/%E4%BF%A1%E5%8F%B7%E6%A7%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Qt高分屏适配方案</title>
-    <link href="https://santajiang.github.io/article/a2642ebb.html"/>
-    <id>https://santajiang.github.io/article/a2642ebb.html</id>
-    <published>2022-09-21T08:32:33.000Z</published>
-    <updated>2022-09-21T08:35:06.110Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>通过比例系数来实现高分屏适配，软件的每个UI组件尺寸都要乘以比例系数，以达到适配高分辨率的目的</p><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">win32:&#123;</span><br><span class="line">QT += winextras</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> Q_OS_WIN</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;windows.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="built_in">getWindowScaleFactor</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">double</span> scaleFactor = <span class="number">1.0</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> Q_OS_WIN</span></span><br><span class="line">    <span class="keyword">int</span> nWidth = <span class="built_in">GetSystemMetrics</span>(SM_CXSCREEN);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    QRectF rect = QApplication::<span class="built_in">desktop</span>()-&gt;<span class="built_in">screenGeometry</span>();</span><br><span class="line">    <span class="keyword">int</span> nWidth = rect.<span class="built_in">width</span>();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(nWidth &gt;= <span class="number">3840</span> )</span><br><span class="line">    &#123;</span><br><span class="line">          scaleFactor = <span class="number">2.0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(nWidth &lt; <span class="number">3840</span> &amp;&amp; nWidth &gt; <span class="number">1366</span> )</span><br><span class="line">    &#123;</span><br><span class="line">          scaleFactor = <span class="number">1.0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(nWidth &lt;= <span class="number">1366</span>  &amp;&amp; nWidth &gt; <span class="number">800</span> )</span><br><span class="line">    &#123;</span><br><span class="line">          scaleFactor = <span class="number">0.8</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(nWidth &lt;= <span class="number">800</span>)</span><br><span class="line">    &#123;</span><br><span class="line">          scaleFactor = <span class="number">0.5</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//各类靠property获取比例系数</span></span><br><span class="line">    QApplication::<span class="built_in">instance</span>()-&gt;<span class="built_in">setProperty</span>(<span class="string">&quot;scalefactor&quot;</span>, dScaleFactor); </span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;通过比例系数来实现高分屏适配，软件的每个UI组件尺寸都要乘以比例系数，以达到适配高分辨率的目的&lt;/p&gt;
-&lt;h3 id=&quot;实现&quot;&gt;&lt;a hre</summary>
-      
-    
-    
-    
-    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
-    
-    <category term="高分屏" scheme="https://santajiang.github.io/tags/%E9%AB%98%E5%88%86%E5%B1%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Qt实现Http的Get/Post请求</title>
-    <link href="https://santajiang.github.io/article/cdff3725.html"/>
-    <id>https://santajiang.github.io/article/cdff3725.html</id>
-    <published>2022-09-15T11:08:04.000Z</published>
-    <updated>2022-09-21T08:16:03.085Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">QT += network</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QNetworkAccessManager&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QNetworkRequest&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QNetworkReply&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建</span></span><br><span class="line"><span class="keyword">void</span> <span class="built_in">init</span>()</span><br><span class="line">&#123;</span><br><span class="line">    QNetworkAccessManager* manager = <span class="keyword">new</span> <span class="built_in">QNetworkAccessManager</span>(<span class="keyword">this</span>);</span><br><span class="line">    <span class="built_in">connect</span>(manager,<span class="built_in">SIGNAL</span>(<span class="built_in">finished</span>(QNetworkReply*)),<span class="keyword">this</span>,<span class="built_in">SLOT</span>(<span class="built_in">replyFinished</span>(QNetworkReply*)));<span class="comment">//关联信号和槽</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//请求，以天气预报为例</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">queryWeather</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> quest_array[<span class="number">256</span>]=<span class="string">&quot;http://wthrcdn.etouch.cn/weather_mini?city=&quot;</span>;</span><br><span class="line">    QNetworkRequest quest;</span><br><span class="line">    <span class="built_in">sprintf</span>(quest_array,<span class="string">&quot;%s%s&quot;</span>,quest_array,cityName.<span class="built_in">toUtf8</span>().<span class="built_in">data</span>());</span><br><span class="line">    quest.<span class="built_in">setUrl</span>(<span class="built_in">QUrl</span>(quest_array));</span><br><span class="line">    quest.<span class="built_in">setHeader</span>(QNetworkRequest::UserAgentHeader,<span class="string">&quot;RT-Thread ART&quot;</span>);</span><br><span class="line">    <span class="comment">/*发送get网络请求*/</span></span><br><span class="line">    manager-&gt;<span class="built_in">get</span>(quest);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//响应</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">replyFinished</span><span class="params">(QNetworkReply *reply)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    allinfo = reply-&gt;<span class="built_in">readAll</span>();</span><br><span class="line">    <span class="built_in">qDebug</span>()&lt;&lt;<span class="string">&quot;allinfo：&quot;</span>&lt;&lt;allinfo;</span><br><span class="line">    </span><br><span class="line">    QJsonParseError err;</span><br><span class="line">    QJsonDocument json_recv = QJsonDocument::<span class="built_in">fromJson</span>(allinfo.<span class="built_in">toUtf8</span>(),&amp;err);<span class="comment">//解析json对象</span></span><br><span class="line">    <span class="built_in">qDebug</span>() &lt;&lt;<span class="string">&quot;Json-Error:&quot;</span>&lt;&lt; err.error;</span><br><span class="line">    <span class="keyword">if</span>(!json_recv.<span class="built_in">isNull</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        QJsonObject object = json_recv.<span class="built_in">object</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;示例&quot;&gt;&lt;a href=&quot;#示例&quot; class=&quot;headerlink&quot; title=&quot;示例&quot;&gt;&lt;/a&gt;示例&lt;/h3&gt;&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span cl</summary>
-      
-    
-    
-    
-    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
-    
-    <category term="网络" scheme="https://santajiang.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
