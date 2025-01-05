@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="蒋胜达">
+
+
+
+
+
+<title>工程动态加载库之QLibrary解耦编译 | Santa&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/images/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Santa&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Santa&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">工程动态加载库之QLibrary解耦编译</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">蒋胜达</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">一月 5, 2025&nbsp;&nbsp;21:49</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Linux下做Qt工程经常遇到需要依赖某某动态库的问题，而且这个动态库还一般不内置到工程里，都是放在什么/usr/之类的地方，如果动态库没有安装的话，不管是编译和运行都会有问题。<br>所以就要用QLibrary来做动态加载，就彻底和动态库解耦了，工程里设计到动态库相关的部分，也不会直接#include之类的，相关逻辑也会先判断动态加载有没有成功</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>这里以动态加载一个语音录入库为例：<br>头文件：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QLibrary&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="comment">//speech,这些本来是库的头文件，现在不能直接引用</span></span><br><span class="line"><span class="comment">//#include &lt;kylin-ai/coreai/speech/recognizer.h&gt;</span></span><br><span class="line"><span class="comment">//#include &lt;kylin-ai/coreai/speech/synthesizer.h&gt;</span></span><br><span class="line"><span class="comment">//#include &lt;kylin-ai/coreai/speech/result.h&gt;</span></span><br><span class="line"><span class="comment">//#include &lt;kylin-ai/coreai/speech/audioconfig.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//这些本来是头文件里的一些定义，也要搬过来，不然库里某些接口的返回值是这些，运行会有问题</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    SPEECH_ERROR_OCCURRED = <span class="number">1</span>,</span><br><span class="line">    SPEECH_RECOGNITION_STARTED = <span class="number">2</span>,</span><br><span class="line">    SPEECH_RECOGNIZING = <span class="number">3</span>,</span><br><span class="line">    SPEECH_RECOGNIZED = <span class="number">4</span>,</span><br><span class="line">    SPEECH_RECOGNITION_COMPLETED = <span class="number">5</span>,</span><br><span class="line">    SPEECH_SYNTHESIS_STARTED = <span class="number">6</span>,</span><br><span class="line">    SPEECH_SYNTHESIZING = <span class="number">7</span>,</span><br><span class="line">    SPEECH_SYNTHESIS_COMPLETED = <span class="number">8</span>,</span><br><span class="line">&#125; SpeechResultReason;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">SpeechRecognitionSession</span> <span class="title">SpeechRecognitionSession</span>;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">SpeechRecognitionResult</span> <span class="title">SpeechRecognitionResult</span>;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">SpeechSynthesisResult</span> <span class="title">SpeechSynthesisResult</span>;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">AudioConfig</span> <span class="title">AudioConfig</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*SpeechRecognitionResultCallback)</span><span class="params">(SpeechRecognitionResult *result, <span class="keyword">void</span> *user_data)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*SpeechSynthesisResultCallback)</span><span class="params">(SpeechSynthesisResult *result, <span class="keyword">void</span> *user_data)</span></span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>* (*CreateSessionFunc)();</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*InitSessionFunc)</span><span class="params">(<span class="keyword">void</span>*)</span></span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">const</span> <span class="keyword">char</span> *(*GetTextFunc)(SpeechRecognitionResult *result);</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">SpeechResultReason</span><span class="params">(*GetReasonFunc)</span><span class="params">(SpeechRecognitionResult *result)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*SetCallbackFunc)</span><span class="params">(<span class="keyword">void</span>*, <span class="keyword">void</span>(*callback)(SpeechRecognitionResult*, <span class="keyword">void</span>*), <span class="keyword">void</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*StartRecognitionFunc)</span><span class="params">(<span class="keyword">void</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*StopRecognitionFunc)</span><span class="params">(<span class="keyword">void</span>*)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*SetAudioConfigFunc)</span><span class="params">(<span class="keyword">void</span>*, <span class="keyword">void</span>*)</span></span>;</span><br><span class="line"><span class="keyword">typedef</span> AudioConfig* (*CreateAudioConfigFunc)();</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QMutex</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PUBLICDATA_EXPORT</span> <span class="title">Speech</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> Speech* <span class="title">getInstance</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">beginListening</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">endListening</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isSpeechSetup</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isSpeechListening</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Speech</span><span class="params">(QObject *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sigSpeechCallBack</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>*)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">warning</span><span class="params">(QString)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">loadSpeechLibrary</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">callback</span><span class="params">(SpeechRecognitionResult *result, <span class="keyword">void</span> *user_data)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">static</span> Speech* m_pSpeech;</span><br><span class="line">    <span class="keyword">static</span> QMutex mutex_m;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    QLibrary m_speechLibrary;</span><br><span class="line">    CreateSessionFunc speech_recognizer_create_session = <span class="literal">nullptr</span>;</span><br><span class="line">    InitSessionFunc speech_recognizer_init_session = <span class="literal">nullptr</span>;</span><br><span class="line">    SetCallbackFunc speech_recognizer_result_set_callback = <span class="literal">nullptr</span>;</span><br><span class="line">    StartRecognitionFunc speech_recognizer_start_continuous_recognition_async = <span class="literal">nullptr</span>;</span><br><span class="line">    StopRecognitionFunc speech_recognizer_stop_continuous_recognition_async = <span class="literal">nullptr</span>;</span><br><span class="line">    GetTextFunc speech_recognition_result_get_text = <span class="literal">nullptr</span>;</span><br><span class="line">    GetReasonFunc speech_recognition_result_get_reason = <span class="literal">nullptr</span>;</span><br><span class="line">    CreateAudioConfigFunc audio_config_create_continuous_audio_input_from_default_microphone = <span class="literal">nullptr</span>;</span><br><span class="line">    SetAudioConfigFunc speech_recognizer_set_audio_config = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> *m_session = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> m_bSpeechSetup;</span><br><span class="line">    <span class="keyword">bool</span> m_isListening;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;speech.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDebug&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QMessageBox&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDBusInterface&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDBusReply&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">Speech* Speech::m_pSpeech = <span class="literal">nullptr</span>;</span><br><span class="line">QMutex Speech::mutex_m;</span><br><span class="line"></span><br><span class="line">Speech::<span class="built_in">Speech</span>(QObject *parent) : <span class="built_in">QObject</span>(parent)</span><br><span class="line">&#123;</span><br><span class="line">    m_bSpeechSetup = <span class="literal">false</span>;</span><br><span class="line">    m_isListening = <span class="literal">false</span>;</span><br><span class="line">    <span class="built_in">loadSpeechLibrary</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Speech *<span class="title">Speech::getInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(m_pSpeech == <span class="literal">nullptr</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        mutex_m.<span class="built_in">lock</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(m_pSpeech == <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            m_pSpeech = <span class="keyword">new</span> <span class="built_in">Speech</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mutex_m.<span class="built_in">unlock</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> m_pSpeech;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Speech::isSpeechSetup</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> m_bSpeechSetup;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Speech::isSpeechListening</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> m_isListening;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Speech::loadSpeechLibrary</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    m_speechLibrary.<span class="built_in">setFileName</span>(<span class="string">&quot;/usr/lib/x86_64-linux-gnu/libkysdk-coreai-speech.so&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(!m_speechLibrary.<span class="built_in">load</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">qWarning</span>() &lt;&lt; <span class="string">&quot;Failed to load speech library:&quot;</span> &lt;&lt; m_speechLibrary.<span class="built_in">errorString</span>();</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取函数符号</span></span><br><span class="line">    speech_recognizer_create_session = <span class="keyword">reinterpret_cast</span>&lt;CreateSessionFunc&gt;(m_speechLibrary.<span class="built_in">resolve</span>(<span class="string">&quot;speech_recognizer_create_session&quot;</span>));</span><br><span class="line">    speech_recognizer_init_session = <span class="keyword">reinterpret_cast</span>&lt;InitSessionFunc&gt;(m_speechLibrary.<span class="built_in">resolve</span>(<span class="string">&quot;speech_recognizer_init_session&quot;</span>));</span><br><span class="line">    speech_recognizer_result_set_callback = <span class="keyword">reinterpret_cast</span>&lt;SetCallbackFunc&gt;(m_speechLibrary.<span class="built_in">resolve</span>(<span class="string">&quot;speech_recognizer_result_set_callback&quot;</span>));</span><br><span class="line">    speech_recognizer_start_continuous_recognition_async = <span class="keyword">reinterpret_cast</span>&lt;StartRecognitionFunc&gt;(m_speechLibrary.<span class="built_in">resolve</span>(<span class="string">&quot;speech_recognizer_start_continuous_recognition_async&quot;</span>));</span><br><span class="line">    speech_recognizer_stop_continuous_recognition_async = <span class="keyword">reinterpret_cast</span>&lt;StopRecognitionFunc&gt;(m_speechLibrary.<span class="built_in">resolve</span>(<span class="string">&quot;speech_recognizer_stop_continuous_recognition_async&quot;</span>));</span><br><span class="line">    speech_recognizer_set_audio_config = <span class="keyword">reinterpret_cast</span>&lt;SetAudioConfigFunc&gt;(m_speechLibrary.<span class="built_in">resolve</span>(<span class="string">&quot;speech_recognizer_set_audio_config&quot;</span>));</span><br><span class="line">    speech_recognition_result_get_text = <span class="keyword">reinterpret_cast</span>&lt;GetTextFunc&gt;(m_speechLibrary.<span class="built_in">resolve</span>(<span class="string">&quot;speech_recognition_result_get_text&quot;</span>));</span><br><span class="line">    speech_recognition_result_get_reason = <span class="keyword">reinterpret_cast</span>&lt;GetReasonFunc&gt;(m_speechLibrary.<span class="built_in">resolve</span>(<span class="string">&quot;speech_recognition_result_get_reason&quot;</span>));</span><br><span class="line">    audio_config_create_continuous_audio_input_from_default_microphone = <span class="keyword">reinterpret_cast</span>&lt;CreateAudioConfigFunc&gt;(m_speechLibrary.<span class="built_in">resolve</span>(<span class="string">&quot;audio_config_create_continuous_audio_input_from_default_microphone&quot;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!speech_recognizer_create_session || !speech_recognizer_init_session || !speech_recognition_result_get_text ||</span><br><span class="line">        !speech_recognizer_result_set_callback || !speech_recognizer_start_continuous_recognition_async ||</span><br><span class="line">        !speech_recognizer_stop_continuous_recognition_async || !speech_recognizer_set_audio_config)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">qWarning</span>() &lt;&lt; <span class="string">&quot;Failed to resolve one or more speech library symbols&quot;</span>;</span><br><span class="line">        m_speechLibrary.<span class="built_in">unload</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Speech::beginListening</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    m_isListening = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (!speech_recognizer_create_session || !speech_recognizer_init_session ||</span><br><span class="line">        !speech_recognizer_result_set_callback || !speech_recognizer_start_continuous_recognition_async ||</span><br><span class="line">        !speech_recognizer_set_audio_config)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">qWarning</span>() &lt;&lt; <span class="string">&quot;Speech library functions not loaded&quot;</span>;</span><br><span class="line">        m_isListening = <span class="literal">false</span>;</span><br><span class="line">        <span class="function">emit <span class="title">warning</span><span class="params">(tr(<span class="string">&quot;Voice-to-text is currently unavailable.&quot;</span>))</span></span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    m_session = <span class="built_in">speech_recognizer_create_session</span>();</span><br><span class="line">    <span class="keyword">int</span> result = <span class="built_in">speech_recognizer_init_session</span>(m_session);</span><br><span class="line">    <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;result&quot;</span> &lt;&lt; result;</span><br><span class="line">    <span class="keyword">if</span>(result == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        m_isListening = <span class="literal">false</span>;</span><br><span class="line">        <span class="function">emit <span class="title">warning</span><span class="params">(tr(<span class="string">&quot;The network is abnormal. Check whether the system is connected to the network&quot;</span>))</span></span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (result != <span class="number">0</span> &amp;&amp; result != <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        m_isListening = <span class="literal">false</span>;</span><br><span class="line">        <span class="function">emit <span class="title">warning</span><span class="params">(tr(<span class="string">&quot;Voice-to-text is currently unavailable.&quot;</span>))</span></span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">speech_recognizer_result_set_callback</span>(m_session, callback, <span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">auto</span> *config = <span class="built_in">audio_config_create_continuous_audio_input_from_default_microphone</span>();</span><br><span class="line">    <span class="built_in">speech_recognizer_set_audio_config</span>(m_session, config);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">speech_recognizer_start_continuous_recognition_async</span>(m_session);</span><br><span class="line">    GMainLoop *pMainLoop = <span class="built_in">g_main_loop_new</span>(<span class="literal">nullptr</span>, <span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">g_main_loop_run</span>(pMainLoop);</span><br><span class="line">    <span class="built_in">g_main_loop_unref</span>(pMainLoop);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Speech::endListening</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(speech_recognizer_stop_continuous_recognition_async)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">speech_recognizer_stop_continuous_recognition_async</span>(m_session);</span><br><span class="line">        m_isListening = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Speech::callback</span><span class="params">(SpeechRecognitionResult *result, <span class="keyword">void</span> *user_data)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Speech *self = <span class="keyword">static_cast</span>&lt;Speech*&gt;(user_data);</span><br><span class="line">    <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;************************************&quot;</span> &lt;&lt; self-&gt;<span class="built_in">speech_recognition_result_get_text</span>(result);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(self-&gt;<span class="built_in">speech_recognition_result_get_reason</span>(result) == SPEECH_RECOGNIZED)<span class="comment">//这个是正在进行语音修正后的结果</span></span><br><span class="line">    &#123;</span><br><span class="line">        self-&gt;<span class="built_in">sigSpeechCallBack</span>(self-&gt;<span class="built_in">speech_recognition_result_get_text</span>(result));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Qt/"># Qt</a>
+                    
+                        <a href="/tags/C/"># C++</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/article/32821987.html">KDE全局快捷键</a>
+            
+            
+            <a class="next" rel="next" href="/article/795668d8.html">2024年总结</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>蒋胜达 © 
+            2021 - 2025 | 
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+        </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
