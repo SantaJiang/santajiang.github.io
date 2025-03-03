@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="蒋胜达">
+
+
+
+
+
+<title>Qt多模块架构在Linux下的重定向 | Santa&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/images/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Santa&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Santa&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Qt多模块架构在Linux下的重定向</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">蒋胜达</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">三月 3, 2025&nbsp;&nbsp;10:52</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>在主工程模块里：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">unix:!macx:&#123;</span><br><span class="line">    <span class="built_in">CONFIG</span>(release, debug|release): &#123;</span><br><span class="line">        DESTDIR = $$PWD/../Bin/Release</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libNoteSDK.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libUIElement.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libPublicData.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libEditText.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libDataBase.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libQuickEntry.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libTray.so</span><br><span class="line">    &#125; <span class="keyword">else</span>: <span class="built_in">CONFIG</span>(debug, debug|release): &#123;</span><br><span class="line">        DESTDIR = $$PWD/../Bin/Debug</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libNoteSDK.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libUIElement.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libPublicData.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libEditText.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libDataBase.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libQuickEntry.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libTray.so</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">QMAKE_RPATHDIR += $$DESTDIR</span><br><span class="line">  </span><br><span class="line"># Default rules <span class="keyword">for</span> deployment.</span><br><span class="line">unix &#123;</span><br><span class="line">    target.path = /usr/bin  # 将应用程序安装到 /usr/bin 目录</span><br><span class="line">    INSTALLS += target      # 添加目标安装路径</span><br><span class="line">&#125;</span><br><span class="line">!<span class="built_in">isEmpty</span>(target.path): INSTALLS += target</span><br><span class="line"></span><br><span class="line">#每个子模块的Pro文件也要写，保证翻译文件合一</span><br><span class="line">TRANSLATIONS += ../translations/kylin-note_zh_CN.ts \</span><br><span class="line">                ../translations/kylin-note_en_US.ts</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Qt/"># Qt</a>
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/article/f79dfdbd.html">Gitee仓库迁移到Gitlabc仓库</a>
+            
+            
+            <a class="next" rel="next" href="/article/32821987.html">KDE全局快捷键</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>蒋胜达 © 
+            2021 - 2025 | 
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+        </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

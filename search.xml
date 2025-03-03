@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>Gitee仓库迁移到Gitlabc仓库</title>
+      <link href="/article/f79dfdbd.html"/>
+      <url>/article/f79dfdbd.html</url>
+      
+        <content type="html"><![CDATA[<p>为了将Gitee上的<code>Test</code>仓库转移到Gitlab上，并保留原有的git commit记录，你可以按照以下步骤进行操作：</p><h3 id="一、准备阶段"><a href="#一、准备阶段" class="headerlink" title="一、准备阶段"></a>一、准备阶段</h3><ol><li><strong>在Gitlab上新建同名仓库</strong>：<ul><li>登录Gitlab。</li><li>创建一个新的仓库，命名为<code>Test</code>。注意，在创建过程中，不要勾选“Initialize repository with a  README”（用README初始化仓库）等选项，以避免生成不必要的文件。但根据你提供的信息，仓库已经创建并默认生成了一个README.md文件，这在实际操作中可能并不影响迁移过程，因为你可以在迁移后处理这个文件。</li></ul></li><li><strong>获取原仓库的URL</strong>：<ul><li>登录Gitee，找到<code>Test</code>仓库，并复制其HTTPS或SSH URL。</li></ul></li></ol><h3 id="二、迁移阶段"><a href="#二、迁移阶段" class="headerlink" title="二、迁移阶段"></a>二、迁移阶段</h3><ol><li><p><strong>克隆原仓库</strong>：</p><ul><li>打开终端或命令提示符。</li><li>使用<code>git clone</code>命令克隆Gitee上的<code>Test</code>仓库。例如：</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line">git <span class="built_in">clone</span> &lt;Gitee仓库URL&gt;</span><br></pre></td></tr></table></figure><p>这将把原仓库的所有内容（包括分支、提交记录等）下载到本地。</p></li><li><p><strong>进入克隆的仓库目录</strong>：</p><ul><li>使用<code>cd</code>命令进入克隆下来的<code>Test</code>仓库目录。</li></ul></li><li><p><strong>添加新仓库的远程地址</strong>：</p><ul><li>使用<code>git remote add</code>命令添加Gitlab上新仓库的远程地址。例如：</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line">git remote add gitlab &lt;Gitlab仓库URL&gt;</span><br></pre></td></tr></table></figure><p>这里，<code>gitlab</code>是你给新远程仓库起的名字，你可以根据需要自行命名。</p></li><li><p><strong>推送所有分支和提交记录到新仓库</strong>：</p><ul><li>使用<code>git push</code>命令将所有分支和提交记录推送到Gitlab上的新仓库。由于你在Gitlab上创建仓库时生成了一个README.md文件，这可能会导致推送时发生冲突。为了避免这种情况，你可以先尝试推送所有分支（不包括默认分支，如main或master），然后在Gitlab上手动删除README.md文件，再推送默认分支。或者，你也可以选择覆盖Gitlab上的默认分支。</li><li>推送所有分支（不包括默认分支）：</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line">git push gitlab --all</span><br></pre></td></tr></table></figure><p>注意：如果Gitlab上的仓库已经包含了某些分支，并且你不想覆盖它们，那么你需要先手动处理这些分支（例如，合并或删除它们），然后再执行推送操作。</p><ul><li>推送所有标签（可选）：</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line">git push gitlab --tags</span><br></pre></td></tr></table></figure></li><li><p><strong>处理默认分支和README.md文件</strong>：</p><ul><li>登录Gitlab，进入<code>Test</code>仓库。</li><li>如果需要，可以手动删除README.md文件或将其内容替换为原仓库中的对应内容。</li><li>然后，你可以将本地仓库的默认分支推送到Gitlab上（如果之前没有推送的话）。例如：</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout main  <span class="comment"># 切换到默认分支（假设默认分支是main）</span></span><br><span class="line">git push gitlab main  <span class="comment"># 推送默认分支到Gitlab</span></span><br></pre></td></tr></table></figure><p>或者，如果你希望覆盖Gitlab上的默认分支，可以使用<code>-f</code>（或<code>--force</code>）选项进行强制推送。但请注意，强制推送可能会丢失Gitlab上默认分支上的某些提交记录，因此在使用之前请务必确认。</p></li></ol><h3 id="三、验证阶段"><a href="#三、验证阶段" class="headerlink" title="三、验证阶段"></a>三、验证阶段</h3><ol><li><strong>检查分支和提交记录</strong>：<ul><li>登录Gitlab，进入<code>Test</code>仓库。</li><li>检查所有分支是否都已成功迁移。</li><li>使用<code>git log</code>命令在本地仓库中查看提交记录，确保它们都已成功推送到Gitlab上。</li></ul></li><li><strong>检查标签</strong>：<ul><li>如果推送了标签，请在Gitlab上检查它们是否都已成功迁移。</li></ul></li><li><strong>团队成员权限设置</strong>：<ul><li>根据需要，在Gitlab上为团队成员设置相应的权限。</li></ul></li></ol><p>通过以上步骤，你应该能够成功地将Gitee上的<code>Test</code>仓库转移到Gitlab上，并保留原有的git commit记录。如果在迁移过程中遇到任何问题，请查阅Git的官方文档或寻求相关社区的帮助。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Qt多模块架构在Linux下的重定向</title>
+      <link href="/article/82d1a478.html"/>
+      <url>/article/82d1a478.html</url>
+      
+        <content type="html"><![CDATA[<p>在主工程模块里：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">unix:!macx:&#123;</span><br><span class="line">    <span class="built_in">CONFIG</span>(release, debug|release): &#123;</span><br><span class="line">        DESTDIR = $$PWD/../Bin/Release</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libNoteSDK.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libUIElement.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libPublicData.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libEditText.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libDataBase.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libQuickEntry.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libTray.so</span><br><span class="line">    &#125; <span class="keyword">else</span>: <span class="built_in">CONFIG</span>(debug, debug|release): &#123;</span><br><span class="line">        DESTDIR = $$PWD/../Bin/Debug</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libNoteSDK.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libUIElement.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libPublicData.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libEditText.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libDataBase.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libQuickEntry.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libTray.so</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">QMAKE_RPATHDIR += $$DESTDIR</span><br><span class="line">  </span><br><span class="line"># Default rules <span class="keyword">for</span> deployment.</span><br><span class="line">unix &#123;</span><br><span class="line">    target.path = /usr/bin  # 将应用程序安装到 /usr/bin 目录</span><br><span class="line">    INSTALLS += target      # 添加目标安装路径</span><br><span class="line">&#125;</span><br><span class="line">!<span class="built_in">isEmpty</span>(target.path): INSTALLS += target</span><br><span class="line"></span><br><span class="line">#每个子模块的Pro文件也要写，保证翻译文件合一</span><br><span class="line">TRANSLATIONS += ../translations/kylin-note_zh_CN.ts \</span><br><span class="line">                ../translations/kylin-note_en_US.ts</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>KDE全局快捷键</title>
       <link href="/article/32821987.html"/>
       <url>/article/32821987.html</url>

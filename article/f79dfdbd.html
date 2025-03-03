@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="蒋胜达">
+
+
+
+
+
+<title>Gitee仓库迁移到Gitlabc仓库 | Santa&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/images/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Santa&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Santa&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Gitee仓库迁移到Gitlabc仓库</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">蒋胜达</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">三月 3, 2025&nbsp;&nbsp;10:53</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>为了将Gitee上的<code>Test</code>仓库转移到Gitlab上，并保留原有的git commit记录，你可以按照以下步骤进行操作：</p>
+<h3 id="一、准备阶段"><a href="#一、准备阶段" class="headerlink" title="一、准备阶段"></a>一、准备阶段</h3><ol>
+<li><strong>在Gitlab上新建同名仓库</strong>：<ul>
+<li>登录Gitlab。</li>
+<li>创建一个新的仓库，命名为<code>Test</code>。注意，在创建过程中，不要勾选“Initialize repository with a  README”（用README初始化仓库）等选项，以避免生成不必要的文件。但根据你提供的信息，仓库已经创建并默认生成了一个README.md文件，这在实际操作中可能并不影响迁移过程，因为你可以在迁移后处理这个文件。</li>
+</ul>
+</li>
+<li><strong>获取原仓库的URL</strong>：<ul>
+<li>登录Gitee，找到<code>Test</code>仓库，并复制其HTTPS或SSH URL。</li>
+</ul>
+</li>
+</ol>
+<h3 id="二、迁移阶段"><a href="#二、迁移阶段" class="headerlink" title="二、迁移阶段"></a>二、迁移阶段</h3><ol>
+<li><p><strong>克隆原仓库</strong>：</p>
+<ul>
+<li>打开终端或命令提示符。</li>
+<li>使用<code>git clone</code>命令克隆Gitee上的<code>Test</code>仓库。例如：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line">git <span class="built_in">clone</span> &lt;Gitee仓库URL&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这将把原仓库的所有内容（包括分支、提交记录等）下载到本地。</p>
+</li>
+<li><p><strong>进入克隆的仓库目录</strong>：</p>
+<ul>
+<li>使用<code>cd</code>命令进入克隆下来的<code>Test</code>仓库目录。</li>
+</ul>
+</li>
+<li><p><strong>添加新仓库的远程地址</strong>：</p>
+<ul>
+<li>使用<code>git remote add</code>命令添加Gitlab上新仓库的远程地址。例如：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line">git remote add gitlab &lt;Gitlab仓库URL&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里，<code>gitlab</code>是你给新远程仓库起的名字，你可以根据需要自行命名。</p>
+</li>
+<li><p><strong>推送所有分支和提交记录到新仓库</strong>：</p>
+<ul>
+<li>使用<code>git push</code>命令将所有分支和提交记录推送到Gitlab上的新仓库。由于你在Gitlab上创建仓库时生成了一个README.md文件，这可能会导致推送时发生冲突。为了避免这种情况，你可以先尝试推送所有分支（不包括默认分支，如main或master），然后在Gitlab上手动删除README.md文件，再推送默认分支。或者，你也可以选择覆盖Gitlab上的默认分支。</li>
+<li>推送所有分支（不包括默认分支）：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line">git push gitlab --all</span><br></pre></td></tr></table></figure>
+
+<p>注意：如果Gitlab上的仓库已经包含了某些分支，并且你不想覆盖它们，那么你需要先手动处理这些分支（例如，合并或删除它们），然后再执行推送操作。</p>
+<ul>
+<li>推送所有标签（可选）：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash</span><br><span class="line">git push gitlab --tags</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>处理默认分支和README.md文件</strong>：</p>
+<ul>
+<li>登录Gitlab，进入<code>Test</code>仓库。</li>
+<li>如果需要，可以手动删除README.md文件或将其内容替换为原仓库中的对应内容。</li>
+<li>然后，你可以将本地仓库的默认分支推送到Gitlab上（如果之前没有推送的话）。例如：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout main  <span class="comment"># 切换到默认分支（假设默认分支是main）</span></span><br><span class="line">git push gitlab main  <span class="comment"># 推送默认分支到Gitlab</span></span><br></pre></td></tr></table></figure>
+
+<p>或者，如果你希望覆盖Gitlab上的默认分支，可以使用<code>-f</code>（或<code>--force</code>）选项进行强制推送。但请注意，强制推送可能会丢失Gitlab上默认分支上的某些提交记录，因此在使用之前请务必确认。</p>
+</li>
+</ol>
+<h3 id="三、验证阶段"><a href="#三、验证阶段" class="headerlink" title="三、验证阶段"></a>三、验证阶段</h3><ol>
+<li><strong>检查分支和提交记录</strong>：<ul>
+<li>登录Gitlab，进入<code>Test</code>仓库。</li>
+<li>检查所有分支是否都已成功迁移。</li>
+<li>使用<code>git log</code>命令在本地仓库中查看提交记录，确保它们都已成功推送到Gitlab上。</li>
+</ul>
+</li>
+<li><strong>检查标签</strong>：<ul>
+<li>如果推送了标签，请在Gitlab上检查它们是否都已成功迁移。</li>
+</ul>
+</li>
+<li><strong>团队成员权限设置</strong>：<ul>
+<li>根据需要，在Gitlab上为团队成员设置相应的权限。</li>
+</ul>
+</li>
+</ol>
+<p>通过以上步骤，你应该能够成功地将Gitee上的<code>Test</code>仓库转移到Gitlab上，并保留原有的git commit记录。如果在迁移过程中遇到任何问题，请查阅Git的官方文档或寻求相关社区的帮助。</p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Qt/"># Qt</a>
+                    
+                        <a href="/tags/C/"># C++</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/article/82d1a478.html">Qt多模块架构在Linux下的重定向</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>蒋胜达 © 
+            2021 - 2025 | 
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+        </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
