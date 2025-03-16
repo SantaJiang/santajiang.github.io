@@ -4,7 +4,57 @@
   
     
     <entry>
-      <title>Gitee仓库迁移到Gitlabc仓库</title>
+      <title>Debian包安装时生成桌面快捷方式的方法</title>
+      <link href="/article/6d1b5c21.html"/>
+      <url>/article/6d1b5c21.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>debian的包在安装的时候想在桌面生成快捷方式，了解后发现debian有对应的处理方式，在工程debian目录下有几个脚本：</p><ul><li><code>preinst</code>：安装前执行</li><li><code>postinst</code>：安装后执行</li><li><code>prerm</code>：卸载前执行</li><li><code>postrm</code>：卸载后执行</li></ul><p>写对应的脚本，包在安装的时候就会按照对应的顺序执行。以此为依据，编写两个脚本：</p><h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>首先编写.desktop文件，并且在工程文件里写上安装到/usr/share/applications/里，这步可以让程序在开始菜单里显示出来，然后：</p><p>kylin-note.postinst</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">set -e  # 严格模式：任何命令失败则终止脚本</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义函数：为单个用户创建快捷方式</span></span><br><span class="line">create_desktop_shortcut() &#123;</span><br><span class="line">    USER_HOME=$1</span><br><span class="line">    DESKTOP_DIR=&quot;&quot;</span><br><span class="line"></span><br><span class="line">    # 检测常见桌面路径（英文/中文）</span><br><span class="line">    if [ -d &quot;$USER_HOME/Desktop&quot; ]; then</span><br><span class="line">        DESKTOP_DIR=&quot;$USER_HOME/Desktop&quot;</span><br><span class="line">    elif [ -d &quot;$USER_HOME/桌面&quot; ]; then  # 处理中文环境</span><br><span class="line">        DESKTOP_DIR=&quot;$USER_HOME/桌面&quot;</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    if [ -n &quot;$DESKTOP_DIR&quot; ]; then</span><br><span class="line">        # 复制 .desktop 文件到用户桌面</span><br><span class="line">        cp &quot;/usr/share/applications/kylin-note.desktop&quot; &quot;$DESKTOP_DIR/&quot;</span><br><span class="line">        # 设置正确的所有者和权限</span><br><span class="line">        chown $(stat -c &#x27;%U:%G&#x27; &quot;$USER_HOME&quot;) &quot;$DESKTOP_DIR/kylin-note.desktop&quot;</span><br><span class="line">        chmod 755 &quot;$DESKTOP_DIR/kylin-note.desktop&quot;</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 遍历所有可能的用户主目录</span></span><br><span class="line">for USER_HOME in /home/* /root; do</span><br><span class="line">    # 跳过无效目录（如 /home/lost+found）</span><br><span class="line">    if [ -d &quot;$USER_HOME&quot; ] &amp;&amp; [ -O &quot;$USER_HOME&quot; ]; then</span><br><span class="line">        create_desktop_shortcut &quot;$USER_HOME&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 处理当前安装时可能已登录的用户（可选）</span></span><br><span class="line">CURRENT_USER_HOME=$(getent passwd $(logname) | cut -d: -f6)</span><br><span class="line">if [ -n &quot;$CURRENT_USER_HOME&quot; ]; then</span><br><span class="line">    create_desktop_shortcut &quot;$CURRENT_USER_HOME&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure><p>kylin-note.postrm</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">set -e</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义清理函数</span></span><br><span class="line">cleanup_desktop_shortcut() &#123;</span><br><span class="line">    USER_HOME=$1</span><br><span class="line">    if [ -f &quot;$USER_HOME/Desktop/kylin-note.desktop&quot; ]; then</span><br><span class="line">        rm -f &quot;$USER_HOME/Desktop/kylin-note.desktop&quot;</span><br><span class="line">    elif [ -f &quot;$USER_HOME/桌面/kylin-note.desktop&quot; ]; then</span><br><span class="line">        rm -f &quot;$USER_HOME/桌面/kylin-note.desktop&quot;</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 遍历所有用户主目录</span></span><br><span class="line">for USER_HOME in /home/* /root; do</span><br><span class="line">    if [ -d &quot;$USER_HOME&quot; ]; then</span><br><span class="line">        cleanup_desktop_shortcut &quot;$USER_HOME&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>一种解决Ubuntu笔记本合盖唤醒后屏幕亮度最低的解决方案</title>
+      <link href="/article/a03151f2.html"/>
+      <url>/article/a03151f2.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="一种解决Ubuntu笔记本合盖唤醒后屏幕亮度最低的解决方案"><a href="#一种解决Ubuntu笔记本合盖唤醒后屏幕亮度最低的解决方案" class="headerlink" title="一种解决Ubuntu笔记本合盖唤醒后屏幕亮度最低的解决方案"></a>一种解决Ubuntu笔记本合盖唤醒后屏幕亮度最低的解决方案</h3><ul><li>调整系统电源管理配置</li></ul><ol><li><p>打开终端，编辑电源管理配置文件：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/systemd/logind.conf</span><br></pre></td></tr></table></figure></li><li><p>找到并修改以下参数（若被注释请取消注释）：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HandleLidSwitch=suspend</span><br><span class="line">HandleLidSwitchExternalPower=suspend</span><br><span class="line">LidSwitchIgnoreInhibited=no</span><br></pre></td></tr></table></figure></li><li><p>保存文件后重启服务：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart systemd-logind</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Gitee仓库迁移到Gitlab仓库</title>
       <link href="/article/f79dfdbd.html"/>
       <url>/article/f79dfdbd.html</url>
       

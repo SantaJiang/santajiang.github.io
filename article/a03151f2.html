@@ -13,7 +13,7 @@
 
 
 
-<title>Qt多模块架构在Linux下的重定向 | Santa&#39;s Blog</title>
+<title>一种解决Ubuntu笔记本合盖唤醒后屏幕亮度最低的解决方案 | Santa&#39;s Blog</title>
 
 
 
@@ -132,11 +132,76 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Qt多模块架构在Linux下的重定向</h1>
+            <h1 class="post-title">一种解决Ubuntu笔记本合盖唤醒后屏幕亮度最低的解决方案</h1>
             
                 <div class="post-meta">
                     
@@ -145,14 +210,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">三月 3, 2025&nbsp;&nbsp;10:52</a>
+                        Date: <a href="#">三月 16, 2025&nbsp;&nbsp;20:22</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a>
+                                <a href="/categories/Linux/">Linux</a>
                             
                         </span>
                     
@@ -161,9 +226,17 @@
         </header>
 
         <div class="post-content">
-            <p>在主工程模块里：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">unix:!macx:&#123;</span><br><span class="line">    <span class="built_in">CONFIG</span>(release, debug|release): &#123;</span><br><span class="line">        DESTDIR = $$PWD/../Bin/Release</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libNoteSDK.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libUIElement.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libPublicData.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libEditText.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libDataBase.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libQuickEntry.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Release/libTray.so</span><br><span class="line">    &#125; <span class="keyword">else</span>: <span class="built_in">CONFIG</span>(debug, debug|release): &#123;</span><br><span class="line">        DESTDIR = $$PWD/../Bin/Debug</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libNoteSDK.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libUIElement.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libPublicData.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libEditText.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libDataBase.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libQuickEntry.so</span><br><span class="line">        LIBS += $$PWD/../Bin/Debug/libTray.so</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">QMAKE_RPATHDIR += $$DESTDIR</span><br><span class="line">  </span><br><span class="line"># Default rules <span class="keyword">for</span> deployment.</span><br><span class="line">unix &#123;</span><br><span class="line">    target.path = /usr/bin  # 将应用程序安装到 /usr/bin 目录</span><br><span class="line">    INSTALLS += target      # 添加目标安装路径</span><br><span class="line">&#125;</span><br><span class="line">!<span class="built_in">isEmpty</span>(target.path): INSTALLS += target</span><br><span class="line"></span><br><span class="line">#每个子模块的Pro文件也要写，保证翻译文件合一</span><br><span class="line">TRANSLATIONS += ../translations/kylin-note_zh_CN.ts \</span><br><span class="line">                ../translations/kylin-note_en_US.ts</span><br></pre></td></tr></table></figure>
-
+            <h3 id="一种解决Ubuntu笔记本合盖唤醒后屏幕亮度最低的解决方案"><a href="#一种解决Ubuntu笔记本合盖唤醒后屏幕亮度最低的解决方案" class="headerlink" title="一种解决Ubuntu笔记本合盖唤醒后屏幕亮度最低的解决方案"></a>一种解决Ubuntu笔记本合盖唤醒后屏幕亮度最低的解决方案</h3><ul>
+<li>调整系统电源管理配置</li>
+</ul>
+<ol>
+<li><p>打开终端，编辑电源管理配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/systemd/logind.conf</span><br></pre></td></tr></table></figure></li>
+<li><p>找到并修改以下参数（若被注释请取消注释）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HandleLidSwitch=suspend</span><br><span class="line">HandleLidSwitchExternalPower=suspend</span><br><span class="line">LidSwitchIgnoreInhibited=no</span><br></pre></td></tr></table></figure></li>
+<li><p>保存文件后重启服务：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart systemd-logind</span><br></pre></td></tr></table></figure></li>
+</ol>
 
         </div>
 
@@ -173,8 +246,6 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
-                    
-                        <a href="/tags/Qt/"># Qt</a>
                     
                         <a href="/tags/Linux/"># Linux</a>
                     
@@ -189,10 +260,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/article/f79dfdbd.html">Gitee仓库迁移到Gitlab仓库</a>
+                <a class="prev" rel="prev" href="/article/6d1b5c21.html">Debian包安装时生成桌面快捷方式的方法</a>
             
             
-            <a class="next" rel="next" href="/article/32821987.html">KDE全局快捷键</a>
+            <a class="next" rel="next" href="/article/f79dfdbd.html">Gitee仓库迁移到Gitlab仓库</a>
             
         </section>
 

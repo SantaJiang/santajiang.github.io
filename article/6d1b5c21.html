@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="蒋胜达">
+
+
+
+
+
+<title>Debian包安装时生成桌面快捷方式的方法 | Santa&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/images/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Santa&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Santa&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Debian包安装时生成桌面快捷方式的方法</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">蒋胜达</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">三月 16, 2025&nbsp;&nbsp;20:22</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Linux/">Linux</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>debian的包在安装的时候想在桌面生成快捷方式，了解后发现debian有对应的处理方式，在工程debian目录下有几个脚本：</p>
+<ul>
+<li><code>preinst</code>：安装前执行</li>
+<li><code>postinst</code>：安装后执行</li>
+<li><code>prerm</code>：卸载前执行</li>
+<li><code>postrm</code>：卸载后执行</li>
+</ul>
+<p>写对应的脚本，包在安装的时候就会按照对应的顺序执行。以此为依据，编写两个脚本：</p>
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>首先编写.desktop文件，并且在工程文件里写上安装到/usr/share/applications/里，这步可以让程序在开始菜单里显示出来，然后：</p>
+<p>kylin-note.postinst</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">set -e  # 严格模式：任何命令失败则终止脚本</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义函数：为单个用户创建快捷方式</span></span><br><span class="line">create_desktop_shortcut() &#123;</span><br><span class="line">    USER_HOME=$1</span><br><span class="line">    DESKTOP_DIR=&quot;&quot;</span><br><span class="line"></span><br><span class="line">    # 检测常见桌面路径（英文/中文）</span><br><span class="line">    if [ -d &quot;$USER_HOME/Desktop&quot; ]; then</span><br><span class="line">        DESKTOP_DIR=&quot;$USER_HOME/Desktop&quot;</span><br><span class="line">    elif [ -d &quot;$USER_HOME/桌面&quot; ]; then  # 处理中文环境</span><br><span class="line">        DESKTOP_DIR=&quot;$USER_HOME/桌面&quot;</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    if [ -n &quot;$DESKTOP_DIR&quot; ]; then</span><br><span class="line">        # 复制 .desktop 文件到用户桌面</span><br><span class="line">        cp &quot;/usr/share/applications/kylin-note.desktop&quot; &quot;$DESKTOP_DIR/&quot;</span><br><span class="line">        # 设置正确的所有者和权限</span><br><span class="line">        chown $(stat -c &#x27;%U:%G&#x27; &quot;$USER_HOME&quot;) &quot;$DESKTOP_DIR/kylin-note.desktop&quot;</span><br><span class="line">        chmod 755 &quot;$DESKTOP_DIR/kylin-note.desktop&quot;</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 遍历所有可能的用户主目录</span></span><br><span class="line">for USER_HOME in /home/* /root; do</span><br><span class="line">    # 跳过无效目录（如 /home/lost+found）</span><br><span class="line">    if [ -d &quot;$USER_HOME&quot; ] &amp;&amp; [ -O &quot;$USER_HOME&quot; ]; then</span><br><span class="line">        create_desktop_shortcut &quot;$USER_HOME&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 处理当前安装时可能已登录的用户（可选）</span></span><br><span class="line">CURRENT_USER_HOME=$(getent passwd $(logname) | cut -d: -f6)</span><br><span class="line">if [ -n &quot;$CURRENT_USER_HOME&quot; ]; then</span><br><span class="line">    create_desktop_shortcut &quot;$CURRENT_USER_HOME&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+
+<p>kylin-note.postrm</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">set -e</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义清理函数</span></span><br><span class="line">cleanup_desktop_shortcut() &#123;</span><br><span class="line">    USER_HOME=$1</span><br><span class="line">    if [ -f &quot;$USER_HOME/Desktop/kylin-note.desktop&quot; ]; then</span><br><span class="line">        rm -f &quot;$USER_HOME/Desktop/kylin-note.desktop&quot;</span><br><span class="line">    elif [ -f &quot;$USER_HOME/桌面/kylin-note.desktop&quot; ]; then</span><br><span class="line">        rm -f &quot;$USER_HOME/桌面/kylin-note.desktop&quot;</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 遍历所有用户主目录</span></span><br><span class="line">for USER_HOME in /home/* /root; do</span><br><span class="line">    if [ -d &quot;$USER_HOME&quot; ]; then</span><br><span class="line">        cleanup_desktop_shortcut &quot;$USER_HOME&quot;</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/article/a03151f2.html">一种解决Ubuntu笔记本合盖唤醒后屏幕亮度最低的解决方案</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>蒋胜达 © 
+            2021 - 2025 | 
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+        </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
