@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="蒋胜达">
+
+
+
+
+
+<title>Qt实现毛玻璃效果 | Santa&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/images/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Santa&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Santa&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Qt实现毛玻璃效果</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">蒋胜达</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">三月 23, 2025&nbsp;&nbsp;20:39</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>今天要实现一个Win毛玻璃窗口，忘了之前怎么做的了，以为很简单，没想到查了半天资料，问了DeepSeek之类的，没有一个好用的。不得已只能翻找之前的工程，摘出来代码一运行，果然好使。特在此贴上</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;mainwindow.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;ui_mainwindow.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;WinUser.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QtWinExtras/QtWin&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> _<span class="title">WINDOWCOMPOSITIONATTRIB</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    WCA_UNDEFINED = <span class="number">0</span>,</span><br><span class="line">    WCA_NCRENDERING_ENABLED = <span class="number">1</span>,</span><br><span class="line">    WCA_NCRENDERING_POLICY = <span class="number">2</span>,</span><br><span class="line">    WCA_TRANSITIONS_FORCEDISABLED = <span class="number">3</span>,</span><br><span class="line">    WCA_ALLOW_NCPAINT = <span class="number">4</span>,</span><br><span class="line">    WCA_CAPTION_BUTTON_BOUNDS = <span class="number">5</span>,</span><br><span class="line">    WCA_NONCLIENT_RTL_LAYOUT = <span class="number">6</span>,</span><br><span class="line">    WCA_FORCE_ICONIC_REPRESENTATION = <span class="number">7</span>,</span><br><span class="line">    WCA_EXTENDED_FRAME_BOUNDS = <span class="number">8</span>,</span><br><span class="line">    WCA_HAS_ICONIC_BITMAP = <span class="number">9</span>,</span><br><span class="line">    WCA_THEME_ATTRIBUTES = <span class="number">10</span>,</span><br><span class="line">    WCA_NCRENDERING_EXILED = <span class="number">11</span>,</span><br><span class="line">    WCA_NCADORNMENTINFO = <span class="number">12</span>,</span><br><span class="line">    WCA_EXCLUDED_FROM_LIVEPREVIEW = <span class="number">13</span>,</span><br><span class="line">    WCA_VIDEO_OVERLAY_ACTIVE = <span class="number">14</span>,</span><br><span class="line">    WCA_FORCE_ACTIVEWINDOW_APPEARANCE = <span class="number">15</span>,</span><br><span class="line">    WCA_DISALLOW_PEEK = <span class="number">16</span>,</span><br><span class="line">    WCA_CLOAK = <span class="number">17</span>,</span><br><span class="line">    WCA_CLOAKED = <span class="number">18</span>,</span><br><span class="line">    WCA_ACCENT_POLICY = <span class="number">19</span>,</span><br><span class="line">    WCA_FREEZE_REPRESENTATION = <span class="number">20</span>,</span><br><span class="line">    WCA_EVER_UNCLOAKED = <span class="number">21</span>,</span><br><span class="line">    WCA_VISUAL_OWNER = <span class="number">22</span>,</span><br><span class="line">    WCA_LAST = <span class="number">23</span></span><br><span class="line">&#125; WINDOWCOMPOSITIONATTRIB;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">WINDOWCOMPOSITIONATTRIBDATA</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    WINDOWCOMPOSITIONATTRIB Attrib;</span><br><span class="line">    PVOID pvData;</span><br><span class="line">    SIZE_T cbData;</span><br><span class="line">&#125; ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> _<span class="title">ACCENT_STATE</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ACCENT_DISABLED = <span class="number">0</span>,</span><br><span class="line">    ACCENT_ENABLE_GRADIENT = <span class="number">1</span>,</span><br><span class="line">    ACCENT_ENABLE_TRANSPARENTGRADIENT = <span class="number">2</span>,</span><br><span class="line">    ACCENT_ENABLE_BLURBEHIND = <span class="number">3</span>,</span><br><span class="line">    ACCENT_INVALID_STATE = <span class="number">4</span></span><br><span class="line">&#125; ACCENT_STATE;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">ACCENT_POLICY</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ACCENT_STATE AccentState;</span><br><span class="line">    DWORD AccentFlags;</span><br><span class="line">    DWORD GradientColor;</span><br><span class="line">    DWORD AnimationId;</span><br><span class="line">&#125; ACCENT_POLICY;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">BOOL</span><span class="params">(WINAPI* pfnSetWindowCompositionAttribute)</span><span class="params">(HWND, struct WINDOWCOMPOSITIONATTRIBDATA*)</span></span>;</span><br><span class="line"></span><br><span class="line">MainWindow::<span class="built_in">MainWindow</span>(QWidget *parent)</span><br><span class="line">    : <span class="built_in">QMainWindow</span>(parent)</span><br><span class="line">    , <span class="built_in">ui</span>(<span class="keyword">new</span> Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;<span class="built_in">setupUi</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>-&gt;<span class="built_in">setAttribute</span>(Qt::WA_TranslucentBackground, <span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">this</span>-&gt;<span class="built_in">setWindowFlags</span>(Qt::FramelessWindowHint);</span><br><span class="line"></span><br><span class="line">    QString systemVersion = QSysInfo::<span class="built_in">productType</span>() + <span class="string">&quot; &quot;</span> + QSysInfo::<span class="built_in">productVersion</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(systemVersion.<span class="built_in">contains</span>(<span class="string">&quot;windows 7&quot;</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        QtWin::<span class="built_in">extendFrameIntoClientArea</span>(<span class="keyword">this</span>, <span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>);    <span class="comment">//玻璃效果</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        HWND hWnd = <span class="built_in">HWND</span>(<span class="keyword">this</span>-&gt;<span class="built_in">winId</span>());<span class="comment">//HWND(winId());</span></span><br><span class="line">        HMODULE hUser = <span class="built_in">GetModuleHandle</span>(<span class="string">L&quot;user32.dll&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (hUser)</span><br><span class="line">        &#123;</span><br><span class="line">            pfnSetWindowCompositionAttribute setWindowCompositionAttribute = (pfnSetWindowCompositionAttribute)<span class="built_in">GetProcAddress</span>(hUser, <span class="string">&quot;SetWindowCompositionAttribute&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (setWindowCompositionAttribute)</span><br><span class="line">            &#123;</span><br><span class="line">                ACCENT_POLICY accent = &#123; ACCENT_ENABLE_BLURBEHIND, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> &#125;;</span><br><span class="line">                WINDOWCOMPOSITIONATTRIBDATA data;</span><br><span class="line">                data.Attrib = WCA_ACCENT_POLICY;</span><br><span class="line">                data.pvData = &amp;accent;</span><br><span class="line">                data.cbData = <span class="built_in"><span class="keyword">sizeof</span></span>(accent);</span><br><span class="line">                <span class="built_in">setWindowCompositionAttribute</span>(hWnd, &amp;data);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>-&gt;<span class="built_in">update</span>();<span class="comment">//加一层半透效果</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MainWindow::~<span class="built_in">MainWindow</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> ui;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Qt/"># Qt</a>
+                    
+                        <a href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"># 图像处理</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/article/6d1b5c21.html">Debian包安装时生成桌面快捷方式的方法</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>蒋胜达 © 
+            2021 - 2025 | 
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+        </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
