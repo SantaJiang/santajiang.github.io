@@ -44,7 +44,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
 </head>
 
 <body>
@@ -258,7 +258,7 @@
 <p><strong>3.Hexo的初始化</strong></p>
 <ul>
 <li>创建blog文件夹，位置建议各盘根目录</li>
-<li>打开任一终端(PowerShell/Windows Terminal/Git Bash等均可)，进入刚才创建的blog路径下</li>
+<li>打开任一终端(PowerShell&#x2F;Windows Terminal&#x2F;Git Bash等均可)，进入刚才创建的blog路径下</li>
 <li>执行<code>hexo init</code> 将 blog 文件夹初始化</li>
 <li>执行 <code>npm install</code> 安装依赖包</li>
 <li>执行 <code>hexo g</code> 开始进行部署操作</li>
@@ -280,17 +280,17 @@
 <ul>
 <li>复制Github Pages的仓库地址，如：<a target="_blank" rel="noopener" href="https://github.com/SantaJiang/santajiang.github.io.git">https://github.com/SantaJiang/santajiang.github.io.git</a></li>
 <li>修改配置文件<code>blog/_config.yml</code> ，最新版与之前的不同从这里开始了</li>
-<li>查找**# Site**字段，修改如下：  </li>
+<li>查找**# Site**字段，修改如下：</li>
 </ul>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Santa的博客</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;My personal blog&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;记录、分享、交流&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">蒋胜达</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">en</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>查找**# URL**字段，修改如下：  </li>
+<li>查找**# URL**字段，修改如下：</li>
 </ul>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://santajiang.github.io/</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br><span class="line"><span class="attr">pretty_urls:</span></span><br><span class="line">  <span class="attr">trailing_index:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span></span><br><span class="line">  <span class="attr">trailing_html:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing &#x27;.html&#x27; from permalinks</span></span><br></pre></td></tr></table></figure>
 <p>注意url填写的是pages网址不是仓库地址</p>
 <ul>
-<li>查找<strong>deploy</strong>字段，修改如下：  </li>
+<li>查找<strong>deploy</strong>字段，修改如下：</li>
 </ul>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">repository:</span> <span class="string">git@github.com:SantaJiang/santajiang.github.io.git</span></span><br><span class="line"><span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
 

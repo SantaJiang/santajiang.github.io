@@ -44,7 +44,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
 </head>
 
 <body>
@@ -226,7 +226,7 @@
         </header>
 
         <div class="post-content">
-            <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>输入RGB/Hex值，回车触发转换并自动复制结果到剪贴板，简单高效</p>
+            <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>输入RGB&#x2F;Hex值，回车触发转换并自动复制结果到剪贴板，简单高效</p>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>回车生效的事件直接用的是QLineEdit自带的returnPressed()事件，而复制到剪贴板用到的是QClipboard类：  </p>
 <figure class="highlight qt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;QClipboard&gt;</span><br><span class="line"></span><br><span class="line">QString str = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">QClipboard *clip = <span class="attribute">QApplication</span>::clipboard();</span><br><span class="line">clip-&gt;setText(str);</span><br></pre></td></tr></table></figure>
 <p>这样这个”Hello”就自动复制到剪贴板里了.  </p>

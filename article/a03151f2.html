@@ -44,7 +44,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
 </head>
 
 <body>
@@ -231,9 +231,11 @@
 </ul>
 <ol>
 <li><p>打开终端，编辑电源管理配置文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/systemd/logind.conf</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/systemd/logind.conf</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>找到并修改以下参数（若被注释请取消注释）：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HandleLidSwitch=suspend</span><br><span class="line">HandleLidSwitchExternalPower=suspend</span><br><span class="line">LidSwitchIgnoreInhibited=no</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HandleLidSwitch=suspend</span><br><span class="line">HandleLidSwitchExternalPower=suspend</span><br><span class="line">LidSwitchIgnoreInhibited=no</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>保存文件后重启服务：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart systemd-logind</span><br></pre></td></tr></table></figure></li>
 </ol>
