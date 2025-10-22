@@ -13,7 +13,7 @@
 
 
 
-<title>双映射问题 | Santa&#39;s Blog</title>
+<title>制作文件结构图 | Santa&#39;s Blog</title>
 
 
 
@@ -201,7 +201,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">双映射问题</h1>
+            <h1 class="post-title">制作文件结构图</h1>
             
                 <div class="post-meta">
                     
@@ -210,14 +210,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">一月 17, 2024&nbsp;&nbsp;16:52</a>
+                        Date: <a href="#">十月 22, 2025&nbsp;&nbsp;20:38</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
+                                <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a>
                             
                         </span>
                     
@@ -226,9 +226,10 @@
         </header>
 
         <div class="post-content">
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>双射说明两个映射表互为映射关系，正反都可推</p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isIsomorphic</span><span class="params">(string s, string t)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    map&lt;<span class="keyword">char</span>, <span class="keyword">char</span>&gt; t2s, s2t;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) </span><br><span class="line">    &#123;</span><br><span class="line">         <span class="keyword">char</span> a = s[i], b = t[i];</span><br><span class="line">         <span class="keyword">if</span> (s2t.<span class="built_in">contains</span>(a) &amp;&amp; s2t[a] != b || t2s.<span class="built_in">contains</span>(b) &amp;&amp; t2s[b] != a)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      </span><br><span class="line">         s2t[a] = b;</span><br><span class="line">         t2s[b] = a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>制作文件结构图有多种方法：</p>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 显示文件夹结构</span><br><span class="line"><span class="built_in">tree</span></span><br><span class="line"></span><br><span class="line"># 显示所有文件（包括子目录）</span><br><span class="line"><span class="built_in">tree</span> /f</span><br><span class="line"></span><br><span class="line"># 将结果保存到文件</span><br><span class="line"><span class="built_in">tree</span> /f &gt; file_structure.txt</span><br><span class="line"></span><br><span class="line"># 指定深度</span><br><span class="line"><span class="built_in">tree</span> /f /L <span class="number">3</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="macOS-Linux"><a href="#macOS-Linux" class="headerlink" title="macOS &#x2F; Linux"></a>macOS &#x2F; Linux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 tree 命令（如果没有）</span></span><br><span class="line">brew install tree  <span class="comment"># macOS</span></span><br><span class="line">sudo apt install tree  <span class="comment"># Ubuntu/Debian</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 基本使用</span></span><br><span class="line">tree</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有文件</span></span><br><span class="line">tree -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定深度</span></span><br><span class="line">tree -L 3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只显示目录</span></span><br><span class="line">tree -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存到文件</span></span><br><span class="line">tree &gt; file_structure.txt</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -239,7 +240,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/C/"># C++</a>
+                        <a href="/tags/%E6%96%87%E4%BB%B6%E6%A0%91/"># 文件树</a>
                     
                         
                 </span>
@@ -252,10 +253,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/article/74ffeb25.html">C++原生int和string互换</a>
             
-            
-            <a class="next" rel="next" href="/article/6586823f.html">std实现字符串分割</a>
+            <a class="next" rel="next" href="/article/2f453c12.html">Linux开机进initramfs的解决方案</a>
             
         </section>
 
