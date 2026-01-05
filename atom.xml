@@ -6,7 +6,7 @@
   <link href="https://santajiang.github.io/atom.xml" rel="self"/>
   
   <link href="https://santajiang.github.io/"/>
-  <updated>2025-10-22T12:40:20.843Z</updated>
+  <updated>2025-10-22T12:40:44.506Z</updated>
   <id>https://santajiang.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://santajiang.github.io/article/1b9ab0fd.html"/>
     <id>https://santajiang.github.io/article/1b9ab0fd.html</id>
     <published>2025-10-22T12:38:38.000Z</published>
-    <updated>2025-10-22T12:40:20.843Z</updated>
+    <updated>2025-10-22T12:40:44.506Z</updated>
     
     <content type="html"><![CDATA[<p>制作文件结构图有多种方法：</p><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 显示文件夹结构</span><br><span class="line"><span class="built_in">tree</span></span><br><span class="line"></span><br><span class="line"># 显示所有文件（包括子目录）</span><br><span class="line"><span class="built_in">tree</span> /f</span><br><span class="line"></span><br><span class="line"># 将结果保存到文件</span><br><span class="line"><span class="built_in">tree</span> /f &gt; file_structure.txt</span><br><span class="line"></span><br><span class="line"># 指定深度</span><br><span class="line"><span class="built_in">tree</span> /f /L <span class="number">3</span></span><br></pre></td></tr></table></figure><h3 id="macOS-Linux"><a href="#macOS-Linux" class="headerlink" title="macOS &#x2F; Linux"></a>macOS &#x2F; Linux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 tree 命令（如果没有）</span></span><br><span class="line">brew install tree  <span class="comment"># macOS</span></span><br><span class="line">sudo apt install tree  <span class="comment"># Ubuntu/Debian</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 基本使用</span></span><br><span class="line">tree</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有文件</span></span><br><span class="line">tree -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定深度</span></span><br><span class="line">tree -L 3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只显示目录</span></span><br><span class="line">tree -d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存到文件</span></span><br><span class="line">tree &gt; file_structure.txt</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -46,7 +46,7 @@
     <link href="https://santajiang.github.io/article/2f453c12.html"/>
     <id>https://santajiang.github.io/article/2f453c12.html</id>
     <published>2025-10-22T12:35:00.000Z</published>
-    <updated>2025-10-22T12:39:05.318Z</updated>
+    <updated>2025-10-22T12:40:44.504Z</updated>
     
     <content type="html"><![CDATA[<p>开机进入 <code>initramfs</code>（Initial RAM Filesystem）的 BusyBox shell 界面，通常意味着系统在启动过程中遇到了关键错误，无法成功挂载根文件系统。这是一个常见但可以修复的问题。</p><p>不要慌张，按照以下步骤进行诊断和修复。</p><h3 id="问题核心原因"><a href="#问题核心原因" class="headerlink" title="问题核心原因"></a>问题核心原因</h3><p>简单来说，系统启动到 <code>initramfs</code> 这个临时的根文件系统后，它的任务是加载必要的驱动和工具，然后找到并挂载你硬盘上真正的根文件系统（<code>/</code>）。现在它卡住了，原因通常是：</p><ol><li><strong>根文件系统设备无法识别</strong>（例如：UUID 错误、驱动缺失）。</li><li><strong>根文件系统损坏</strong>（文件系统错误）。</li><li><strong>根文件系统所在的磁盘硬件故障</strong>。</li><li><strong><code>/etc/fstab</code> 文件配置错误</strong>（尤其是在修改过挂载选项或添加了新硬盘后）。</li></ol><hr><h3 id="修复步骤指南"><a href="#修复步骤指南" class="headerlink" title="修复步骤指南"></a>修复步骤指南</h3><p>整个诊断和修复流程可以总结为以下步骤，你可以参照进行：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">    A[开机进入 initramfs 界面] --&gt; B[检查系统提示&lt;br&gt;（关键错误信息）]</span><br><span class="line">    B --&gt; C&#123;使用 blkid 命令&lt;br&gt;核对根分区UUID&#125;</span><br><span class="line">    C --&gt; D&#123;使用 fsck 命令&lt;br&gt;修复文件系统&#125;</span><br><span class="line">    D --&gt; E[尝试手动挂载根分区]</span><br><span class="line">    E --&gt; F&#123;手动挂载是否成功?&#125;</span><br><span class="line">    F -- 是 --&gt; G[检查 /etc/fstab 配置]</span><br><span class="line">    F -- 否 --&gt; H[考虑硬件故障&lt;br&gt;或数据恢复]</span><br><span class="line">    G --&gt; I[重启系统]</span><br></pre></td></tr></table></figure><p>现在，我们来详细说明每一步的具体操作。</p><h4 id="第-1-步：仔细阅读错误信息"><a href="#第-1-步：仔细阅读错误信息" class="headerlink" title="第 1 步：仔细阅读错误信息"></a>第 1 步：仔细阅读错误信息</h4><p>在 <code>initramfs</code> 界面出现之前，屏幕上通常会有一些红色的 (<code>FAILED</code>) 提示或具体的错误信息。<strong>这是最重要的线索！</strong></p><ul><li><strong>常见提示1</strong>： <code>ALERT! /dev/sda2 does not exist</code> 或 <code>ALERT! UUID=xxxx-xxxx-xxxx does not exist</code><ul><li><strong>原因</strong>： 系统找不到指定的根分区设备。可能是 <code>GRUB</code> 配置或 <code>initramfs</code> 中的设备标识（如 <code>UUID</code>）错了。</li></ul></li><li><strong>常见提示2</strong>： <code>Give root password for maintenance (or type Control-D to continue)</code><ul><li><strong>原因</strong>： 这比 <code>initramfs</code> 更进一步，说明根文件系统可能已经挂载为只读，但遇到了其他问题（如 <code>fstab</code> 错误）。此时输入 root 密码即可进入修复 shell。</li></ul></li><li><strong>常见提示3</strong>： 没有明显错误，直接掉进 <code>initramfs</code> shell。<ul><li><strong>原因</strong>： 需要手动排查。</li></ul></li></ul><h4 id="第-2-步：检查并确认根分区"><a href="#第-2-步：检查并确认根分区" class="headerlink" title="第 2 步：检查并确认根分区"></a>第 2 步：检查并确认根分区</h4><p>在 <code>initramfs</code> 提示符下，执行以下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有识别到的块设备和分区</span></span><br><span class="line">lsblk</span><br><span class="line"><span class="comment"># 或者使用</span></span><br><span class="line">blkid</span><br></pre></td></tr></table></figure><p><strong>你要做的是：</strong></p><ol><li>通过 <code>lsblk</code> 或 <code>blkid</code> 查看你的根分区（通常是 <code>ext4</code>, <code>xfs</code>, <code>btrfs</code> 格式）是哪个设备（例如 <code>/dev/sda2</code>, <code>/dev/nvme0n1p3</code>）以及它的 <code>UUID</code>。</li><li>与你系统原本的配置进行核对。如果你不记得，可以尝试根据分区大小和文件系统类型来判断。</li></ol><h4 id="第-3-步：尝试修复文件系统"><a href="#第-3-步：尝试修复文件系统" class="headerlink" title="第 3 步：尝试修复文件系统"></a>第 3 步：尝试修复文件系统</h4><p>如果根分区设备能找到（例如 <code>/dev/sda2</code>），但无法挂载，很可能是文件系统损坏。使用 <code>fsck</code> 进行修复。</p><p><strong>非常重要：</strong> 如果你的根分区是 <code>LVM</code> 或加密的，这一步会更复杂，需要先激活 <code>LVM</code>（<code>lvm vgchange -ay</code>）或解锁加密分区，这里先讲最简单的情况。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意：将 /dev/sda2 替换为你实际的根分区设备</span></span><br><span class="line"><span class="comment"># -y 选项表示自动修复所有问题</span></span><br><span class="line">fsck -y /dev/sda2  或 fsck -t ext4 /dev/sda2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果是 XFS 文件系统，使用 xfs_repair</span></span><br><span class="line">xfs_repair /dev/sda2</span><br></pre></td></tr></table></figure><ul><li>修复过程可能会持续几分钟，期间会输出很多信息，这是正常的。</li><li>修复完成后，<strong>务必重启系统</strong> (<code>reboot</code>)，看是否能够正常启动。</li></ul><h4 id="第-4-步：尝试手动挂载根分区（高级诊断）"><a href="#第-4-步：尝试手动挂载根分区（高级诊断）" class="headerlink" title="第 4 步：尝试手动挂载根分区（高级诊断）"></a>第 4 步：尝试手动挂载根分区（高级诊断）</h4><p>如果 <code>fsck</code> 修复后问题依旧，或者你想进一步诊断，可以尝试手动继续启动过程。</p><ol><li><p><strong>手动挂载根分区</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个挂载点</span></span><br><span class="line">mkdir /rootfs</span><br><span class="line"><span class="comment"># 挂载根分区</span></span><br><span class="line">mount /dev/sda2 /rootfs</span><br></pre></td></tr></table></figure><ul><li><strong>如果挂载成功</strong>：说明驱动和基础文件系统现在是好的，问题可能出在后续的启动流程（如 <code>/etc/fstab</code>）。</li><li><strong>如果挂载失败</strong>：会给出错误信息（如 <code>wrong fs type, bad option, bad superblock</code>），根据错误信息继续排查。</li></ul></li><li><p><strong>检查 <code>/etc/fstab</code></strong> (如果上一步挂载成功)：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看已挂载的根分区下的 fstab 文件</span></span><br><span class="line">cat /rootfs/etc/fstab</span><br></pre></td></tr></table></figure><ul><li>检查是否有错误的 <code>UUID</code> 或者挂载点。特别是检查是否有定义根文件系统 <code>/</code> 的行，但它的 <code>UUID</code> 和你用 <code>blkid</code> 看到的不一致。</li><li>也检查其他非根分区（如 <code>/home</code>, <code>/boot</code>）的配置是否正确。有时一个错误的分区配置会导致整个启动失败。</li></ul></li><li><p><strong>检查引导程序配置</strong> (如果上一步挂载成功)：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 GRUB 配置文件</span></span><br><span class="line">cat /rootfs/boot/grub/grub.cfg | grep linux</span><br></pre></td></tr></table></figure><ul><li>查看输出的那一行，确认 <code>root</code> 参数指定的设备或 <code>UUID</code> 是否正确。例如 <code>root=UUID=1234-5678</code> 或 <code>root=/dev/sda2</code>。</li></ul></li></ol><h4 id="第-5-步：修正配置并重建-initramfs-如果手动挂载成功"><a href="#第-5-步：修正配置并重建-initramfs-如果手动挂载成功" class="headerlink" title="第 5 步：修正配置并重建 initramfs (如果手动挂载成功)"></a>第 5 步：修正配置并重建 initramfs (如果手动挂载成功)</h4><p>如果你在步骤 4 中发现是 <code>UUID</code> 错误或驱动问题，可以尝试修正。</p><ol><li><p><strong>Chroot 到你的系统</strong> (需要步骤4中挂载成功)：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 挂载必要的虚拟文件系统</span></span><br><span class="line">mount -t proc proc /rootfs/proc</span><br><span class="line">mount -t sysfs sys /rootfs/sys</span><br><span class="line">mount -o <span class="built_in">bind</span> /dev /rootfs/dev</span><br><span class="line">mount -o <span class="built_in">bind</span> /dev/pts /rootfs/dev/pts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换根目录</span></span><br><span class="line">chroot /rootfs /bin/bash</span><br></pre></td></tr></table></figure></li><li><p><strong>更新 GRUB 和 initramfs</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新 GRUB 配置</span></span><br><span class="line">update-grub</span><br><span class="line"><span class="comment"># 或者对于某些发行版</span></span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新生成 initramfs</span></span><br><span class="line">update-initramfs -u -k all</span><br></pre></td></tr></table></figure></li><li><p><strong>退出并重启</strong>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br><span class="line">umount /rootfs/dev/pts</span><br><span class="line">umount /rootfs/dev</span><br><span class="line">umount /rootfs/sys</span><br><span class="line">umount /rootfs/proc</span><br><span class="line">umount /rootfs</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure></li></ol><hr><h3 id="常见场景及快速解决方案"><a href="#常见场景及快速解决方案" class="headerlink" title="常见场景及快速解决方案"></a>常见场景及快速解决方案</h3><ul><li><p><strong>场景A：之前修改过 <code>/etc/fstab</code>，添加了错误的挂载项。</strong></p><ul><li><strong>解决</strong>：在 <code>initramfs</code> 中手动挂载根分区后，编辑 <code>/rootfs/etc/fstab</code>，注释掉（在行首加 <code>#</code>）你新增或怀疑有问题的行，然后重启。</li></ul></li><li><p><strong>场景B：系统更新或断电后启动失败。</strong></p><ul><li><strong>解决</strong>：这很可能是文件系统损坏。<strong>首要尝试</strong>在 <code>initramfs</code> 下运行 <code>fsck -y /dev/your_root_partition</code>。</li></ul></li><li><p><strong>场景C：更换了硬盘或主板后启动失败。</strong></p><ul><li><strong>解决</strong>：这可能是磁盘控制器驱动变化导致的。需要在 <code>initramfs</code> 中检查根分区设备名是否正确，很可能需要按照步骤5，<code>chroot</code> 后重新生成 <code>initramfs</code> 来包含新硬件的驱动。</li></ul></li><li><p><strong>场景D：一切都是对的，但就是报 <code>UUID does not exist</code>。</strong></p><ul><li><strong>解决</strong>：有时是 <code>initramfs</code> 映像本身损坏了。你需要从一个 Live USB（U盘启动盘）启动，然后 <code>chroot</code> 到你的系统，再执行步骤5中的 <code>update-initramfs</code> 命令。</li></ul></li></ul><h3 id="最后的办法"><a href="#最后的办法" class="headerlink" title="最后的办法"></a>最后的办法</h3><p>如果以上所有方法都失败，并且数据非常重要，可以考虑：</p><ol><li>使用 <strong>Live USB</strong> 启动电脑。</li><li>挂载你的根分区，备份重要数据到外部存储设备。</li><li>然后尝试更深入的修复，或者直接重新安装系统。</li></ol>]]></content>
     
@@ -248,31 +248,6 @@
   </entry>
   
   <entry>
-    <title>2024年总结</title>
-    <link href="https://santajiang.github.io/article/795668d8.html"/>
-    <id>https://santajiang.github.io/article/795668d8.html</id>
-    <published>2025-01-05T13:33:00.000Z</published>
-    <updated>2025-01-05T13:34:19.480Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>24年的这篇总结写的比之前的都要早，现在是6月5日，就已经开始起笔了，先写写上半年发生的事吧  </p><p>首先是谈判成功了，拿到了n+1和年终，其次是，我的leader也被裁了；裁了之后就是过年了，因为之前老早就定好了去成都重庆的旅游，所以回去了在见了双方父母爷爷奶奶姥姥姥爷之后，初二就坐飞机去成都了，然后去的重庆，值得一提的是成都的巴蜀大宅门没有想象的那么好吃了，可能过去的几年一直在心里神话它的味道，实际吃到还是跟心里的神话有点落差的，再有就是重庆的白象居好玩，嗯，把玥玥吓得够呛hh  </p><p>旅游回来之后差不多2月底，就开始搬家了，从之前的小区搬到了隔壁小区，租金没怎么变，但变成了复式，家具也全都是实木的，比之前跟仓库一样的小屋强多了，两个人兴奋的布置了好多东西，现在的布局合理多了  </p><p>后来因为玥玥的23年假快到期了，两个人又去了深圳，香港和澳门，印象很深（深圳除外），香港给玥玥拍了很多好看的照片，确实感觉跟内地很不一样；澳门也很好玩，还吃到了一家超级好吃的牛杂面  </p><p>回来之后就是3月底了，想着开始复习准备找工作了，但总感觉时间还早，有种拖延的感觉，感觉还没怎么调整过来，就到了4月初清明节了，因为放假时间的特殊，玥玥问我还想不想出去玩，我其实一方面确实是很喜欢出去旅游长见识，另一方面有种失落感在，自从失业后，整个人感觉跟社会脱节了，而且每天看着媳妇上下班处理各种事情，就感觉自己没有参与感，所以商量好后媳妇又请了3天年假，两个人花了6天时间去了昆明、大理、丽江和香格里拉，看了很多的景，吃了好多之前没吃过的好吃的，确实是玩的最尽兴的一次  </p><p>回来之后，就快到4月中了，接下来一直到5月底，就是每天各种复杂的情绪搀和在一起，有时候觉得真的不想找工作，歇到这个时候了打心底里是厌恶上班的，觉得上班很没有意义；有时候觉得都4月下半旬了，金三银四，再不找就完蛋了，又开始恐慌；有时候又感到深深的失落，觉得自己能力明明没有问题，前三年表现的很好，为什么就把我给裁了，为什么会轮到我，然后又想leader也被裁了，又想大家本来在嘉华的时候都开开心心的，怎么突然就都散了呢；又觉得自己好没用，意识到原来挣钱这么难，之前一路工作过来太顺了，觉得每个月拿上万的工资是理所应当的，失业之后才发现原来有那么多人，挣钱是那么困难；开始反思以后自己的路怎么办，现在不用担心，到了35了再失业了，还能干什么呢，是去卖烤肠，还是跑滴滴，跑滴滴也没京牌；大白天的走出去就会想会不会有异样的眼光在看我，年轻的小伙子大白天闲逛，每当这个时候就会想到终于知道什么叫无业游民了；中午下午出去转，发现街上没几个人，感觉自己跟社会脱节了一样，心在想这个时候大家都在上班吗···</p><p>后来没憋住找了同样被裁的前同事，问了问他的情况，心里状况也没比我好到哪里去， 那还能怎么办呢，投简历吧，刷题吧，准备知识点吧  </p><p>熬到5月中的时候，感觉焦虑到了巅峰，之前大大小小能投的几十分简历全投出去了，要么石沉大海，要么一面二面没过，感到深深的绝望；跟媳妇讨论这些事的时候，她有说到，如果我一直到年底都找不到工作，可能两个人就留不到北京了 （而我们这个刚新建的小家庭，因为我的后腿，就要走下坡路了，没说，自己领会的），两个人就这个事发生了争吵，一方面我是在想她怎么能这么说，另一方面我觉得说的是事实，只是由她说出来了  </p><p>到5月底的时候，不知道为什么情况突然好起来了，先后广联达和麒麟软件找我面试，广联达是去线下，我有点紧张，就在仅有的一天时间里把之前面试过的所有问题答案都准备了一份，一遍一遍的背，背完了发现原来这些所谓的底层原理也就那样，只是我之前一直浮躁看不进去，最后先是GLD二面全通过，但是被一个履历比我好的顶下去了；然后QL面试官对我评价挺高，当天就到了谈薪资的阶段了，而且给的挺高（行业不算高，比我心理预期高），接下来就是乖乖等offer了   </p><p>到6月3号，我就来报道了，结束了前半年坎坷的经历。目前入职了3天，还没有什么特别的感觉，希望下半年顺利些吧！接下来马上就要端午节，两个人定了机票去长沙玩，希望能玩的开心，也希望下半年的我能把下半年写的好一些  </p><p>端午节，两个人去长沙玩了，湘菜没有想象中的那么好吃，很多地方也没有想象的好玩，但两个人出来玩总归是比闷在家里好的；7月初，两个人去了大同，看了云冈石窟，悬空寺，华严寺，应县木塔，这次是真真的看到古迹了，而不是那种翻修的新东西愣说是老的，给了我俩很大的震撼，大同的东西也都很好吃，感觉很棒  </p><p>接下来写的就是在25年1月5号了，后边就是很顺利的转正了，出乎意料的被重视，而且专业能力受到了认可。而且还当上了小组长，虽然就管俩人，但都是之前完全没有料到的</p><p>11月份又长沙出了趟差，呆了两周吃了不少湘菜。回来后基本就是日常的上下班干活了，所以没有特别值得记录的事情</p><h3 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h3><p>感觉真的是起伏特别大的一年，经历了很多很多。前快30年都没有今年旅游的次数多。而且经历了年初的裁员后，我的心态也发生了一些变化，时常会有一种被抛弃的感觉，对待公司这个主体也没有那么的“感觉公司和我是一体”了。而且对加班现在的态度就是能不加就不加，加了也没用，到时候还是被裁；对公司本身发展的一些事情也不太关心和重视了，现在就是我每天上班、好好干活、下班、发工资，就齐活了，其他的我也不关心。当然最后还是要感谢我的夫人，在我裁员期间，和工作期间，一如既往的给我巨大的情感支持，没有让我感觉到被嫌弃，被社会抛弃。</p><p>最后就是，感觉人生的容错真的很大，工作在整个人生中，其实不管是意义还是重要性都没有想象的那么高。旅游时候看到人多种多样的人生，原来大家在同一片土地和时间可以这样的活着。现在的心态总结来就是不喜不悲，心怀满足。希望25年事业能更进一步吧，更重要的是我跟我的夫人能够开开心心的把日子过好，感觉其他的也都不太重要了。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h3&gt;&lt;p&gt;24年的这篇总结写的比之前的都要早，现在是6月5日，就已经开始起笔了，先写写上半年发生的事吧  &lt;/p&gt;
-&lt;p&gt;首先是谈判成功了，拿到了n+</summary>
-      
-    
-    
-    
-    <category term="感悟" scheme="https://santajiang.github.io/categories/%E6%84%9F%E6%82%9F/"/>
-    
-    
-    <category term="年度总结" scheme="https://santajiang.github.io/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Linux下开发之动态库加载</title>
     <link href="https://santajiang.github.io/article/427bdb52.html"/>
     <id>https://santajiang.github.io/article/427bdb52.html</id>
@@ -396,31 +371,6 @@
   </entry>
   
   <entry>
-    <title>2023年总结</title>
-    <link href="https://santajiang.github.io/article/9b8a73a1.html"/>
-    <id>https://santajiang.github.io/article/9b8a73a1.html</id>
-    <published>2024-01-04T09:11:00.000Z</published>
-    <updated>2024-01-08T01:20:06.980Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>23年真的是不平凡的一年，发生了好多好多事，这篇回顾文写的持续时间也比较长，我怕到年底的时候不能完整的回忆起每件事</p><p>首先1月份搬家到了北辰时代大厦这边，不得不说风景是真的好，不光挨着鸟巢，上下班都路过鸟巢，工位也高大上了好多，甚至在工位上一扭头就能看到鸟巢风景，还解锁了大年二十八九下班路上，鸟巢公园空无一人的奇观；坏处肯定也是有的，通勤时间从35分钟变成了1小时20分钟，时间长了也麻木了；物价也高了很多，消费开支都高了</p><p>过年的时候两家终于见面了，老爸找了保定会馆，据说在这里的原因是“保证能定”;我对象在第二天也来我家串门吃饭，终于定了在柏润东方大酒店办婚礼</p><p>然后，年后回来上班，从3月份开始了一个大项目，持续到了7月底，前中期几乎每天都在加班，9点后走打车报销是常事，期间各种改需求，赶进度，动不动崩溃，过程很痛苦</p><p>同时我自己的人生大事也在同步推进：3月20号求婚，想了很多最后还是在出租屋里求婚了，期间还发生了趣事，本来照常点下班的对象下午意外撒了咖啡，又是个周五，对象就提前回来了，导致我没布置完就匆匆忙忙躲起来了；还是3月，逛婚博会定了北遇的婚纱；4月份婚纱照拍了，出片了，但是不满意，又约了重拍，同时定了婚庆公司；5月份重拍了婚纱照，5月21号订了婚；6月中旬出了婚纱照片的精修，两个人很满意，还跟着对象俩人玩了第一次剧本杀；7月份就是挑婚纱，最后定婚礼方案；8月份一直在备婚，很多很多事情，动不动就崩溃；8月26号，两个人办了婚礼，这可真是一辈子的大事，很开心</p><p>9月份两个人自驾去乌兰察布玩了，还住了帐篷，晚上还下大暴雨，两个人在帐篷里边看手机视频边吃小火锅，感觉太特别了，很难忘</p><p>以上的段落写在我23年9月份的时候，现在回看一下心态还真的是完全不同；接下来的段落是在24年1月初写的，后边的状况急转直下</p><p>10月份的时候就开始有消息说公司要整个搬到深圳，leader当时还比较乐观，说不太可能，我也觉得不太可能整个全搬到深圳，公司里有很多的老员工，光赔偿金都不够赔的  </p><p>后边部门就开始没活干了，一度到了要员工自己找活干的程度了，我明白这是研发领导跟leader可能有恩怨，连带一起打压我们部门了，申请的工作全都不让做  </p><p>12月初的时候，研发领导开大会，直接就说要进行搬家和大裁员，确实是挺让人意外的，但还是觉得可能动作不会那么快，而且裁也裁不到我，毕竟我的能力大家都是认可的  </p><p>后来我们一起去钢琴行看了电钢琴，花一万买了一架KAWAI CA401，我很喜欢，又可以重拾之前的爱好了，只是希望后续有足够的时间练琴，也能坚持下去  </p><p>月中的时候，某天晚上我照常下班坐昌平线地铁，从西二旗到沙河高教园的时候，突发事故了，当时我只感觉我整个人飞了出去，然后我摔到了某人的上边，我的上边也压着两三个人，挣扎着起来之后发现地铁撞车了，一片混乱，又经过了漫长的两个多小时的等待，我们全都从车上下来了，顺着地铁一路走回了西二旗地铁站，后又因为打不到车，手机又没电了，又徒步走到了新龙泽医院，最后还是玥玥从沙河高教园打车过来接我回去才得以回家的，有生之年竟然上了一次热搜，地铁事故这种超小概率事件能碰上也是神奇··  </p><p>12月末的时候，事情就急转直下了，先是各个部门大裁员，保定部门直接没了，然后就我们部门没动静，后来就是leader开会说可能裁一半，再到24年1月3号（昨天）的时候，leader私聊找我说我在裁员名单上了，事情才尘埃落定了  </p><h3 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h3><p>不知道说什么，现在脑袋其实乱糟糟的，被裁员肯定难过还是有的，但不被裁的话，说实话也干不下去了，没什么意义，还是挺想拿了赔偿休息一阵的，毕竟后边干几十年呢，想出去旅个游还要等放假，我放假别人也放假，人多物价也贵；但又很烦接下来的谈判过程，通过和各个同事的聊天过程后已经预感到了不是一个轻松的过程；还有拿到赔偿后，现在又是年底，过完年了之后找工作的情况也是未知数，还是有些焦虑的····总而言之言而总之，还是希望自己能整理好心情吧，努力把该做的事情做好，希望24年末回顾的时候，自己能有一个满意的结果，加油吧！！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h3&gt;&lt;p&gt;23年真的是不平凡的一年，发生了好多好多事，这篇回顾文写的持续时间也比较长，我怕到年底的时候不能完整的回忆起每件事&lt;/p&gt;
-&lt;p&gt;首先1月份</summary>
-      
-    
-    
-    
-    <category term="感悟" scheme="https://santajiang.github.io/categories/%E6%84%9F%E6%82%9F/"/>
-    
-    
-    <category term="年度总结" scheme="https://santajiang.github.io/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Qt模态窗口点击窗外消失</title>
     <link href="https://santajiang.github.io/article/4a371b70.html"/>
     <id>https://santajiang.github.io/article/4a371b70.html</id>
@@ -509,6 +459,62 @@
       
     <summary type="html">&lt;p&gt;在main.cpp里：&lt;/p&gt;
 &lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/spa</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Qt正则表达式筛手机号</title>
+    <link href="https://santajiang.github.io/article/9fa9795d.html"/>
+    <id>https://santajiang.github.io/article/9fa9795d.html</id>
+    <published>2023-07-03T05:49:02.000Z</published>
+    <updated>2023-07-03T05:51:48.710Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QRegExp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QRegExpValidator&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsValidPhoneNumber</span><span class="params">(<span class="keyword">const</span> QString &amp; phoneNum)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QRegExp <span class="title">regx</span><span class="params">(<span class="string">&quot;^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]&#123;8&#125;$&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">QRegExpValidator <span class="title">regs</span><span class="params">(regx, <span class="number">0</span>)</span></span>;</span><br><span class="line">    QString pNum = phoneNum;</span><br><span class="line">    <span class="keyword">int</span> pos = <span class="number">0</span>;</span><br><span class="line">    QValidator::State res = regs.<span class="built_in">validate</span>(pNum, pos);</span><br><span class="line">    <span class="keyword">if</span> (QValidator::Acceptable == res) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;</summary>
+      
+    
+    
+    
+    <category term="开发笔记" scheme="https://santajiang.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Qt" scheme="https://santajiang.github.io/tags/Qt/"/>
+    
+    <category term="正则表达式" scheme="https://santajiang.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Qt快速转换路径(斜杠与反斜杠转换)</title>
+    <link href="https://santajiang.github.io/article/c2e86a2f.html"/>
+    <id>https://santajiang.github.io/article/c2e86a2f.html</id>
+    <published>2023-05-16T11:58:08.000Z</published>
+    <updated>2023-05-16T12:02:24.370Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><p>使用<code>QDir::fromNativeSeparators</code></p></li><li><p>示例：</p></li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QString path = <span class="string">&quot;C:\\temp/test.txt&quot;</span>;</span><br><span class="line">path = QDir::<span class="built_in">fromNativeSeparators</span>(path);</span><br></pre></td></tr></table></figure><ul><li>输出</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:/temp/test.txt</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;使用&lt;code&gt;QDir::fromNativeSeparators&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;示例：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight c++&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td clas</summary>
       
     
     
