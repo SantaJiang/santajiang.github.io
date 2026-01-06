@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="蒋胜达">
+
+
+
+
+
+<title>Linux-CoreDump解析方法 | Santa&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/images/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Santa&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Santa&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Linux-CoreDump解析方法</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">蒋胜达</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">一月 6, 2026&nbsp;&nbsp;16:07</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Linux/">Linux</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>在现代 Linux 发行版（如较新版本的 Ubuntu、Fedora 等）上，系统默认使用 <code>zstd</code> 这种高效的压缩算法来压缩 core dump 文件，从而生成 <code>.zst</code> 后缀的文件，以节省磁盘空间。</p>
+<p>要查看和分析这种 core 文件，需要先将其解压，然后再用调试工具（如 GDB）加载。以下是详细的步骤：</p>
+<h3 id="步骤-1：安装必要的工具"><a href="#步骤-1：安装必要的工具" class="headerlink" title="步骤 1：安装必要的工具"></a>步骤 1：安装必要的工具</h3><p>首先，确保你的系统已经安装了 <code>zstd</code> 压缩工具和 <code>gdb</code> 调试器。</p>
+<p><strong>在基于 Debian&#x2F;Ubuntu 的系统上：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install zstd gdb</span><br></pre></td></tr></table></figure>
+
+<p><strong>在基于 RHEL&#x2F;CentOS&#x2F;Fedora 的系统上：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Fedora/CentOS 8+</span></span><br><span class="line">sudo dnf install zstd gdb</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="comment"># CentOS 7</span></span><br><span class="line">sudo yum install epel-release</span><br><span class="line">sudo yum install zstd gdb</span><br></pre></td></tr></table></figure>
+
+<h3 id="步骤-2：解压-zst-格式的-core-文件"><a href="#步骤-2：解压-zst-格式的-core-文件" class="headerlink" title="步骤 2：解压 .zst 格式的 core 文件"></a>步骤 2：解压 .zst 格式的 core 文件</h3><p>使用 <code>zstd</code> 命令来解压文件。<code>zstd</code> 非常智能，它既可以压缩也可以解压。</p>
+<p><strong>基本解压命令：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zstd -d core.%pid.%executable.%signal.%timestamp.zst</span><br><span class="line"><span class="comment"># 或者使用更简短的格式，-d 代表 decompress（解压）</span></span><br><span class="line">zstd -d core.zst</span><br></pre></td></tr></table></figure>
+
+<p>解压成功后，会生成一个同名的但<strong>没有 <code>.zst</code> 后缀</strong>的文件。例如，解压 <code>core.1234.vim.11.1712345678.zst</code> 后会得到 <code>core.1234.vim.11.1712345678</code>。</p>
+<p><strong>如果你想保留原始的 .zst 文件，可以使用 <code>-k</code> 选项：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zstd -d -k core.zst</span><br></pre></td></tr></table></figure>
+
+<p><strong>你也可以指定输出文件的名称：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zstd -d -o my_core_file core.zst</span><br></pre></td></tr></table></figure>
+
+<p>这将把解压后的内容输出到 <code>my_core_file</code>，而原始 <code>core.zst</code> 保持不变。</p>
+<h3 id="步骤-3：使用-GDB-分析解压后的-core-文件"><a href="#步骤-3：使用-GDB-分析解压后的-core-文件" class="headerlink" title="步骤 3：使用 GDB 分析解压后的 core 文件"></a>步骤 3：使用 GDB 分析解压后的 core 文件</h3><p>解压完成后，你就可以像分析普通 core 文件一样，使用 GDB 来调试它了。</p>
+<p><strong>命令格式：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb &lt;生成core文件的可执行程序路径&gt; &lt;解压后的core文件路径&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>举个例子：</strong><br>假设你的程序名为 <code>my_app</code>，解压后的 core 文件就是 <code>core</code>（或者带有长长后缀的名字）。</p>
+<ol>
+<li><p><strong>找到你的程序路径：</strong> 如果你是在当前目录编译和运行的，程序可能就是 <code>./my_app</code>。</p>
+</li>
+<li><p><strong>运行 GDB：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果 core 文件就在当前目录，并且名字就是 ‘core&#x27;</span></span><br><span class="line">gdb ./my_app core</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果 core 文件有复杂的名字</span></span><br><span class="line">gdb ./my_app core.1234.vim.11.1712345678</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果程序和core文件不在当前目录</span></span><br><span class="line">gdb /path/to/my_app /path/to/core</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>在 GDB 中查看信息：</strong> 加载成功后，GDB 会显示程序崩溃时的位置（信号、函数、代码行等）。常用的命令有：</p>
+<ul>
+<li><code>bt</code> 或 <code>where</code>：打印<strong>回溯信息（backtrace）</strong>，这是最关键的一步，它会显示崩溃时函数的调用栈。</li>
+<li><code>info registers</code>：查看寄存器状态。</li>
+<li><code>list</code>：查看崩溃位置附近的代码。</li>
+<li><code>print &lt;变量名&gt;</code>：打印变量的值。</li>
+</ul>
+</li>
+</ol>
+<h3 id="完整工作流示例"><a href="#完整工作流示例" class="headerlink" title="完整工作流示例"></a>完整工作流示例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 解压 core 文件（假设文件名为 core.1234.my_app.11.1712345678.zst）</span></span><br><span class="line">$ zstd -d -k core.1234.my_app.11.1712345678.zst</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压后得到 core.1234.my_app.11.1712345678</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 使用 GDB 进行分析</span></span><br><span class="line">$ gdb ./my_app core.1234.my_app.11.1712345678</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 在 GDB 界面中，立即会看到崩溃信息，然后输入 ‘bt‘ 查看详细堆栈</span></span><br><span class="line">(gdb) bt</span><br><span class="line"><span class="comment">#0  0x00007f1234567890 in some_crash_function () at src/main.c:123</span></span><br><span class="line"><span class="comment">#1  0x0000555555555123 in main (argc=1, argv=0x7ffc5f0a8d68) at src/main.c:456</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">(gdb) quit</span><br></pre></td></tr></table></figure>
+
+<h3 id="补充说明：为什么会有-zst-文件？"><a href="#补充说明：为什么会有-zst-文件？" class="headerlink" title="补充说明：为什么会有 .zst 文件？"></a>补充说明：为什么会有 .zst 文件？</h3><p>这是由 <code>/proc/sys/kernel/core_pattern</code> 配置决定的。现代系统通常将其设置为通过 <code>systemd-coredump</code> 服务来处理 core 文件，该服务默认会压缩存储 core 文件。</p>
+<p>你可以通过以下命令查看你系统的设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/sys/kernel/core_pattern</span><br></pre></td></tr></table></figure>
+
+<p>如果输出是 <code>|/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h</code> 之类的格式，说明你正在使用 <code>systemd-coredump</code>。在这种情况下，你还可以使用 <code>coredumpctl</code> 命令来列表和管理 core 文件，而无需手动解压。</p>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有 coredump</span></span><br><span class="line">coredumpctl list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用 GDB 打开最新的一个 coredump（会自动处理压缩和解压）</span></span><br><span class="line">coredumpctl gdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用 GDB 打开特定程序的最后一个 coredump</span></span><br><span class="line">coredumpctl gdb &lt;程序名&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>coredumpctl</code> 通常是更推荐的方式，因为它能自动匹配程序和 core 文件。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li><strong>安装工具</strong>：确保安装了 <code>zstd</code> 和 <code>gdb</code>。</li>
+<li><strong>解压文件</strong>：使用 <code>zstd -d core-file.zst</code> 解压。</li>
+<li><strong>分析调试</strong>：使用 <code>gdb /path/to/program /path/to/decompressed-core</code> 加载分析。</li>
+<li><strong>查看堆栈</strong>：在 GDB 中使用 <code>bt</code> 命令查看崩溃调用栈。</li>
+<li><strong>（推荐）</strong> 如果系统使用 <code>systemd-coredump</code>，直接使用 <code>coredumpctl gdb</code> 命令更为方便。</li>
+</ol>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/article/8ddee233.html">麒麟系统开发环境配置</a>
+            
+            
+            <a class="next" rel="next" href="/article/1b9ab0fd.html">制作文件结构图</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>蒋胜达 © 
+            2021 - 2026 | 
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+        </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

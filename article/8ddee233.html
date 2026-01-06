@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="蒋胜达">
+
+
+
+
+
+<title>麒麟系统开发环境配置 | Santa&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/images/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Santa&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Santa&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">麒麟系统开发环境配置</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">蒋胜达</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">一月 6, 2026&nbsp;&nbsp;16:07</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E9%BA%92%E9%BA%9F%E8%BD%AF%E4%BB%B6/">麒麟软件</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h4 id="V11系统"><a href="#V11系统" class="headerlink" title="V11系统"></a>V11系统</h4><ul>
+<li><strong>Qt</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//开启维护模式</span><br><span class="line">sudo mm-cli -o </span><br><span class="line">//开明环境</span><br><span class="line">sudo apt-get install kaiming-builder kaiming-builder-gui</span><br><span class="line">//编译环境</span><br><span class="line">sudo apt-get install gcc g++ cmake gdb libqt5x11extras5-dev</span><br><span class="line">//基础开发环境</span><br><span class="line">sudo apt-get install libkf5windowsystem-dev libqt5xdg-dev qttools5-dev-tools qttools5-dev pkg-config libkysdk-systime-dev libkysdk-waylandhelper-dev libkysdk-qtwidgets-dev  libkysdk-kabase-dev extra-cmake-modules qtbase5-private-dev libukui-log4qt-dev libkysdk-sysinfo-dev debhelper-compat libgsettings-qt-dev qt5-qmake qt5-qmake-bin qtbase5-dev qtbase5-dev-tools qtbase5-doc qtbase5-examples qtpdf5-dev qtpdf5-doc qtpdf5-examples qtsvg5-examples qtsystems5-dev qtsystems5-examples qttools5-dev qtwayland5 qtxdg-dev-tools qtxdg-tools qtcreator qtcreator-data qtcreator-doc xorg-dev libkysdk-datacollect-dev libkf5globalaccel-dev libxtst-dev devscripts</span><br><span class="line">//额外开发环境</span><br><span class="line">sudo apt-get install pkgconf libkf5screen-dev libkysdk-kabase-dev libkysdk-log-dev libkysdk-config-dev libkysdk-ukenv-dev libkysdk-alm-dev libqt5websockets5-dev qtmultimedia5-dev libqt5svg5-dev libukui-log4qt-dev libx11-dev libxtst-dev libpeony-dev libgif-dev libstb-dev libfreeimage-dev libfreeimageplus-dev libcmark-dev librsvg2-dev qtquickcontrols2-5-dev libkysdk-sysinfo libkysdk-sysinfo-dev libkyai-config-dev libkysdk-coreai-speech-dev libkyai-assistant-dev qtdeclarative5-dev libpolkit-qt5-1-dev libkysdk-ai-common-dev libkysdk-genai-nlp-dev libukui-file-metadata-dev libsdl2-dev nlohmann-json3-dev</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2403-2503系统"><a href="#2403-2503系统" class="headerlink" title="2403&#x2F;2503系统"></a>2403&#x2F;2503系统</h4><ul>
+<li><strong>Qt</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install qt5-default</span><br><span class="line">sudo apt-get install gcc g++ cmake gdb</span><br><span class="line">sudo apt-get install qtcreator</span><br><span class="line">sudo apt install libqt5x11extras5-dev</span><br><span class="line">sudo apt-get install libkf5windowsystem-dev libqt5xdg-dev qttools5-dev-tools qttools5-dev pkg-config libglib2.0-dev libglib2.0-cil glib2.0 libkysdk-systime-dev libkysdk-waylandhelper-dev libkysdk-qtwidgets-dev libukui-panel-dev  libkysdk-kabase-dev extra-cmake-modules qtbase5-private-dev libukui-log4qt-dev libkysdk-sysinfo-dev debhelper-compat libgsettings-qt-dev</span><br><span class="line">sudo apt-get install libkf5screen-dev pkgconf libkysdk-kabase-dev libkysdk-log-dev libkysdk-config-dev libkysdk-ukenv-dev libkysdk-waylandhelper-dev libkysdk-alm-dev libqt5websockets5-dev qtmultimedia5-dev libqt5svg5-dev libukui-log4qt-dev libx11-dev libxtst-dev libpeony-dev libkysdk-datacollect-dev libgif-dev libstb-dev libfreeimage-dev libfreeimageplus-dev libcmark-dev libkf5globalaccel-dev librsvg2-dev qtquickcontrols2-5-dev libkysdk-sysinfo libkysdk-sysinfo-dev libkyai-config-dev libkysdk-coreai-speech-dev libkyai-assistant-dev qtdeclarative5-dev libpolkit-qt5-1-dev libkysdk-ai-common-dev libkysdk-ai-authorization-dev libkysdk-advanced-ai-dev libkf5windowsystem-dev libqt5x11extras5-dev qttools5-dev qttools5-dev-tools</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>调试的时候缺权限</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setstatus disable</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="OpenKylin2-0系统"><a href="#OpenKylin2-0系统" class="headerlink" title="OpenKylin2.0系统"></a>OpenKylin2.0系统</h4><ul>
+<li><strong>Qt</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gcc g++ cmake gdb</span><br><span class="line">sudo apt install libqt5x11extras5-dev</span><br><span class="line">sudo apt-get install libkf5windowsystem-dev libqt5xdg-dev qttools5-dev-tools qttools5-dev pkg-config libkysdk-systime-dev libkysdk-waylandhelper-dev libkysdk-qtwidgets-dev  libkysdk-kabase-dev extra-cmake-modules qtbase5-private-dev libukui-log4qt-dev libkysdk-sysinfo-dev debhelper-compat libgsettings-qt-dev</span><br><span class="line">sudo apt-get install qt5-qmake</span><br><span class="line">sudo apt-get install qt5-qmake-bin</span><br><span class="line">sudo apt-get install qtbase5-dev qtbase5-dev-tools qtbase5-doc qtbase5-examples qtpdf5-dev qtpdf5-doc qtpdf5-examples qtsvg5-doc qtsvg5-examples qtsystems5-dev qtsystems5-examples qttools5-dev qtwayland5 qtx11extras5-doc qtxdg-dev-tools qtxdg-tools qtcreator qtcreator-data qtcreator-doc xorg-dev</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="通用"><a href="#通用" class="headerlink" title="通用"></a>通用</h4><ul>
+<li><strong>Git</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">安装</span></span><br><span class="line">sudo apt-get install git</span><br><span class="line">git config --global user.name 蒋胜达</span><br><span class="line">git config --global user.email jiangshengda@kylinos.cn</span><br><span class="line"><span class="meta">#</span><span class="bash">要保证gitlab/gitee/gerrit上的用户名和邮箱一致</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">配SSH：</span></span><br><span class="line">ssh-keygen -t rsa</span><br><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>查看GSetting的选项</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gsettings get org.ukui.style + tab</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>debian工程调试</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">方法一：</span><br><span class="line">- 去到工程根目录</span><br><span class="line">- mkdir build</span><br><span class="line">- cd build</span><br><span class="line">- cmake ..</span><br><span class="line">- make -j12</span><br><span class="line">- sudo make install</span><br><span class="line">- 本机查看相应的软件效果</span><br><span class="line"></span><br><span class="line">方法二：</span><br><span class="line">- 工程根目录</span><br><span class="line">- 按上边的流程make完</span><br><span class="line">- 去到根目录</span><br><span class="line">- dpkg-buildpackage -us -uc</span><br><span class="line">- 打出来deb包，去openKylin测试</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>debian工程编译报错</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> dpkg-source --before-build .</span><br><span class="line">&#x27; is invalid 错误: source package format &#x27;3.0 (native)</span><br><span class="line">dpkg-buildpackage: 错误: dpkg-source --before-build . subprocess returned exit status 255</span><br></pre></td></tr></table></figure>
+<p>写的没问题可能是文件放到过Windows里，只要复制内容，重新在Linux用Vim写一份就行</p>
+<ul>
+<li><strong>debian工程修改changelog</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install devscripts</span><br><span class="line"><span class="meta">#</span><span class="bash">去到工程目录下：</span></span><br><span class="line">dch -i</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>安装依赖问题</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install aptitude</span><br><span class="line">sudo aptitude install &lt;软件包名&gt;</span><br><span class="line">或</span><br><span class="line">sudo apt install gdebi</span><br><span class="line">sudo gdebi &lt;软件包名.deb&gt;</span><br></pre></td></tr></table></figure>
+
+<p>或去debian&#x2F;control看依赖包名，或：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install equivs</span><br><span class="line">mk-build-deps debian/control</span><br><span class="line">sudo apt install ./*.deb</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>日历数据库查看</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlite3 /home/santa/.config/.kylin_calendar_Schedule2.db</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>系统升级确认</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/kylin-build</span><br><span class="line">然后看buildid号，跟builder.kylin.com上的镜像编号做对比就知道有没有升级成功了</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>怎么看传的包有没有入版本</strong><br>1.直接下载对应版本的镜像然后apt下载试试<br>2.版本负责人会发邮件，类似于：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">V11-2503-update1-alpha1（0423）版本提测</span><br><span class="line"></span><br><span class="line">禅道版本链接：</span><br><span class="line">https://pm.kylin.com/build-view-14972.html</span><br><span class="line"></span><br><span class="line">下载链接：</span><br><span class="line">(14272) Kylin-Desktop-V11-General-2503-update1-Build01-20250422-X86_64</span><br><span class="line">https://distro-out.kylin.com/web_pungi/default/index#distro.14272</span><br><span class="line">(14273) Kylin-Desktop-V11-General-2503-update1-Build01-20250422-ARM64</span><br><span class="line">https://distro-out.kylin.com/web_pungi/default/index#distro.14273</span><br><span class="line">(14274) Kylin-Desktop-V11-General-2503-update1-Build01-20250422-Loong64</span><br><span class="line">https://distro-out.kylin.com/web_pungi/default/index#distro.14274</span><br><span class="line">(14275) Kylin-Desktop-V11-General-2503-update1-Build01-20250422-SW64</span><br><span class="line">https://distro-out.kylin.com/web_pungi/default/index#distro.14275</span><br><span class="line"></span><br><span class="line">【版本软件源地址】</span><br><span class="line"></span><br><span class="line">deb http://archive.kylinos.cn/kylin/KYLIN-ALL .tags--11.0--2503-update1-alpha1 main restricted universe multiverse cross pty</span><br><span class="line">deb https://archive2.kylinos.cn/DEB/KYLIN_DEB V11 main all</span><br><span class="line"></span><br><span class="line">版本平台（https://builder.kylin.com）对应id： </span><br><span class="line">amd：https://builder.kylin.com/kybuilder/build/view/68446</span><br><span class="line">arm：https://builder.kylin.com/kybuilder/build/view/68447</span><br><span class="line">loong64：https://builder.kylin.com/kybuilder/build/view/68448</span><br><span class="line">sw：https://builder.kylin.com/kybuilder/build/view/68449</span><br></pre></td></tr></table></figure>
+
+<p>其中<a target="_blank" rel="noopener" href="https://distro-out.kylin.com/web_pungi/default/index#distro.14272%E8%BF%99%E6%A0%B7%E7%9A%84%E9%93%BE%E6%8E%A5%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%EF%BC%8C%E9%80%89%E6%8B%A9%E5%8C%85%E5%88%97%E8%A1%A8%EF%BC%8C%E6%90%9C%E7%B4%A2%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8C%85%E4%BF%A1%E6%81%AF%E5%B0%B1%E8%A1%8C">https://distro-out.kylin.com/web_pungi/default/index#distro.14272这样的链接直接打开，选择包列表，搜索自己的包信息就行</a></p>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/article/3f53d664.html">Linux-CoreDump解析方法</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>蒋胜达 © 
+            2021 - 2026 | 
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+        </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
