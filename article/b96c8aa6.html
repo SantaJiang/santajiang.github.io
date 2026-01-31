@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="蒋胜达">
+
+
+
+
+
+<title>Wayland环境下的Qt模态问题 | Santa&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/images/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Santa's Blog" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Santa&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Santa&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/categories">归档</a>
+                
+                    <a class="menu-item" href="/tags">标签</a>
+                
+                    <a class="menu-item" href="/project">项目</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Wayland环境下的Qt模态问题</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">蒋胜达</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">一月 31, 2026&nbsp;&nbsp;14:32</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>这是针对 Linux Wayland (wlcom) 平台模态问题的完整解决方案。</p>
+<h3 id="一、问题分析"><a href="#一、问题分析" class="headerlink" title="一、问题分析"></a>一、问题分析</h3><p>在 Wayland 平台上，窗口管理机制比 X11 更为严格。 QQuickWidget 或 QML 窗口与 QWidget 对话框属于不同的窗口层级。如果 一个 QDialog &#x2F; QWidget 没有正确设置 Wayland 层面的父窗口（Transient Parent），Wayland 合成器（Compositor）就无法识别它们之间的模态关系，导致模态失效。</p>
+<h3 id="二、解决方案"><a href="#二、解决方案" class="headerlink" title="二、解决方案"></a>二、解决方案</h3><p>核心修复方案是在对话框显示（ exec() ）之前，强制创建其底层窗口句柄，并手动设置其 Transient Parent 为 QML 的主窗口。</p>
+<p>关键步骤：</p>
+<ol>
+<li>调用 dialog.winId() 确保对话框创建了原生窗口句柄。</li>
+<li>调用 dialog.windowHandle()-&gt;setTransientParent(qml_parent) 建立模态关系。</li>
+</ol>
+<h3 id="三、什么是Transient"><a href="#三、什么是Transient" class="headerlink" title="三、什么是Transient"></a>三、什么是Transient</h3><p>在 Wayland（以及 X11）的窗口协议中， “Transient”（瞬态） 这个词有特定的技术含义，不仅仅是字面上的“短暂”。</p>
+<p>简单来说， Transient Parent 是窗口管理器（Compositor）用来识别“ 辅助窗口属于哪个主窗口 ”的唯一凭证。</p>
+<p>以下是详细的技术分析：</p>
+<h4 id="1-什么是-Transient（瞬态）窗口？"><a href="#1-什么是-Transient（瞬态）窗口？" class="headerlink" title="1. 什么是 Transient（瞬态）窗口？"></a>1. 什么是 Transient（瞬态）窗口？</h4><p>在窗口系统中，窗口分为两类：</p>
+<ul>
+<li>Toplevel（顶层窗口） ：独立存在的窗口，比如你的主程序界面（ main.qml 对应的窗口）。它们在任务栏有图标，可以独立最小化。</li>
+<li>Transient（瞬态窗口） ： 依附于 某个顶层窗口存在的辅助窗口，比如对话框（Dialog）、提示框（Alert）、工具栏等。<br>“Transient Parent” 就是指这个辅助窗口所依附的那个“父亲”。</li>
+</ul>
+<h4 id="2-为什么-Wayland-必须显式设置它？"><a href="#2-为什么-Wayland-必须显式设置它？" class="headerlink" title="2. 为什么 Wayland 必须显式设置它？"></a>2. 为什么 Wayland 必须显式设置它？</h4><p>Wayland 与 X11 的最大区别在于 安全性 和 隔离性 。</p>
+<ul>
+<li>X11 的“混乱” ：在 X11 时代，任何程序都可以通过全局坐标得知其他窗口的位置，甚至拦截其他窗口的输入。窗口管理器通常比较“宽容”，只要你设了模态（Modal）标志，它可能就会尝试阻塞输入，哪怕它不知道你属于谁。</li>
+<li>Wayland 的“严格” ：在 Wayland 中，Compositor（合成器，如 KWin, Mutter 或 wlcom）默认认为每个窗口都是独立的、沙箱化的。<ul>
+<li>如果你弹出一个对话框（ WritingAddItemDialog ），但没有告诉 Compositor “我是 main.qml 的孩子”。</li>
+<li>Compositor 就会把它当成另一个独立的顶层窗口。</li>
+<li>结果 ：既然是两个独立的程序窗口，它们之间当然没有模态阻塞关系。用户依然可以点击后面的主窗口，模态失效。<br>只有当你调用 setTransientParent 时，底层才会发送协议（如 xdg_toplevel_set_parent ）给 Compositor，正式“认亲”。Compositor 确认关系后，才会执行模态策略（变暗背景、拦截点击）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-Qt-中的两个-“Parent”-的区别"><a href="#3-Qt-中的两个-“Parent”-的区别" class="headerlink" title="3. Qt 中的两个 “Parent” 的区别"></a>3. Qt 中的两个 “Parent” 的区别</h4><p>这是最容易混淆的地方：</p>
+<ol>
+<li><p>QObject Parent &#x2F; QWidget Parent（内存与对象树层面）</p>
+<ul>
+<li>代码： new WritingAddItemDialog(parentWidget)</li>
+<li>作用：负责 内存管理 （父对象析构时自动析构子对象）和 Qt 内部的事件传递 。</li>
+<li>局限：对于 QQuickWidget 和 QWidget 混用的情况，或者跨越了 QML&#x2F;C++ 边界，Qt 有时无法自动将这个对象树关系映射到操作系统的窗口关系上。</li>
+</ul>
+</li>
+<li><p>Window Transient Parent（操作系统窗口层面）</p>
+<ul>
+<li>代码： windowHandle()-&gt;setTransientParent(qmlWindow)</li>
+<li>作用：直接告诉操作系统（Wayland Compositor）窗口层级关系。</li>
+<li>这就是我们修复的核心 ：我们绕过了 Qt 的对象层级，直接在底层窗口句柄（QWindow）级别建立了父子关系。</li>
+</ul>
+</li>
+</ol>
+<p>在 Wayland 上， “模态”是一种窗口管理器提供的服务 ，而 Transient Parent 是申请这项服务的“入场券”。没有这张入场券，对话框就是个路人，无权阻塞主窗口。</p>
+<h3 id="四、Demo"><a href="#四、Demo" class="headerlink" title="四、Demo"></a>四、Demo</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//适用于QML为父窗口，widgets子窗口需要显示模态的场景</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*========================第1步=================================*/</span></span><br><span class="line"><span class="comment">//中介类</span></span><br><span class="line"><span class="comment">//Msg是普通的QObject类</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//中介类暴露</span></span><br><span class="line">Msg *msgTemplate = <span class="keyword">new</span> <span class="built_in">Msg</span>();</span><br><span class="line">QQmlApplicationEngine *engine = <span class="keyword">new</span> QQmlApplicationEngine;</span><br><span class="line">engine-&gt;<span class="built_in">rootContext</span>()-&gt;<span class="built_in">setContextProperty</span>(<span class="string">&quot;msg&quot;</span>,Msg);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*========================第2步=================================*/</span></span><br><span class="line"><span class="comment">//主界面传递,QML中</span></span><br><span class="line">Component.onCompleted: </span><br><span class="line">&#123;</span><br><span class="line">	msgTemplate.<span class="built_in">setParent</span>(root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//C++中</span></span><br><span class="line">QQuickWindow *m_parent = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">public</span> slots: <span class="function"><span class="keyword">void</span> <span class="title">MsgTemplate::setParent</span><span class="params">(QObject *parent)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    m_parent = qobject_cast&lt;QQuickWindow*&gt;(parent);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*========================第3步=================================*/</span></span><br><span class="line">QDialog dlg;</span><br><span class="line"><span class="comment">// --- 修复模态问题的核心代码 ---</span></span><br><span class="line"><span class="keyword">if</span>(m_parent) </span><br><span class="line">&#123;</span><br><span class="line">    dlg.<span class="built_in">winId</span>(); <span class="comment">// 1. 强制创建原生窗口句柄</span></span><br><span class="line">    <span class="keyword">if</span> (dlg.<span class="built_in">windowHandle</span>()) </span><br><span class="line">	&#123;</span><br><span class="line">        dlg.<span class="built_in">windowHandle</span>()-&gt;<span class="built_in">setTransientParent</span>(m_parent); <span class="comment">// 2. 设置 Wayland 瞬态父窗口</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">dlg.<span class="built_in">exec</span>();</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        <a href="/tags/Qt/"># Qt</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/article/8ddee233.html">麒麟系统开发环境配置</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>蒋胜达 © 
+            2021 - 2026 | 
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    访客量:
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>&nbsp;
+
+
+        </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
