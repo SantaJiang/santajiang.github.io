@@ -230,10 +230,10 @@
 <p>要查看和分析这种 core 文件，需要先将其解压，然后再用调试工具（如 GDB）加载。以下是详细的步骤：</p>
 <h3 id="步骤-1：安装必要的工具"><a href="#步骤-1：安装必要的工具" class="headerlink" title="步骤 1：安装必要的工具"></a>步骤 1：安装必要的工具</h3><p>首先，确保你的系统已经安装了 <code>zstd</code> 压缩工具和 <code>gdb</code> 调试器。</p>
 <p><strong>在基于 Debian&#x2F;Ubuntu 的系统上：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install zstd gdb</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install zstd gdb</span><br></pre></td></tr></table></figure>
 
 <p><strong>在基于 RHEL&#x2F;CentOS&#x2F;Fedora 的系统上：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Fedora/CentOS 8+</span></span><br><span class="line">sudo dnf install zstd gdb</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="comment"># CentOS 7</span></span><br><span class="line">sudo yum install epel-release</span><br><span class="line">sudo yum install zstd gdb</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Fedora/CentOS 8+</span></span><br><span class="line"><span class="built_in">sudo</span> dnf install zstd gdb</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="comment"># CentOS 7</span></span><br><span class="line"><span class="built_in">sudo</span> yum install epel-release</span><br><span class="line"><span class="built_in">sudo</span> yum install zstd gdb</span><br></pre></td></tr></table></figure>
 
 <h3 id="步骤-2：解压-zst-格式的-core-文件"><a href="#步骤-2：解压-zst-格式的-core-文件" class="headerlink" title="步骤 2：解压 .zst 格式的 core 文件"></a>步骤 2：解压 .zst 格式的 core 文件</h3><p>使用 <code>zstd</code> 命令来解压文件。<code>zstd</code> 非常智能，它既可以压缩也可以解压。</p>
 <p><strong>基本解压命令：</strong></p>
@@ -271,7 +271,7 @@
 
 <h3 id="补充说明：为什么会有-zst-文件？"><a href="#补充说明：为什么会有-zst-文件？" class="headerlink" title="补充说明：为什么会有 .zst 文件？"></a>补充说明：为什么会有 .zst 文件？</h3><p>这是由 <code>/proc/sys/kernel/core_pattern</code> 配置决定的。现代系统通常将其设置为通过 <code>systemd-coredump</code> 服务来处理 core 文件，该服务默认会压缩存储 core 文件。</p>
 <p>你可以通过以下命令查看你系统的设置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/sys/kernel/core_pattern</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/sys/kernel/core_pattern</span><br></pre></td></tr></table></figure>
 
 <p>如果输出是 <code>|/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h</code> 之类的格式，说明你正在使用 <code>systemd-coredump</code>。在这种情况下，你还可以使用 <code>coredumpctl</code> 命令来列表和管理 core 文件，而无需手动解压。</p>
 <p>例如：</p>
